@@ -1,5 +1,5 @@
 // global.js
-var Env = "remote";
+var Env = "local";
 
 if(Env == "local"){
   var host_url = "http://localhost/brayana/web/";
@@ -11,7 +11,19 @@ if(Env == "local"){
   var api_url = "http://brayana.tweenix.com";
   var replace_ct = "/web/";
 }
-
+function hideMasters(){
+    var auth = getLocal("auth");
+    var userType = getLocal("u");
+    if(userType != 1){
+        $(".master").css("display","none");
+        //$(".nav>.master").hide();
+    }else{
+       $(".master").css({"display":"inline"});
+    }
+}
+$( document ).ready(function() {
+  hideMasters();
+});
 function islogged(){
   var pathname = window.location.pathname; // Returns path only
   var url      = window.location.href;     // Returns full URL
@@ -34,17 +46,7 @@ function islogged(){
   }
 }
 
-function hideMasters(){
-    var auth = getLocal("auth");
-    var userType = getLocal("u");
-    if(userType != 1){
-        $(".master").css("display","none");
-        //$(".nav>.master").hide();
-    }else{
-       $(".master").css({"display":"inline"});
-    }
-    
-}
+
 function getCurrentPath(){
   var pathname = window.location.pathname; // Returns path only
   var url      = window.location.href;     // Returns full URL
@@ -130,6 +132,7 @@ function cl(msg){
 function goBack() {
     window.history.back();
 }
+
 (function ($) {
   $.fn.serializeFormJSON = function () {
 
@@ -147,10 +150,5 @@ function goBack() {
       });
       return o;
   };
- setTimeout(function(){
-                        hideMasters();
-                      }, 500);   
-  
-  //console.log("tes");
-})(jQuery);
+ })(jQuery);
 
