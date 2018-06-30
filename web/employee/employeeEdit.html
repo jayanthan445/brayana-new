@@ -55,10 +55,7 @@
  
      <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
      <script src="../assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
- 
-     <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-     <script src="../assets/js/demo.js"></script>
- 
+
      <!-- client side validation script -->
      <script src="../js/employee.js"></script>
 
@@ -76,7 +73,7 @@
 
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#" class="simple-text">
+                <a href="http://www.creative-tim.com" class="simple-text">
                     BRAYANA
                 </a>
             </div>
@@ -169,61 +166,67 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                            <div class="card col-md-11">
-                                <div class="content table-responsive table-full-width">
+                            
+                        <div class="card  col-md-11">
+                            <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                        <h4 class="title">Edit</h4>
+                                         <h4 class="title">Employee</h4>
                                     </div>
-
+                                    
                                   </div>
                                 </div>
-                            
-                                <div class="content">
-                                        <div>
+                               <div class="content">
+            <div>        
                                                 <form id="EmployerAddForm" method="POST">
 
                                             <div class="row">
                                                 <div class="col-md-5">
                                                     <div class="form-group">
                                                         <label>Emp ID</label>
-                                                        <input type="text" class="form-control" placeholder="Employee Id" value="" id="employeeId" name="employeeId">
+                                                        <input type="text" class="form-control" placeholder="Employee Id" value="" id="employeeId" name="employeeId" readonly="">
+                                                        <input type="hidden" class="form-control" value="" id="emp_id" name="emp_id" readonly="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control" placeholder="Name" value="" id="name" name="name">
+                                                        <label>Email ID</label>
+                                                        <input type="text" class="form-control" placeholder="email" value="" id="email" name="email" readonly="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Gender</label>
-                                                        <input type="text" class="form-control" placeholder="Gender" id="gender" name="gender">
+                                                        <label>Mobile NO</label>
+                                                        <input type="text" class="form-control" placeholder="Mobile NO" value="" id="mobile" name="mobile" readonly="">
                                                     </div>
+                                                     
                                                 </div>
                                             </div>
         
                                             <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control" placeholder="Name" value="" id="name" name="name">
+                                                    </div>
+                                                    
+                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>DOB</label>
                                                         <input type="text" class="form-control" placeholder="DOB" value="" id="dob" name="dob">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Mobile NO</label>
-                                                        <input type="text" class="form-control" placeholder="Mobile NO" value="" id="mobile" name="mobile">
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
         
                                             <div class="row">
                                                 <div class="col-md-6">
+                                                    
+                                                   
                                                     <div class="form-group">
-                                                        <label>Email ID</label>
-                                                        <input type="text" class="form-control" placeholder="email" value="" id="email" name="email">
+                                                        <label for="exampleInputEmail1">Gender</label>
+                                                        <input type="text" class="form-control" placeholder="Gender" id="gender" name="gender">
                                                     </div>
                                                 </div>
                                                  <div class="col-md-6">
@@ -280,8 +283,8 @@
                                                 </div>
                                             </div>
                                             
-                                            <button type="submit" class="btn btn-primary btn-fill " onclick="editEmployeeDetail()">Submit</button> 
-                                             <button type="submit" class="btn btn-info btn-fill">Cancel</button>
+                                            <button type="button" class="btn btn-primary btn-fill " onclick="editEmployeeDetail()">Submit</button> 
+                                             <button type="button" class="btn btn-info btn-fill" onclick="cancel_employee()">Cancel</button>
                                             <div class="clearfix"></div>
                                             </form>
                                         </div>

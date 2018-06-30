@@ -1,5 +1,5 @@
 // global.js
-var Env = "remote";
+var Env = "local";
 
 if(Env == "local"){
   var host_url = "http://localhost/brayana/web/";
@@ -23,8 +23,7 @@ function islogged(){
     if(userType == 1){
         window.location.href=host_url+'land/landView.html';  
     }else if(userType == 2){
-        window.location.href=host_url+'customer/customerLand/customerLandView.html';  
-
+        window.location.href=host_url+'land/landView.html';  
     }else if(userType == 3){
         window.location.href=host_url+'myTransaction/transactionLandView.html';  
     }
@@ -34,16 +33,8 @@ function islogged(){
   }
 }
 
-function hideMasters(){
-    var auth = getLocal("auth");
-    var userType = getLocal("u");
-    if(userType != 1){
-        $(".master").css("display","none");
-        //$(".nav>.master").hide();
-    }else{
-       $(".master").css({"display":"inline"});
-    }
-    
+function customerAllowedPages(){
+  s
 }
 function getCurrentPath(){
   var pathname = window.location.pathname; // Returns path only
@@ -60,7 +51,6 @@ function checkPaths(){
 }
 function logout(){
     removeLocal("auth");
-     removeLocal("u");
     islogged();
 }
 
@@ -147,10 +137,4 @@ function goBack() {
       });
       return o;
   };
- setTimeout(function(){
-                        hideMasters();
-                      }, 500);   
-  
-  //console.log("tes");
 })(jQuery);
-

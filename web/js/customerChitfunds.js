@@ -154,9 +154,11 @@ function getCustomerChitsByID(id){
            var data = msg.RESPONSE;
            if(status == "OK"){
                 if(data.count > 0){
-
+                    setTimeout(function(){
+                        fillEditLandDetail(data.data[0]);
+                      }, 500);   
                     //$("#customerChitFundForm").autofill( data.data[0] );
-                    fillEditLandDetail(data.data[0]);
+                    
                 }else{
                    // alert("No data Found");
                     window.location.href=host_url+'customer/customerChitFunds/customerChitFundView.html';
@@ -170,7 +172,7 @@ function fillEditLandDetail(data){
 
   $("#booking_no").val(data.booking_no);
   $("#name").val(data.name);
-  $("#mobile").val(data.mobile);
+  $("#user_mobile").val(data.mobile);
   $("#email_id").val(data.email_id);
   $("#address").val(data.address);
   
@@ -179,9 +181,9 @@ function fillEditLandDetail(data){
   $("#survey_no").val(data.survey_no);
   $("#area").val(data.area);
   $("#city").val(data.city);
-  $("#installment_month").val(data.inst_month);
-  $("#installment_amount").val(data.inst_amount);
-  $("#total_amount").val(data.tot_amount);
+  $("#inst_month").val(data.inst_month);
+  $("#inst_amount").val(data.inst_amount);
+  $("#tot_amount").val(data.tot_amount);
 
   $('#site_name').val(data.site_id);
 

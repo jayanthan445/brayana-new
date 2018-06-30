@@ -127,7 +127,9 @@ function getCustomerLandsByID(id){
            var data = msg.RESPONSE;
            if(status == "OK"){
                 if(data.count > 0){
-                    fillEditLandDetail(data.data[0]);
+                    setTimeout(function(){
+                        fillEditLandDetail(data.data[0]);
+                      }, 500);                    
                 }else{
                    // alert("No data Found");
                     window.location.href=host_url+'land/landView.html';
@@ -146,7 +148,7 @@ function fillEditLandDetail(data){
   $("#address").val(data.address);
   
  // $('select[name="site_name"] option[value="'+data.site_id+'"]').attr('selected', 'selected');
-   $("#site_name").val(data.site_id);
+  $("#site_name").val(data.site_id);
   $("#survey_no").val(data.survey_no);
   $("#area").val(data.area);
   $("#city").val(data.city);
@@ -194,10 +196,12 @@ function saveLandDetail(){
   var booking_no = $("#booking_no").val();
   var site_name = $("#site_name").val();
   var address = $("#address").val();
+  var email_id = $("#email_id").val();
   
   var data = {
                 "booking_no":booking_no,
                 "user_mobile":mobile,
+                "email_id":email_id,
                 "name":name,
                 "mobile":mobile,
                 "address":address,
@@ -207,7 +211,6 @@ function saveLandDetail(){
                 "tot_amount":installmentMonths*installmentAmount
               };
 
-    console.log(data);
 
   var auth = getLocal("auth");
 

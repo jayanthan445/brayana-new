@@ -1,11 +1,59 @@
 
 
+
+// function saveLandDetail(){
+
+//     	var siteName = $("#siteName").val();
+
+//     	var surveyNo = $("#surveyNo").val();
+
+//         var area = $("#area").val();
+
+//         var city = $("#city").val();
+
+//         var installmentMonths = $("#installmentMonths").val();
+
+//         var installmentAmount = $("#installmentAmount").val();
+
+
+
+//         if(siteName == ""){
+
+// 			alert("Please enter site Name");
+
+//     	}else if(surveyNo == ""){
+
+// 			alert("Please enter survey Number");
+
+//     	} else if(area == ""){
+
+//             alert("Please enter area Deatails");
+
+//         } else if(city == ""){
+
+//             alert("Please enter city Deatails");
+
+//         } else if(installmentMonths == ""){
+
+//             alert("Please enter installment Months Deatails");
+
+//         } else if(installmentAmount == ""){
+
+//             alert("Please enter installment Amount Deatails");
+
+//         } else{
+
+//             alert("Details saved successfully");
+
+//         }
+
+//     }
+
+
 function openEmployeeAddPage(){
     window.location='./employeeAddEdit.html';
 }
-function cancel_employee(){
-    window.location='./employeeView.html';
-}
+
 $(document).ready(function(){
     //islogged();
 
@@ -24,55 +72,9 @@ $(document).ready(function(){
         deleteEmployee(empId);
     });
 
-   AddFormValidation();
-
-
     init();
-    // loadDataTable();
 
 });
-
-function AddFormValidation(){
-
-
-    $("#EmployerAddForm").validate({
-        rules: {
-         //   employeeId: "required",
-            name: "required",
-            gender: "required",
-            dob: "required",
-            mobile: "required",
-            email: "required",
-            address: "required",
-            city: "required",
-            state: "required",
-            country: "required",
-            education: "required",
-            maritalStatus: "required",
-            idProof: "required",
-            city: "required",
-            state: "required"
-        },
-        messages: {
-     //       employeeId: "Please Enter Employee ID Field",
-            name: "Please Enter Name Field",
-            gender: "Please Enter Gender Field",
-            dob: "Please Enter DOB Field",
-            mobile: "Please Enter Mobile Field",
-            email: "Please Enter Email Field",
-            address: "Please Enter Address Field",
-            city: "Please Enter City Field",
-            state: "Please Enter State Field",
-            country: "Please Enter Country Field",
-            education: "Please Enter Education Field",
-            maritalStatus: "Please Enter Marital status Field",
-            idProof: "Please Enter ID Proof Field",
-            city: "Please Enter City Field",
-            state: "Please Enter State Field"
-        }
-    });
-    
-    }
 
 function openEmployeeAddPage(){
 window.location='./employeeAddEdit.html';
@@ -84,10 +86,11 @@ window.location='./employeeAddEdit.html';
 
 function init(){
 var currentPath = getCurrentPath();
-// alert(currentPath);
-// alert(host_url);
 if(currentPath == "employee/employeeView.html"){
     getEmployees();  
+}else if(currentPath == "employee/employeeAddEdit.html"){
+
+
 }else if(currentPath == "employee/employeeEdit.html"){
     var params = getParams(window.location.href);
     if(typeof params.id != "undefined" && params.id !="" && params.id != null){
@@ -126,30 +129,46 @@ function getEmployeeEdit(){
            }
        });
    }
+function saveEmployeeDetailss(){
+ // alert("come");
+    var auth = getLocal("auth");
 
+    //  if($("#customerChitFundForm").valid()){
+   
+      var data = $('#EmployerAddForm').serializeFormJSON();
+      console.log(data);
+   
+    $.ajax({
+        type: "POST",
+        url: api_url+"/api/addEmployee/chit",
+        headers: { "auth":auth},
+        dataType:"JSON",
+        data:data,
+        cache: false,
+        success: function(msg, textStatus, xhr) {
+            if(msg.STATUS == "OK"){
+                window.location.href=host_url+'customer/customerChitFunds/customerChitFundView.html';
+            }else{
+                alert(msg.RESPONSE);
+            }
+            
+            }
+        });
+  //  }
+
+return false;  
+}
 
 function loadDataTable(){
 var table = $('#myTable').DataTable({
-    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
- });
+   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+});
+ 
 // #myInput is a <input type="text"> element
 $('#myInput').on( 'keyup', function () {
     table.search( this.value ).draw();
 });
 }
-
-
-
-function back(){
-
-                        window.location.href=host_url+'employee/employeeView.html';
-
-   
-    }
-    
-
-
-
 
 function buildTable(list,count){
 
@@ -194,13 +213,13 @@ function getEmployeeByID(id){
            if(status == "OK"){
                 if(data.count > 0){
                     var empData = data.data[0];
-                    $('#emp_id').val(empData.emp_id);
-                    $('#employeeId').val(empData.emp_pin);
+                    $('#employeeId').val(empData.emp_id);
                     $('#name').val(empData.name);
                     $('#gender').val(empData.gender); 
                     $('#dob').val(empData.dob);
                     $('#mobile').val(empData.mobile);
                     $('#email').val(empData.email); 
+
                     $('#address').val(empData.address);
                     $('#city').val(empData.city);
                     $('#state').val(empData.state); 
@@ -232,8 +251,6 @@ function fillEditEmployeeDetail(data){
   
 }
 function saveEmployeeDetail(){
-      if($("#EmployerAddForm").valid()){
-
     var employeeId = $("#employeeId").val();
     var name = $("#name").val();
   var gender = $("#gender").val();
@@ -281,15 +298,12 @@ function saveEmployeeDetail(){
            
         }
     });
-}
 
 return false;  
 }
 
 
 function editEmployeeDetail(){
-   if($("#EmployerAddForm").valid()){
-    var emp_id = $("#emp_id").val();
     var employeeId = $("#employeeId").val();
     var name = $("#name").val();
   var gender = $("#gender").val();
@@ -321,9 +335,8 @@ function editEmployeeDetail(){
               }
   var auth = getLocal("auth");
  $.ajax({
-     
       type: "POST",
-      url: api_url+"/api/editEmployee/"+emp_id,
+      url: api_url+"/api/editEmployee/"+employeeId,
       headers: { "auth":auth},
       dataType:"JSON",
       data:data,
@@ -336,9 +349,8 @@ function editEmployeeDetail(){
         }
            
         }
-    
     });
-    }
+
 return false;  
 }
 

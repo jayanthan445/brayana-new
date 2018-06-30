@@ -1,8 +1,6 @@
 $(document).ready(function(){
     islogged();
 
-  
-
     $('body').on('click', '.deleteland',function(){
           var id = $(this).attr('data-id');
           var name = $(this).attr('data-name');
@@ -15,7 +13,7 @@ $(document).ready(function(){
     });
 
     
-$('#no_tree').on('change', function() {
+$('#agar_id').on('change', function() {
     var idd = $(this).val();
     getAgarsByID(idd);
 });
@@ -184,7 +182,10 @@ function getCustomerAgarsByID(id){
                     //$('#user_mobile').val(data.data[0].mobile);
                     
                     //$('#agar_id').val(data.data[0].agar_id);
-                    fillEditLandDetail(data.data[0]);
+                    
+                    setTimeout(function(){
+                       fillEditLandDetail(data.data[0]);  
+                      }, 500);   
                 }else{
                    // alert("No data Found");
                     window.location.href=host_url+'customer/customerAgar/customerAgarView.html';
@@ -206,8 +207,8 @@ function fillEditLandDetail(data){
   $("#survey_no").val(data.survey_no);
   $("#area").val(data.area);
   $("#city").val(data.city);
-  $("#inst_month").val(data.inst_month);
-  $("#inst_amount").val(data.inst_amount);
+  $("#no_tree").val(data.no_tree);
+  $("#tree_amount").val(data.tree_amount);
   $("#tot_amount").val(data.tot_amount);
 
   $("#id").val(data.id);
@@ -244,9 +245,8 @@ function saveAgarDetail(){
     var auth = getLocal("auth");
 
     //  if($("#customerAgarForm").valid()){
-    $('#tot_amount').val($('#inst_month').val()*$('#inst_amount').val());
+    
       var data = $('#customerAgarForm').serializeFormJSON();
-      console.log(data);
       
    
     $.ajax({
@@ -279,7 +279,6 @@ function editAgarDetail(){
 //  if($("#customerAgarForm").valid()){
    
     var data = $('#customerAgarForm').serializeFormJSON();
-    console.log(data);
     var id = $('#id').val();
   var auth = getLocal("auth");
  $.ajax({
@@ -318,11 +317,10 @@ function getAgarsByID(id){
               var data = msg.RESPONSE;
               if(status == "OK"){
                    if(data.count > 0){
-                      // fillEditLandDetail(data.data[0]);
                        var agarData = data.data[0];
-                    //    $('#inst_month').val(agarData.inst_month);
-                    //    $('#inst_amount').val(agarData.inst_amount);
-                    //    $('#tot_amount').val(agarData.inst_month*agarData.inst_amount); 
+                        $('#no_tree').val(agarData.no_tree);
+                        $('#tree_amount').val(agarData.tree_amount);
+                        $('#tot_amount').val(agarData.no_tree*agarData.tree_amount); 
                    }else{
                        alert("No data Found");
                        //window.location.href=host_url+'land/landView.html';
@@ -335,7 +333,7 @@ function getAgarsByID(id){
 
 }
 
-function deleteCustomerLand(id){
+function deleteCustomerAgar(id){
     var data = {
                 
               }

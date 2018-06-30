@@ -199,11 +199,15 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label>FB No</label>
+                                    <label for="exampleInputEmail1">Fund Type</label>
+                                    <select class="form-control" id="chit_id" name="chit_id" required>
+                                        <option value=""> Select option </option>
+                                    </select>
                                     <input type="hidden" class="form-control" placeholder="Booking No" value="" id="id" name="id" required>
                                     <input type="hidden" class="form-control" placeholder="Booking No" value="" id="login_id" name="login_id" required>
-                                    <input type="text" class="form-control" placeholder="Booking No" value="" id="booking_no" name="booking_no" required>
+
                                 </div>
+                                
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -214,7 +218,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Mobile No</label>
-                                    <input type="text" class="form-control" placeholder="Mobile No" id="user_mobile" name="user_mobile" required>
+                                    <input type="text" class="form-control" placeholder="Mobile No" id="user_mobile" name="user_mobile" required readonly="">
                                 </div>
                             </div>
                         </div>
@@ -234,11 +238,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Fund Type</label>
-                                    <select class="form-control" id="chit_id" name="chit_id" required>
-                                        <option value=""> Select option </option>
-                                    </select>
-
+                                    <label>FB No</label>
+                                    
+                                    <input type="text" class="form-control" placeholder="Booking No" value="" id="booking_no" name="booking_no" required readonly="">
                                 </div>
                             </div>
                         </div>

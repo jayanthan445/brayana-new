@@ -173,7 +173,7 @@ Brayana Group
             <div class="content table-responsive table-full-width">
                   <div class="row">
                     <div class="col-md-6">
-                         <h4 class="title">Edit Chit Customer</h4>
+                         <h4 class="title">Edit Agar Customer</h4>
                     </div>
                     
                   </div>
@@ -185,13 +185,14 @@ Brayana Group
                     <div class="row">
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label>AWB No</label>
-                                
+                                <label for="exampleInputEmail1">No of Trees Selected</label>
+                                <select class="form-control" id="agar_id" name="agar_id">
+                                    <option value=""></option>
+                                </select>
                                 <input type="hidden" class="form-control" placeholder="Booking No" value="" id="id" name="id" required>
                                 <input type="hidden" class="form-control" placeholder="Booking No" value="" id="login_id" name="login_id" required>
-                                
-                                <input type="text" class="form-control" placeholder="AWB No" value="" id="booking_no" name="booking_no">
                             </div>
+                            
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -202,7 +203,7 @@ Brayana Group
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mobile No</label>
-                                <input type="text" class="form-control" placeholder="Mobile No" id="user_mobile" name="user_mobile">
+                                <input type="text" class="form-control" placeholder="Mobile No" id="user_mobile" name="user_mobile" readonly="">
                             </div>
                         </div>
                     </div>
@@ -211,7 +212,7 @@ Brayana Group
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label>Email Id</label>
-                                <input type="text" class="form-control" placeholder="Email Id" value="" id="email_id" name="email_id" readonly>
+                                <input type="text" class="form-control" placeholder="Email Id" value="" id="email_id" name="email_id" >
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -222,29 +223,30 @@ Brayana Group
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">No of Trees Selected</label>
-                                <select class="form-control" id="agar_id" name="agar_id">
-                                    <option value=""></option>
-                                </select>
+                                <label>AWB No</label>
+                                
+                                
+                                
+                                <input type="text" class="form-control" placeholder="AWB No" value="" id="booking_no" name="booking_no" readonly="">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Installment Months</label>
-                                <input type="text" class="form-control numbersOnly" placeholder="Installment Months" value="" id="inst_month" name="inst_month" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Installment Amount</label>
-                                <input type="text" class="form-control numbersOnly" placeholder="Installment Amount" value="" id="inst_amount" name="inst_amount" readonly>
-                            </div>
-                        </div>
-
-                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>No of Trees</label>
+                                            <input type="text" class="form-control " placeholder="No of tree" value="" id="no_tree" name="no_tree" readonly="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Tree Amount</label>
+                                            <input type="text" class="form-control " placeholder="Tree Amount" value="" id="tree_amount" name="tree_amount" readonly="">
+                                        </div>
+                                    </div>
+                                    
+                                </div>  
 
                     <div class="row">
                         <div class="col-md-4">

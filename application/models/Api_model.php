@@ -453,7 +453,7 @@ class Api_model extends CI_Model {
                 $lists[$key]["paid_amount"] =  $paid_amount;
                 $lists[$key]["paid_months"] = $calc["paid_months"];
                 $lists[$key]["balance_amount"] = $value["tot_amount"] - $paid_amount;
-                $lists[$key]["balance_months"] = $value["inst_month"] - $paid_months;
+                //$lists[$key]["balance_months"] = $value["inst_month"] - $paid_months;
               }
           }
           $response = array('data'=>$lists,'count'=>$result->num_rows());

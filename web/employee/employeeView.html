@@ -57,8 +57,6 @@
 
 <script src="../assets/js/bootstrap-notify.js"></script>
 
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
 <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 <script src="../assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
@@ -83,7 +81,7 @@
 
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="#" class="simple-text">
+                    <a href="http://www.creative-tim.com" class="simple-text">
                         BRAYANA
                     </a>
                 </div>
@@ -171,56 +169,50 @@
             </nav>
 
 
+
             <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card col-md-11">
-                                <div class="content table-responsive table-full-width">
-                                  <div class="row">
-                                    <div class="col-md-6">
-                                        <h4 class="title">Employee</h4>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card col-md-11">
+                                    <div class="content table-responsive table-full-width">
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="title">Employees</h4>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="pull-right">
+                                                <button type="submit" class="btn btn-primary btn-fill" onclick="openEmployeeAddPage()">Add</button></span>
+                                        </div>
+                                      </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <span class="pull-right">
-
-                           
-                             <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openEmployeeAddPage()">Add</button>
+                                      
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-hover table-striped" id="myTable">
+    
+                                            <thead>
+                                                    <th>S.NO</th>
+                                                    <td>Name</td>
+                                                    <td>Mobile NO</td>
+                                                    <td>Email ID</td>
+                                                    <td>City</td>
+                                                    <td></td>
+                                            </thead>
+                                            
+                                            <tbody>
+                                                                                          
+                                            </tbody>
+                                        </table>
+    
                                     </div>
-                                  </div>
-                                </div>
-                            
-                                <div class="header">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" />
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-search"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="content table-responsive table-full-width">
-                                    <table class="table table-hover table-striped" id="myTable">
-                                        <thead>
-                                            <th>S.NO</th>
-                                           <td>Name</td>
-                                            <td>Mobile NO</td>
-                                            <td>Email ID</td>
-                                            <td>City</td>
-                                        </thead>
-                                        <tbody>
-                                           
-                                     </tbody>
-                                    </table>
-
                                 </div>
                             </div>
+    
+    
+    
                         </div>
-
-
-
                     </div>
                 </div>
-            </div>
 
 
              <footer class="footer">

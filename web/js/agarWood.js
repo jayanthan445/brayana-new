@@ -14,9 +14,23 @@ $(document).ready(function(){
           var dId= $("#dID").val();
             deleteagarWood(dId);
         });
-
+$("#noTree,#treeAmount").change(function(){
+            calculateTotal();
+        });
+$("#noTree,#treeAmount").change();
 });
-
+function calculateTotal(){
+  var months = $("#noTree").val();
+    var amt = $("#treeAmount").val();
+    if(months != "" && amt != ""){
+      if($.isNumeric(months) && $.isNumeric(amt)){
+          var tot = months*amt;
+          $("#totalAmount").val(tot);
+      }else{
+          alert("Only Numbers are allowed");
+      }
+    }
+}
 function init(){
     var currentPath = getCurrentPath();
     if(currentPath == "agarWood/agarWoodView.html"){

@@ -20,7 +20,7 @@ function openTransactionChitAddEditPage(){
     window.location='./transactionChitAddEdit.html';
 }
 
-function openTransactionAgarWoodAddEditpage(){
+function openTransactionAgarAddEditpage(){
     window.location='./transactionAgarAddEdit.html';
 }
 
@@ -77,7 +77,7 @@ function loadDataTable(){
 function buildTable(list,count){
 
     for(var i=0;i<count;i++){
-        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].booking_no+"</td><td>"+list[i].name+"</td><td>"+list[i].inst_month+"</td><td>"+list[i].tot_amount+"</td><td>"+list[i].paid_months+"</td><td>"+list[i].paid_amount+"</td><td> <a href=./transactionAgarDetails.html?id="+list[i].id+"  class='btn btn-outline-success'><i class='fa fa-eye ' aria-hidden='true'></i></a></td></tr>";
+        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].booking_no+"</td><td>"+list[i].name+"</td><td>"+list[i].no_tree+"</td><td>"+list[i].tree_amount+"</td><td>"+list[i].tot_amount+"</td><td>"+list[i].paid_months+"</td><td>"+list[i].paid_amount+"</td><td> <a href=./transactionAgarDetails.html?id="+list[i].id+"  class='btn btn-outline-success'><i class='fa fa-eye ' aria-hidden='true'></i></a></td></tr>";
         $("table tbody").append(markup);
     }
     
@@ -309,11 +309,10 @@ function fillBookingSelect(data,count){
 function filldependency(data){
   $("#login_id").val(data.login_id);
   $("#customer_name").val(data.name);
-  $("#inst_amount").val(data.inst_amount);
-  $("#totalAmount").val(data.inst_month*data.inst_amount);
+  $("#inst_amount").val(data.tree_amount);
+  $("#totalAmount").val(data.tot_amount);
 
   $("#balance_amount").val(data.balance_amount);
-  $("#balance_months").val(data.balance_months);
 
   $("#paid_amount").val(data.paid_amount);
   $("#paid_months").val(data.paid_months);

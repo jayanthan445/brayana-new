@@ -142,6 +142,21 @@ class Api extends REST_Controller {
        } 
     }
 
+    public function deleteCustomerAgar_post($id){
+        if(!empty($this->isAuth)){
+        
+        $table = "agar_booking";    
+        $id = $this->Api_model->delete_data($table, array('id'=>$id));
+        if($id){
+            $response = array("STATUS"=>"OK","RESPONSE"=>"Data Deleted");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }else{
+            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to Deleta");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }
+        
+       } 
+    }
 
 
     /** Chit master**/
@@ -398,8 +413,7 @@ class Api extends REST_Controller {
                                     "booking_no" => $POST['booking_no'],
                                     "login_id"=> $customerDetail["data"][0]["login_id"],
                                     "no_tree"=> $POST['no_tree'],
-                                    "inst_month"=> $POST['inst_month'],
-                                    "inst_amount"=> $POST['inst_amount'],                                   
+                                    "tree_amount"=> $POST['tree_amount'],                                  
                                     "tot_amount"=> $POST['tot_amount'],
                                     "added_by"=>$this->isAuth->id,
                                 );      
@@ -804,7 +818,7 @@ class Api extends REST_Controller {
             $customerDetail = $this->Api_model->getCustomers($options);
          $data = array(
  
-                         "emp_id"=>$POST['employeeId'],
+                         "emp_pin"=>$POST['employeeId'],
                          "name" => $POST['name'],
                          "gender"=> $POST['gender'],
                          "login_id"=> $customerDetail["data"][0]["login_id"],
@@ -896,7 +910,7 @@ class Api extends REST_Controller {
         //     $options["where"] = "mobile = '".$userId."'" ;
         //     $customerDetail = $this->Api_model->getCustomers($options);
          $data = array(
-            "emp_id"=>$POST['employeeId'],
+            "emp_pin"=>$POST['employeeId'],
             "name" => $POST['name'],
             "gender"=> $POST['gender'],
             "dob"=> $POST['dob'],
