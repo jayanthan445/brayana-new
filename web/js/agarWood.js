@@ -114,7 +114,8 @@ function fillEditAgarDetail(data){
       $("#siteName").val(data.site_name);
       $("#noTree").val(data.no_tree);
       $("#treeAmount").val(data.tree_amount);
-    
+      var tot = data.no_tree*data.tree_amount;
+      $("#totalAmount").val(tot);
 }
 
 

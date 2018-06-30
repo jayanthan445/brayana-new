@@ -213,6 +213,10 @@ function saveChitDetail(){
       var paid_amount = $("#paid_amount").val();
       var paid_months = $("#paid_months").val();
 
+      if(balance_amount == 0){ 
+          alert("Balance amount is 0 to pay");
+          return false;
+      }
       var data = {  
                    "type_id":type_id,
                     "login_id":login_id,
@@ -318,6 +322,10 @@ function filldependency(data){
   $("#paid_amount").val(data.paid_amount);
   $("#paid_months").val(data.paid_months);
   $("#inst_month").val(parseInt(data.paid_months)+1);
+  if(data.balance_amount == 0){ 
+          alert("Balance amount is 0 to pay");
+          return false;
+      }
 
 }
 function load_booking(){

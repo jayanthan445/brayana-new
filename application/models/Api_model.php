@@ -455,7 +455,22 @@ class Api_model extends CI_Model {
         }
 
         public function getBooking($type,$options = array()){
-          $query = "SELECT * FROM ".$type."_booking b JOIN customers c ON (b.login_id = c.login_id) ";
+          $column = "b.*,c.* ";
+          if($type == "agar"){
+              $column  .= ",m.site_name ";
+            }else if($type == "chit"){
+              $column  .= ",m.fund_type ";
+            }else if($type == "land"){
+              $column  .= ",m.site_name ";
+            }
+          $query = "SELECT ".$column." FROM ".$type."_booking b JOIN customers c ON (b.login_id = c.login_id) ";
+          if($type == "agar"){
+              $query .= "JOIN tree_master m ON (b.agar_id = m.site_id) ";
+            }else if($type == "land"){
+              $query .= "JOIN land_master m ON (b.site_id = m.site_id) ";
+            }else if($type == "chit"){
+              $query .= "JOIN chit_master m ON (b.chit_id = m.chit_id) ";
+            }
           $where = array();
           if(isset($options['where']) && !empty($options['where']))
           {
