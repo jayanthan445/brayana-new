@@ -87,7 +87,7 @@ function buildTable(list,count){
         if(userType == 1){
             var delete_btn = "<a href='./button' class='btn btn-outline-danger master deleteland'  data-toggle='modal' data-target='#myModal' data-name='"+list[i].name+"' data-id='"+list[i].id+"' ><i class='fa fa-trash-o' aria-hidden='true'></i></a>";  
         }
-        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].name+"</td><td>"+list[i].mobile+"</td><td>"+list[i].email_id+"</td><td>"+list[i].tot_amount+"</td><td> <a href=../customerLand/customerLandEdit.html?id="+list[i].id+"  class='btn btn-outline-success'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>"+delete_btn+"</td></tr>";
+        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].name+"</td><td>"+list[i].mobile+"</td><td>"+list[i].email_id+"</td><td>"+list[i].booking_no+"</td><td>"+list[i].site_name+"</td><td>"+list[i].inst_month+"</td><td>"+list[i].tot_amount+"</td><td> <a href=../customerLand/customerLandEdit.html?id="+list[i].id+"  class='btn btn-outline-success'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>"+delete_btn+"</td></tr>";
         $("table tbody").append(markup);
     }
 }
@@ -198,13 +198,13 @@ function saveLandDetail(){
   var installmentAmount = $("#installment_amount").val();
   var mobile = $("#mobile").val();
   var name = $("#name").val();
-  var booking_no = $("#booking_no").val();
+  //var booking_no = $("#booking_no").val();
   var site_name = $("#site_name").val();
   var address = $("#address").val();
   var email_id = $("#email_id").val();
   
   var data = {
-                "booking_no":booking_no,
+                //"booking_no":booking_no,
                 "user_mobile":mobile,
                 "email_id":email_id,
                 "name":name,

@@ -377,12 +377,12 @@ class Api extends REST_Controller {
                     $customerDetail = $this->Api_model->getCustomers($options);
 
                     $options = array();
-                    $booking_no =  $POST['booking_no'];
-                    $options["where"] = "booking_no = '".$booking_no."'" ;
+                   // $booking_no =  $POST['booking_no'];
+                    //$options["where"] = "booking_no = '".$booking_no."'" ;
                     if($type=="land"){
                                 $data = array(
                                     "site_id" => $POST['site_id'],
-                                    "booking_no" => $POST['booking_no'],
+                                    //"booking_no" => $POST['booking_no'],
                                     "login_id"=> $customerDetail["data"][0]["login_id"],
                                     "inst_month"=> $POST['inst_month'],
                                     "inst_amount"=> $POST['inst_amount'],
@@ -390,13 +390,13 @@ class Api extends REST_Controller {
                                     "added_by"=>$this->isAuth->id,
                                 );      
                                 $table = "land_booking";
-                                $id = $this->Api_model->insert_update($table,$data,$options);   
+                                $id = $this->Api_model->insert_data($table,$data);   
                     }
 
                     if($type=="chit"){
                                 $data = array(
                                     "chit_id" => $POST['chit_id'],
-                                    "booking_no" => $POST['booking_no'],
+                                   // "booking_no" => $POST['booking_no'],
                                     "login_id"=> $customerDetail["data"][0]["login_id"],
                                     "inst_month"=> $POST['inst_month'],
                                     "inst_amount"=> $POST['inst_amount'],
@@ -404,13 +404,13 @@ class Api extends REST_Controller {
                                     "added_by"=>$this->isAuth->id,
                                 );      
                                 $table = "chit_booking";
-                                $id = $this->Api_model->insert_update($table,$data,$options);   
+                                $id = $this->Api_model->insert_data($table,$data);   
                     }
 
                     if($type=="agar"){
                                 $data = array(
                                     "agar_id" => $POST['agar_id'],
-                                    "booking_no" => $POST['booking_no'],
+                                   // "booking_no" => $POST['booking_no'],
                                     "login_id"=> $customerDetail["data"][0]["login_id"],
                                     "no_tree"=> $POST['no_tree'],
                                     "tree_amount"=> $POST['tree_amount'],                                  
@@ -418,19 +418,27 @@ class Api extends REST_Controller {
                                     "added_by"=>$this->isAuth->id,
                                 );      
                                 $table = "agar_booking";
-                                $id = $this->Api_model->insert_update($table,$data,$options);   
+                                $id = $this->Api_model->insert_data($table,$data);   
                     }
+                    if($id){
+                        $bookin_no = $this->Api_model->update_automaticID($id,$type,$table);
+                    }
+                    if($id && $bookin_no){
+                            $options = array();
+                            $userId =  $POST['user_mobile'];
+                            $options["where"] = "user_name = '".$userId."'" ;
+                            $userDetail = $this->Api_model->getUsers($options);
 
-                    $options = array();
-                    $userId =  $POST['user_mobile'];
-                    $options["where"] = "user_name = '".$userId."'" ;
-                    $userDetail = $this->Api_model->getUsers($options);
+                            sleep(1);
 
-                    sleep(1);
-
-                    $response = array("STATUS"=>"OK","RESPONSE"=>$userDetail);
-                    //print_r($response);
-                    $this->set_response($response, REST_Controller::HTTP_OK);
+                            $response = array("STATUS"=>"OK","RESPONSE"=>$userDetail);
+                            //print_r($response);
+                            $this->set_response($response, REST_Controller::HTTP_OK);
+                    }else{
+                            $response = array("STATUS"=>"NOK","RESPONSE"=>"No Mobile number found");
+                            $this->set_response($response, REST_Controller::HTTP_OK);
+                    }
+                    
                 }else{
                     $response = array("STATUS"=>"NOK","RESPONSE"=>"No Mobile number found");
                     $this->set_response($response, REST_Controller::HTTP_OK);
@@ -818,7 +826,7 @@ class Api extends REST_Controller {
             $customerDetail = $this->Api_model->getCustomers($options);
          $data = array(
  
-                         "emp_pin"=>$POST['employeeId'],
+                         //"emp_pin"=>$POST['employeeId'],
                          "name" => $POST['name'],
                          "gender"=> $POST['gender'],
                          "login_id"=> $customerDetail["data"][0]["login_id"],
@@ -837,6 +845,9 @@ class Api extends REST_Controller {
          $table = "employees";
          $id = $this->Api_model->insert_data($table,$data);
          if($id){
+            $bookin_no = $this->Api_model->update_automaticID($id,"employee",$table);
+         }
+         if($id && $bookin_no){
              $this->employees_get($id);
          }else{
              $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed");
@@ -910,7 +921,7 @@ class Api extends REST_Controller {
         //     $options["where"] = "mobile = '".$userId."'" ;
         //     $customerDetail = $this->Api_model->getCustomers($options);
          $data = array(
-            "emp_pin"=>$POST['employeeId'],
+            //"emp_pin"=>$POST['employeeId'],
             "name" => $POST['name'],
             "gender"=> $POST['gender'],
             "dob"=> $POST['dob'],

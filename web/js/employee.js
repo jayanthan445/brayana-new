@@ -154,7 +154,7 @@ function back(){
 function buildTable(list,count){
 
 for(var i=0;i<count;i++){
-    var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].name+"</td><td>"+list[i].mobile+"</td><td>"+list[i].email+"</td><td>"+list[i].city+"</td><td> <a href=./employeeEdit.html?id="+list[i].emp_id+"  class='btn btn-outline-success'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a href='./button' class='btn btn-outline-danger deleteemployee'  data-toggle='modal' data-target='#myModal' data-name='"+list[i].name+"' data-id='"+list[i].emp_id+"' ><i class='fa fa-trash-o' aria-hidden='true'></i></a></td></tr>";
+    var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].emp_pin+"</td><td>"+list[i].name+"</td><td>"+list[i].mobile+"</td><td>"+list[i].email+"</td><td>"+list[i].city+"</td><td> <a href=./employeeEdit.html?id="+list[i].emp_id+"  class='btn btn-outline-success'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a href='./button' class='btn btn-outline-danger deleteemployee'  data-toggle='modal' data-target='#myModal' data-name='"+list[i].name+"' data-id='"+list[i].emp_id+"' ><i class='fa fa-trash-o' aria-hidden='true'></i></a></td></tr>";
     $("table tbody").append(markup);
 }
 

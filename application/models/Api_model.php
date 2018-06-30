@@ -19,10 +19,8 @@ class Api_model extends CI_Model {
         
         public function update_data($table,$data,$where)
         {
-        //print_r($data);exit;
-          //$this->db->where($where);
+
           $this->db->update($table,$data,$where);
-          //debug_last_query();exit;
           $afftectedRows = $this->db->affected_rows();
           return $afftectedRows;
         }
@@ -61,6 +59,37 @@ class Api_model extends CI_Model {
         }
          public function record_count($table) {
               return $this->db->count_all($table);
+          }
+
+          public function update_automaticID($id,$type,$table){
+                $id = str_pad($id,5,0,STR_PAD_LEFT); 
+                $auto_id = "";
+                if($type == "land"){
+                    $auto_id = "BGL".$id;
+                    $data = array("booking_no "=>$auto_id );
+                    $where = array('id'=>$id);
+                }else if($type == "agar"){
+                    $auto_id = "BGW".$id;
+                    $data = array("booking_no "=>$auto_id );
+                    $where = array('id'=>$id);
+                }else if($type == "chit"){
+                    $auto_id = "BGF".$id;
+                    $data = array("booking_no "=>$auto_id );
+                    $where = array('id'=>$id);
+                }else if($type == "employee"){
+                    $auto_id = "BGE".$id;
+                    $data = array("emp_pin "=>$auto_id );
+                    $where = array('emp_id'=>$id);
+                }
+                if($auto_id != ""){
+
+                    $this->db->update($table,$data,$where);
+                    $afftectedRows = $this->db->affected_rows();
+                    return $afftectedRows;  
+                }
+                return false;
+                
+
           }
 
 		// Read data using username and password
@@ -453,7 +482,10 @@ class Api_model extends CI_Model {
                 $lists[$key]["paid_amount"] =  $paid_amount;
                 $lists[$key]["paid_months"] = $calc["paid_months"];
                 $lists[$key]["balance_amount"] = $value["tot_amount"] - $paid_amount;
-                //$lists[$key]["balance_months"] = $value["inst_month"] - $paid_months;
+                if(isset($value["inst_month"])){
+                      $lists[$key]["balance_months"] = $value["inst_month"] - $paid_months;
+                }
+                
               }
           }
           $response = array('data'=>$lists,'count'=>$result->num_rows());

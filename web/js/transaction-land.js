@@ -174,7 +174,7 @@ function getTransactionLandsByID(id){
                     if(data.count > 0){
                         fillEditLandDetail(data.data[0]);
                     }else{
-                        alert("No Land Booking Found");
+                        alert("No Transaction Found");
                         window.location.href=host_url+'transaction/getTransactionLandsByID.html';
                     }
                     
