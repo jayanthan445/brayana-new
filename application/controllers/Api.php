@@ -13,8 +13,10 @@ class Api extends REST_Controller {
         parent::__construct();
         // $this->output->set_header("Access-Control-Allow-Origin: *");
         header_remove('Access-Control-Allow-Origin');
+
         $this->load->model('Api_model');
             $this->load->helper('url_helper');
+            /*$this->isAuth = $this->Api_model->validateToken($this->post());*/
             $this->isAuth = $this->Api_model->validateToken();
             $this->userType = $this->isAuth->type;
             if(!$this->isAuth){
@@ -42,6 +44,19 @@ class Api extends REST_Controller {
        } 
         
     }
+
+    /*public function lands_post($id=""){
+       if(!empty($this->isAuth)){
+           $options = array();
+           if($id){
+               $options["where"] = "site_id = ".$id ;
+           }
+           $return = $this->Api_model->getLands($options);
+           $response = array("STATUS"=>"OK","RESPONSE"=>$return);
+           $this->set_response($response, REST_Controller::HTTP_OK);
+       } 
+        
+    }*/
 
     public function addLand_post(){
         if(!empty($this->isAuth)){

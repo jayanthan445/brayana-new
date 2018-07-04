@@ -68,7 +68,7 @@ function getagarWoods(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/agars",
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -90,7 +90,7 @@ function getagarWoodsById(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/agars/"+id,
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -134,7 +134,7 @@ function editagarWoodDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/editAgar/"+siteid,
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -165,7 +165,7 @@ function saveagarWoodDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/addAgar",
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -191,7 +191,7 @@ function deleteagarWood(id){
     $.ajax({
           type: "POST",
           url: api_url+"/api/deleteAgar/"+id,
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,

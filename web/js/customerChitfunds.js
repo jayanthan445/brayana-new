@@ -126,7 +126,7 @@ function getChits(){
  $.ajax({
       type: "GET",
       url: api_url+"/api/chits",
-      headers: { "auth":auth},
+      //headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -152,7 +152,7 @@ function getCustomerChitsByID(id){
  $.ajax({
       type: "GET",
       url: api_url+"/api/customerChits/"+id,
-      headers: { "auth":auth},
+      //headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -204,7 +204,7 @@ function getCustomerChits(){
     $.ajax({
          type: "GET",
          url: api_url+"/api/customerChits",
-         headers: { "auth":auth},
+         //headers: { "auth":auth},
          dataType:"JSON",
          cache: false,
          success: function(msg, textStatus, xhr) {
@@ -234,7 +234,7 @@ function saveChitDetail(){
     $.ajax({
         type: "POST",
         url: api_url+"/api/registerCustomer/chit",
-        headers: { "auth":auth},
+        //headers: { "auth":auth},
         dataType:"JSON",
         data:data,
         cache: false,
@@ -267,7 +267,7 @@ function editChitDetail(){
  $.ajax({
       type: "POST",
       url: api_url+"/api/editCustomerChit/"+id,
-      headers: { "auth":auth},
+      //headers: { "auth":auth},
       dataType:"JSON",
       data:data,
       cache: false,
@@ -292,7 +292,7 @@ function getChitsByID(id){
     $.ajax({
          type: "GET",
          url: api_url+"/api/chits/"+id,
-         headers: { "auth":auth},
+         //headers: { "auth":auth},
          dataType:"JSON",
          cache: false,
          success: function(msg, textStatus, xhr) {
@@ -326,7 +326,7 @@ function deleteCustomerLand(id){
 $.ajax({
       type: "POST",
       url: api_url+"/api/deleteCustomerChit/"+id,
-      headers: { "auth":auth},
+      //headers: { "auth":auth},
       dataType:"JSON",
       data:data,
       cache: false,

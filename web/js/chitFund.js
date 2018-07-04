@@ -54,7 +54,7 @@ function getchitFunds(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/chits",
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -75,7 +75,7 @@ function getchitFundsById(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/chits/"+id,
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -120,7 +120,7 @@ function editchitFundDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/editChit/"+chitid,
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -152,7 +152,7 @@ function savechitFundDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/addChit",
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -178,7 +178,7 @@ function deletechitFund(id){
     $.ajax({
           type: "POST",
           url: api_url+"/api/deleteChit/"+id,
-          headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,

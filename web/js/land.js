@@ -63,7 +63,7 @@ function getLands(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/lands",
-          headers: { "auth":auth},
+          ////headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -84,7 +84,7 @@ function getLandsByID(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/lands/"+id,
-          headers: { "auth":auth},
+          ////headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -137,7 +137,6 @@ function saveLandDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/addland",
-          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -178,7 +177,7 @@ function editLandDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/editLand/"+site_id,
-          headers: { "auth":auth},
+          ////headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -204,7 +203,7 @@ function deleteLand(id){
     $.ajax({
           type: "POST",
           url: api_url+"/api/deleteLand/"+id,
-          headers: { "auth":auth},
+          ////headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,

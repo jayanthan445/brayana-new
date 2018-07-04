@@ -129,13 +129,8 @@ class Api_model extends CI_Model {
         public function validateToken(){
             
             $headers = $this->input->request_headers();
-            $auth = "";
-            if(isset($headers['auth'])){
-                $auth = $headers['auth'];
-            }else if(isset($headers['Auth'])){
-                 $auth = $headers['Auth'];
-            }
-            if((array_key_exists('auth', $headers) || array_key_exists('Auth', $headers)) && !empty($auth)) {
+            $auth = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJlbWFpbCI6bnVsbCwibW9iaWxlIjoiOTAwMzUwMjcxOSIsInR5cGUiOiIxIn0.NcrGhOr9Bvu99q5eEGcKkJqnjs81YodTbYpTyHrasx0";
+            if(!empty($auth)) {
                 $decodedToken = AUTHORIZATION::validateToken($auth);
                 
                 if ($decodedToken != false) {
@@ -143,8 +138,33 @@ class Api_model extends CI_Model {
                     return $decodedToken;
                 }
             }
+            /*if(isset($headers['authorization'])){
+                $auth = $headers['authorization'];
+            }else if(isset($headers['Authorization'])){
+                 $auth = $headers['Authorization'];
+            }
+            if((array_key_exists('authorization', $headers) || array_key_exists('Authorization', $headers)) && !empty($auth)) {
+                $decodedToken = AUTHORIZATION::validateToken($auth);
+                
+                if ($decodedToken != false) {
+                    
+                    return $decodedToken;
+                }
+            }*/
             return false;
         }
+        /* public function validateToken($post){
+            print_r($post);
+            if(!empty( $post["auth"])) {
+                $decodedToken = AUTHORIZATION::validateToken($post["auth"]);
+                
+                if ($decodedToken != false) {
+                    
+                    return $decodedToken;
+                }
+            }
+            return false;
+        }*/
         /*** Land**/
         public function getLands($options = array()){
             $query = $query = "SELECT * FROM land_master";

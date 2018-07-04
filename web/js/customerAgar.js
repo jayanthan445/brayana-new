@@ -146,7 +146,7 @@ function getAgars(id){
  $.ajax({
       type: "GET",
       url: api_url+"/api/agars",
-      headers: { "auth":auth},
+      //headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -175,7 +175,7 @@ function getCustomerAgarsByID(id){
  $.ajax({
       type: "GET",
       url: api_url+"/api/customerAgars/"+id,
-      headers: { "auth":auth},
+      //headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -228,7 +228,7 @@ function getCustomerAgars(){
     $.ajax({
          type: "GET",
          url: api_url+"/api/customerAgars",
-         headers: { "auth":auth},
+         //headers: { "auth":auth},
          dataType:"JSON",
          cache: false,
          success: function(msg, textStatus, xhr) {
@@ -258,7 +258,7 @@ function saveAgarDetail(){
     $.ajax({
         type: "POST",
         url: api_url+"/api/registerCustomer/agar",
-        headers: { "auth":auth},
+        //headers: { "auth":auth},
         dataType:"JSON",
         data:data,
         cache: false,
@@ -290,7 +290,7 @@ function editAgarDetail(){
  $.ajax({
       type: "POST",
       url: api_url+"/api/editCustomerAgar/"+id,
-      headers: { "auth":auth},
+      //headers: { "auth":auth},
       dataType:"JSON",
       data:data,
       cache: false,
@@ -315,7 +315,7 @@ function getAgarsByID(id){
     $.ajax({
          type: "GET",
          url: api_url+"/api/agars/"+id,
-         headers: { "auth":auth},
+         //headers: { "auth":auth},
          dataType:"JSON",
          cache: false,
          success: function(msg, textStatus, xhr) {
@@ -348,7 +348,7 @@ function deleteCustomerAgar(id){
 $.ajax({
       type: "POST",
       url: api_url+"/api/deleteCustomerAgar/"+id,
-      headers: { "auth":auth},
+      //headers: { "auth":auth},
       dataType:"JSON",
       data:data,
       cache: false,
