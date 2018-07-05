@@ -403,6 +403,7 @@ class Api extends REST_Controller {
                                     "inst_amount"=> $POST['inst_amount'],
                                     "tot_amount"=> $POST['tot_amount'],                                   
                                     "added_by"=>$this->isAuth->id,
+                                    "booked_date"=>date("Y-m-d")
                                 );      
                                 $table = "land_booking";
                                 $id = $this->Api_model->insert_data($table,$data);   
@@ -417,6 +418,7 @@ class Api extends REST_Controller {
                                     "inst_amount"=> $POST['inst_amount'],
                                     "tot_amount"=> $POST['tot_amount'],                                    
                                     "added_by"=>$this->isAuth->id,
+                                    "booked_date"=>date("Y-m-d")
                                 );      
                                 $table = "chit_booking";
                                 $id = $this->Api_model->insert_data($table,$data);   
@@ -431,6 +433,7 @@ class Api extends REST_Controller {
                                     "tree_amount"=> $POST['tree_amount'],                                  
                                     "tot_amount"=> $POST['tot_amount'],
                                     "added_by"=>$this->isAuth->id,
+                                    "booked_date"=>date("Y-m-d")
                                 );      
                                 $table = "agar_booking";
                                 $id = $this->Api_model->insert_data($table,$data);   

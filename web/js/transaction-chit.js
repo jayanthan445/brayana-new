@@ -87,7 +87,8 @@ function buildDetailsTable(list,count){
 
     for(var i=0;i<count;i++){
         $(".booking_no").html(list[i].booking_no);
-        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].name+"</td><td>"+list[i].inst_month+"</td><td>"+list[i].inst_amount+"</td><td> <a href='./button' class='btn btn-outline-danger deleteTransactionChit'  data-toggle='modal' data-target='#myModal'  data-id='"+list[i].inst_id+"' ><i class='fa fa-trash-o' aria-hidden='true'></i></a></td></tr>";
+        $(".customer_name").html(list[i].name);
+        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].inst_month+"</td><td>"+list[i].inst_amount+"</td><td>"+list[i].date+"</td><td><b>"+(list[i].status == "PAID" ? "<span style='color:green'>"+list[i].status+"</span>" : "<span style='color:#ee7f2e'>"+list[i].status+"</span>")+"</b></td><td> <a href='./button' class='btn btn-outline-danger deleteTransactionLand'  data-toggle='modal' data-target='#myModal'  data-id='"+list[i].inst_id+"' ><i class='fa fa-trash-o' aria-hidden='true'></i></a></td></tr>";
         $("table tbody").append(markup);
     }
     

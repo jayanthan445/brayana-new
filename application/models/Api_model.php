@@ -446,7 +446,11 @@ class Api_model extends CI_Model {
 
         /*Transaction */
         public function getTransaction($type,$options = array()){
-            $query = "SELECT i.*,b.booking_no,c.* FROM ".$type."_installments i ";
+          $cols = "";
+           if($type != "agar"){
+              $cols = " b.inst_month as total_months,b.inst_amount as amount_per_month,b.booked_date, ";
+           }
+            $query = "SELECT i.*,b.booking_no,".$cols." c.* FROM ".$type."_installments i ";
             $query .= "JOIN ".$type."_booking b ON (i.".$type."_id = b.id) ";
             if($type == "agar"){
               $query .= "JOIN tree_master m ON (b.agar_id = m.site_id) ";
@@ -470,8 +474,39 @@ class Api_model extends CI_Model {
               $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
             } 
             $result = $this->db->query($query);
-            $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+            $list = $result->result_array();
+            $count = $result->num_rows();
+            
+            if($type != "agar"){
+              $count = $list[0]["total_months"];
+                for($i=0;$i<$count;$i++){
+                $booked_ym = date("F-Y",strtotime($list[0]["booked_date"]." +".$i." Month "));
+                if(isset($list[$i])){
+                    $list[$i]["date"] = date("d/m/Y",strtotime($list[$i]["datetime"]));
+                    $list[$i]["status"] ="PAID";
+                  }else{
+                      $list[$i]["inst_amount"] =  $list[0]["amount_per_month"];
+                       $list[$i]["status"] ="UNPAID";
+                       $list[$i]["date"] = "";
+                       $list[$i]["name"] = $list[0]["name"];
+                  }
+                  $list[$i]["inst_month"] =  $booked_ym;
+                   
+              }
+            }else{
+                for($i=0;$i<$count;$i++){
+                if(isset($list[$i])){
+                    $list[$i]["date"] = date("d/m/Y",strtotime($list[$i]["datetime"]));
+                    $list[$i]["inst_month"] = date("F-Y",strtotime($list[$i]["datetime"]));
+                    $list[$i]["status"] ="PAID";
+                  }
+                   
+              }
+            }
+            
+            $response = array('data'=>$list,'count'=>$count);
             return $response;    
+                
         }
 
         public function getBooking($type,$options = array()){
