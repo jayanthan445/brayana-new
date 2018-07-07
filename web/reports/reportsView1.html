@@ -46,7 +46,7 @@
 
 
 <script src="../js/scripts.js"></script>
- <script src="../js/chitFund.js"></script>
+ <script src="../js/land.js"></script>
   <!-- client side validation script -->
   <!-- client side validation script -->
 </head>
@@ -73,7 +73,7 @@
                             <p>Lands</p>
                         </a>
                     </li>
-                    <li class="active" >
+                    <li class="master">
                         <a href="../chitFund/chitFundView.html">
                             <i class="pe-7s-note2"></i>
                             <p>Chit Funds</p>
@@ -97,6 +97,7 @@
                             <p>Customer</p>
                         </a>
                     </li>
+
                     <li>
                         <a href="../transaction/transactionLandView.html">
                             <i class="pe-7s-look"></i>
@@ -104,23 +105,12 @@
                         </a>
                     </li>
                     
-                    <li>
-                            <a href="#demo" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
-                                <i class="pe-7s-ball"></i>
-                                <p class="textAlignLeft">Reports</p>
-                            </a>
-                            <div id="demo" class="collapse">
-                                <a href="../customerReports/reportsView.html" class="sideBarCollapseFirst">
-                                    <i class="pe-7s-download"></i>
-                                    <p>Customer</p>
-                                </a>
-
-                                <a href="../employeeReports/reportsView.html" class="sideBarCollapseLast">
-                                    <i class="pe-7s-download"></i>
-                                    <p>Employee</p>
-                                </a>
-                            </div>
-                        </li>
+                    <li class="active">
+                        <a href="../reports/reportsView.html">
+                            <i class="pe-7s-bell"></i>
+                            <p>Reports</p>
+                        </a>
+                    </li>
                      <li>
                         <a href="../Notification/notificationView.html">
                             <i class="pe-7s-science"></i>
@@ -167,54 +157,67 @@
                             <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                         <h4 class="title">Add chitFund     </h4>
+                                         <h4 class="title">Reports</h4>
                                     </div>
                                     
                                   </div>
                                 </div>
                                 <div class="content">
-                                        <form name="chitFundAddForm" id="chitFundAddForm" onsubmit="return savechitFundDetail();">
+                                        <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();">
                                         <div>
                                             <div class="row">
-                                                 
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label>Category</label>
+                                                       <select class="form-control" id="site_name" required>
+                                                            <option value="0"> Select option </option>
+                                                            <option value="1"> Land </option>
+                                                            <option value="2"> Agar Wood </option>
+                                                            <option value="3"> Chit funds </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Fund Type</label>
-                                                        <input type="text" class="form-control" placeholder="Fund Type" value="" id="fundType" required>
+                                                        <label>Employee Mobile Number</label>
+                                                        <input type="text" class="form-control" placeholder="Employee mobile number" value="" id="surveyNo" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Installment Months</label>
-                                                        <input type="number" class="form-control" placeholder="Installment in Months" pattern= "[0-9]"  value="" id="installmentMonths" required>
+                                                        <label >Customer Mobile Number</label>
+                                                        <input type="text" class="form-control" placeholder="Customer mobile number" id="area" required>
                                                     </div>
                                                 </div>
                                             </div>
-        
+                                        
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Installment Amount</label>
-                                                        <input type="number" pattern= "[0-9]"  class="form-control" placeholder="Installment Amount" value="" id="installmentAmount" required>
+                                                        <label>From Date</label>
+                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDate" required>
                                                     </div>
                                                 </div>
-                                                 
-                                            </div>
-        
-       
-                                            <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Total Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Total Amount" value="" disabled id="totalAmount" required>
+                                                        <label>To Date</label>
+                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDate" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group" style="margin-top: 26px">
+                                                        <label>Consolidate List </label>
+                                                        <input type="checkbox"  required>
+                                                        <label style="margin-left: 10px;">unpaid List </label>
+                                                        <input type="checkbox"  required>
                                                     </div>
                                                 </div>
                                             </div>
         
-                                             
-        
-                                            <button type="submit" class="btn btn-primary btn-fill">Submit</button> 
-                                             <a href="./chitFundView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                            <button type="submit" class="btn btn-primary btn-fill">Search</button> 
+                                             <a href="#" class="btn btn-info btn-fill" role="button">Print</a>
+                                             <button type="submit" class="btn btn-primary btn-fill">Export</button> 
+                                             <a href="#" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </form>

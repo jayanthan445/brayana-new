@@ -6,3 +6,40 @@ table.dataTable thead th, table.dataTable tbody td{
   border: 1px solid #ddd !important;
   text-transform: unset !important;
 }
+
+
+.sideBarCollapseFirst {
+	color: #FFFFFF;
+    margin: 5px 18px 6px 43px;
+    border: white;
+    opacity: 1;
+    border-radius: 4px;
+    display: block;
+     border-color: #075073;
+}
+
+.sideBarCollapseLast {
+	color: #FFFFFF;
+    margin: 5px 18px 6px 43px;
+    border: white;
+    opacity: 1;
+    border-radius: 4px;
+    display: block;
+     border-color: #075073;
+}
+
+.sideBarCollapseMenuActive{
+	background: #ee7f2e;
+}
+
+.textAlignLeft{
+	    text-align: left;
+}
+
+.sideNavADefaultColor{
+	/*background-color: rgba(255, 255, 255, 0.13);*/
+	border:none;
+}
+
+
+

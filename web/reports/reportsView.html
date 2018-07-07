@@ -46,7 +46,7 @@
 
 
 <script src="../js/scripts.js"></script>
- <script src="../js/land.js"></script>
+ <script src="../js/reports.js"></script>
   <!-- client side validation script -->
   <!-- client side validation script -->
 </head>
@@ -104,13 +104,25 @@
                             <p>Transaction</p>
                         </a>
                     </li>
-                    
-                    <li class="active">
-                        <a href="../reports/reportsView.html">
-                            <i class="pe-7s-bell"></i>
-                            <p>Reports</p>
-                        </a>
-                    </li>
+
+                    <li>
+                            <a href="#demo" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
+                                <i class="pe-7s-ball"></i>
+                                <p class="textAlignLeft">Reports</p>
+                            </a>
+                            <div id="demo" class="collapse in ">
+                                <a href="../customerReports/reportsView.html" class="sideBarCollapseFirst">
+                                    <i class="pe-7s-download"></i>
+                                    <p>Customer</p>
+                                </a>
+
+                                <a href="../employeeReports/reportsView.html" class="sideBarCollapseLast">
+                                    <i class="pe-7s-download"></i>
+                                    <p>Employee</p>
+                                </a>
+                            </div>
+                        </li>
+                   
                      <li>
                         <a href="../Notification/notificationView.html">
                             <i class="pe-7s-science"></i>
@@ -157,7 +169,15 @@
                             <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                         <h4 class="title">Reports</h4>
+                                         <h4 class="title">Reports </h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="pull-right">
+
+                        
+                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openTransactionReportsPage()">Booking</button>
+                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openPaymentReportsPage()">Payments</button>
+                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openunPaidReportsPage()">un paid</button>
                                     </div>
                                     
                                   </div>
@@ -166,7 +186,7 @@
                                         <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();">
                                         <div>
                                             <div class="row">
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Category</label>
                                                        <select class="form-control" id="site_name" required>
@@ -177,51 +197,67 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Employee Mobile Number</label>
-                                                        <input type="text" class="form-control" placeholder="Employee mobile number" value="" id="surveyNo" required>
+                                                        <label>From Date</label>
+                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDate" >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label >Customer Mobile Number</label>
-                                                        <input type="text" class="form-control" placeholder="Customer mobile number" id="area" required>
+                                                       <label>To Date</label>
+                                                        <input type="date" class="form-control" placeholder="To Date" value="" id="toDate" required>
                                                     </div>
                                                 </div>
                                             </div>
                                         
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>From Date</label>
-                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDate" required>
+                                                       <label>Mobile Number</label>
+                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="mobileNumber" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>To Date</label>
-                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDate" required>
+                                                       <label>Id</label>
+                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="idInfo" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group" style="margin-top: 26px">
+                                                <div class="form-group" style="margin-top: 26px">
                                                         <label>Consolidate List </label>
-                                                        <input type="checkbox"  required>
-                                                        <label style="margin-left: 10px;">unpaid List </label>
-                                                        <input type="checkbox"  required>
+                                                        <input type="checkbox" >
+                                                         
                                                     </div>
-                                                </div>
                                             </div>
         
+                                           
+                                             
+        
                                             <button type="submit" class="btn btn-primary btn-fill">Search</button> 
-                                             <a href="#" class="btn btn-info btn-fill" role="button">Print</a>
-                                             <button type="submit" class="btn btn-primary btn-fill">Export</button> 
-                                             <a href="#" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                             <a href="../land/landView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </form>
                                     </div>
+
+                                    <div class="content table-responsive table-full-width">
+                                    <table class="table table-hover table-striped" id="myTable">
+                                        <thead>
+                                            <th>S.NO</th>
+                                            <th>Site Name</th>
+                                            <th>Survey No</th>
+                                            <th>Area</th>
+                                            <th>City</th>
+                                            <th></th>
+                                        </thead>
+                                        
+                                        <tbody>
+                                                                                      
+                                        </tbody>
+                                    </table>
+
+                                </div>
                         </div>
                     </div>
                    

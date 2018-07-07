@@ -15,7 +15,7 @@
 
     <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-
+ 
     <!--  Light Bootstrap Table core CSS    -->
     <link href="../assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
 
@@ -46,7 +46,7 @@
 
 
 <script src="../js/scripts.js"></script>
- <script src="../js/chitFund.js"></script>
+ <script src="../js/reports.js"></script>
   <!-- client side validation script -->
   <!-- client side validation script -->
 </head>
@@ -73,7 +73,7 @@
                             <p>Lands</p>
                         </a>
                     </li>
-                    <li class="active" >
+                    <li class="master">
                         <a href="../chitFund/chitFundView.html">
                             <i class="pe-7s-note2"></i>
                             <p>Chit Funds</p>
@@ -97,6 +97,7 @@
                             <p>Customer</p>
                         </a>
                     </li>
+
                     <li>
                         <a href="../transaction/transactionLandView.html">
                             <i class="pe-7s-look"></i>
@@ -104,23 +105,18 @@
                         </a>
                     </li>
                     
-                    <li>
-                            <a href="#demo" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
-                                <i class="pe-7s-ball"></i>
-                                <p class="textAlignLeft">Reports</p>
-                            </a>
-                            <div id="demo" class="collapse">
-                                <a href="../customerReports/reportsView.html" class="sideBarCollapseFirst">
-                                    <i class="pe-7s-download"></i>
-                                    <p>Customer</p>
-                                </a>
-
-                                <a href="../employeeReports/reportsView.html" class="sideBarCollapseLast">
-                                    <i class="pe-7s-download"></i>
-                                    <p>Employee</p>
-                                </a>
-                            </div>
-                        </li>
+                    <li class="active">
+                        <a href="../reports/reportsView.html">
+                            <i class="pe-7s-bell"></i>
+                            <p>Customer Reports</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../reports/reportsView.html">
+                            <i class="pe-7s-bell"></i>
+                            <p>Employee Reports</p>
+                        </a>
+                    </li>
                      <li>
                         <a href="../Notification/notificationView.html">
                             <i class="pe-7s-science"></i>
@@ -166,59 +162,94 @@
                         <div class="card  col-md-11">
                             <div class="content table-responsive table-full-width">
                                   <div class="row">
-                                    <div class="col-md-6">
-                                         <h4 class="title">Add chitFund     </h4>
+                                    <div class="col-md-3">
+                                         <h4 class="title">Reports </h4>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span class="pull-right">
+
+                           
+                            <button type="submit" class=" btn btn-primary btn-fill marginBottom10"  onclick="openEmployeeReports()">Employee</button>
+                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openCustomerReportsPage()">Customer</button>
+                             <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openTransactionReportsPage()">Transaction</button>
+                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openPaymentReportsPage()">Payments</button>
+                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openConsolidatedReportsPage()">Consolidated</button>
+                            <button type="submit" class="active btn btn-primary btn-fill marginBottom10"  onclick="openunPaidReportsPage()">un paid</button>
                                     </div>
                                     
                                   </div>
                                 </div>
                                 <div class="content">
-                                        <form name="chitFundAddForm" id="chitFundAddForm" onsubmit="return savechitFundDetail();">
+                                        <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();">
                                         <div>
                                             <div class="row">
-                                                 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Fund Type</label>
-                                                        <input type="text" class="form-control" placeholder="Fund Type" value="" id="fundType" required>
+                                                        <label>Category</label>
+                                                       <select class="form-control" id="site_name" required>
+                                                            <option value="0"> Select option </option>
+                                                            <option value="1"> Land </option>
+                                                            <option value="2"> Agar Wood </option>
+                                                            <option value="3"> Chit funds </option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Installment Months</label>
-                                                        <input type="number" class="form-control" placeholder="Installment in Months" pattern= "[0-9]"  value="" id="installmentMonths" required>
+                                                        <label>From Date</label>
+                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDate" >
                                                     </div>
                                                 </div>
-                                            </div>
-        
-                                            <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Installment Amount</label>
-                                                        <input type="number" pattern= "[0-9]"  class="form-control" placeholder="Installment Amount" value="" id="installmentAmount" required>
+                                                       <label>To Date</label>
+                                                        <input type="date" class="form-control" placeholder="To Date" value="" id="toDate" required>
                                                     </div>
                                                 </div>
-                                                 
                                             </div>
-        
-       
+                                        
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Total Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Total Amount" value="" disabled id="totalAmount" required>
+                                                       <label>Mobile Number</label>
+                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="mobileNumber" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                       <label>Id</label>
+                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="idInfo" >
                                                     </div>
                                                 </div>
                                             </div>
         
+                                           
                                              
         
-                                            <button type="submit" class="btn btn-primary btn-fill">Submit</button> 
-                                             <a href="./chitFundView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                            <button type="submit" class="btn btn-primary btn-fill">Search</button> 
+                                             <a href="../land/landView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </form>
                                     </div>
+
+                                    <div class="content table-responsive table-full-width">
+                                    <table class="table table-hover table-striped" id="myTable">
+                                        <thead>
+                                            <th>S.NO</th>
+                                            <th>Site Name</th>
+                                            <th>Survey No</th>
+                                            <th>Area</th>
+                                            <th>City</th>
+                                            <th></th>
+                                        </thead>
+                                        
+                                        <tbody>
+                                                                                      
+                                        </tbody>
+                                    </table>
+
+                                </div>
                         </div>
                     </div>
                    
