@@ -15,6 +15,66 @@ function openCustomerunPaidReportsPage(){
     window.location='../customerReports/unPaidView.html';
 }
 
+ $('input[id^="customerBbookingConsolidate"]').click(function() {
+        alert("Selected");     
+    });
+
+
+
+$(function () {
+  $('#consolidateCBR').click(function () {
+    var id = $(this).attr('id');
+    if ($(this).is(':checked')) {
+        $("#typeCBR").attr("disabled" , "disabled");
+        $("#fromDateCBR").attr("disabled" , "disabled");
+        $("#toDateCBR").attr("disabled" , "disabled");
+        $("#mobileCBR").attr("disabled" , "disabled");
+        $("#bookIdCBR").attr("disabled" , "disabled");
+    }else{
+        $("#typeCBR").removeAttr("disabled" , "disabled");
+        $("#fromDateCBR").removeAttr("disabled" , "disabled");
+        $("#toDateCBR").removeAttr("disabled" , "disabled");
+        $("#mobileCBR").removeAttr("disabled" , "disabled");
+        $("#bookIdCBR").removeAttr("disabled" , "disabled");
+    }
+  });
+
+  $('#consolidateCPR').click(function () {
+    var id = $(this).attr('id');
+    if ($(this).is(':checked')) {
+        $("#typeCPR").attr("disabled" , "disabled");
+        $("#fromDateCPR").attr("disabled" , "disabled");
+        $("#toDateCPR").attr("disabled" , "disabled");
+        $("#mobileCPR").attr("disabled" , "disabled");
+        $("#bookIdCPR").attr("disabled" , "disabled");
+    }else{
+        $("#typeCPR").removeAttr("disabled" , "disabled");
+        $("#fromDateCPR").removeAttr("disabled" , "disabled");
+        $("#toDateCPR").removeAttr("disabled" , "disabled");
+        $("#mobileCPR").removeAttr("disabled" , "disabled");
+        $("#bookIdCPR").removeAttr("disabled" , "disabled");
+    }
+  });
+
+  $('#consolidateCUR').click(function () {
+    var id = $(this).attr('id');
+    if ($(this).is(':checked')) {
+        $("#typeCUR").attr("disabled" , "disabled");
+        $("#fromDateCUR").attr("disabled" , "disabled");
+        $("#toDateCUR").attr("disabled" , "disabled");
+        $("#mobileCUR").attr("disabled" , "disabled");
+        $("#bookIdCUR").attr("disabled" , "disabled");
+    }else{
+        $("#typeCUR").removeAttr("disabled" , "disabled");
+        $("#fromDateCUR").removeAttr("disabled" , "disabled");
+        $("#toDateCUR").removeAttr("disabled" , "disabled");
+        $("#mobileCUR").removeAttr("disabled" , "disabled");
+        $("#bookIdCUR").removeAttr("disabled" , "disabled");
+    }
+  });
+});
+
+
 
 function openCustomerReportsPage(){
     window.location='./reportsViewCutomer.html';

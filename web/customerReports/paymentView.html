@@ -169,7 +169,7 @@
                             <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                         <h4 class="title">Reports </h4>
+                                         <h4 class="title">Customer Reports </h4>
                                     </div>
                                     <div class="col-md-6">
                                         <span class="pull-right">
@@ -184,12 +184,12 @@
                                 </div>
                                 <div class="content">
                                         <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();">
-                                        <div>
+                                       <div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Category</label>
-                                                       <select class="form-control" id="site_name" required>
+                                                       <select class="form-control" id="typeCPR" required>
                                                             <option value="0"> Select option </option>
                                                             <option value="1"> Land </option>
                                                             <option value="2"> Agar Wood </option>
@@ -200,13 +200,13 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>From Date</label>
-                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDate" >
+                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDateCPR" >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                        <label>To Date</label>
-                                                        <input type="date" class="form-control" placeholder="To Date" value="" id="toDate" required>
+                                                        <input type="date" class="form-control" placeholder="To Date" value="" id="toDateCPR" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,18 +215,18 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                        <label>Mobile Number</label>
-                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="mobileNumber" >
+                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="mobileCPR" >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                        <label>Id</label>
-                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="idInfo" >
+                                                        <input type="text" class="form-control" placeholder="booking id" value="" id="bookIdCPR" >
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-top: 26px">
                                                         <label>Consolidate List </label>
-                                                        <input type="checkbox" >
+                                                        <input type="checkbox" id="consolidateCPR">
                                                          
                                                     </div>
                                             </div>
