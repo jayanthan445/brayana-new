@@ -3,8 +3,18 @@ function openReportsAddPage(){
 }
 
 function openBookingCustomerReportsPage(){
-    window.location='./customer/reportsView.html';
+    window.location='../customerReports/reportsView.html';
 }
+
+
+function openCustomerPaymentReportsPage(){
+    window.location='../customerReports/paymentView.html';
+}
+
+function openCustomerunPaidReportsPage(){
+    window.location='../customerReports/unPaidView.html';
+}
+
 
 function openCustomerReportsPage(){
     window.location='./reportsViewCutomer.html';
