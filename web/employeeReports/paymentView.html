@@ -105,7 +105,7 @@
                         </a>
                     </li>
                     
-                   <li>
+                    <li>
                             <a href="#demo" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
                                 <i class="pe-7s-ball"></i>
                                 <p class="textAlignLeft">Reports</p>
@@ -122,6 +122,7 @@
                                 </a>
                             </div>
                         </li>
+                   
                      <li>
                         <a href="../Notification/notificationView.html">
                             <i class="pe-7s-science"></i>
@@ -174,8 +175,8 @@
                                         <span class="pull-right">
 
                         
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 active"  onclick="openBookingEmployeeReportsPage()">Booking</button>
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openEmployeePaymentReportsPage()">Payments</button>
+                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 "  onclick="openBookingEmployeeReportsPage()">Booking</button>
+                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 active"  onclick="openEmployeePaymentReportsPage()">Payments</button>
                             <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openEmployeeunPaidReportsPage()">un paid</button>
                                     </div>
                                     
@@ -183,12 +184,12 @@
                                 </div>
                                 <div class="content">
                                         <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();">
-                                        <div>
+                                       <div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Category</label>
-                                                       <select class="form-control" id="typeEBR" required>
+                                                       <select class="form-control" id="typeEPR" required>
                                                             <option value="0"> Select option </option>
                                                             <option value="1"> Land </option>
                                                             <option value="2"> Agar Wood </option>
@@ -199,13 +200,13 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>From Date</label>
-                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDateEBR" >
+                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDateEPR" >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                        <label>To Date</label>
-                                                        <input type="date" class="form-control" placeholder="To Date" value="" id="toDateEBR" required>
+                                                        <input type="date" class="form-control" placeholder="To Date" value="" id="toDateEPR" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,18 +215,18 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                        <label>Mobile Number</label>
-                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="mobileEBR" >
+                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="mobileEPR" >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                        <label>Id</label>
-                                                        <input type="text" class="form-control" placeholder="booking id" value="" id="bookIdEBR" >
+                                                        <input type="text" class="form-control" placeholder="booking id" value="" id="bookIdEPR" >
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="margin-top: 26px">
                                                         <label>Consolidate List </label>
-                                                        <input type="checkbox" id="consolidateEBR">
+                                                        <input type="checkbox" id="consolidateEPR">
                                                          
                                                     </div>
                                             </div>
@@ -251,6 +252,7 @@
                                             <th>Mobile No</th>
                                             <th>Type</th>
                                             <th>Total Amount</th>
+                                            
                                         </thead>
                                         
                                         <tbody>

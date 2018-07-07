@@ -15,6 +15,20 @@ function openCustomerunPaidReportsPage(){
     window.location='../customerReports/unPaidView.html';
 }
 
+
+function openBookingEmployeeReportsPage(){
+    window.location='../employeeReports/reportsView.html';
+}
+
+function openEmployeePaymentReportsPage(){
+    window.location='../employeeReports/paymentView.html';
+}
+
+function openEmployeeunPaidReportsPage(){
+    window.location='../employeeReports/unPaidView.html';
+}
+
+
  $('input[id^="customerBbookingConsolidate"]').click(function() {
         alert("Selected");     
     });
@@ -55,6 +69,58 @@ $(function () {
         $("#bookIdCPR").removeAttr("disabled" , "disabled");
     }
   });
+
+   $('#consolidateEPR').click(function () {
+    var id = $(this).attr('id');
+    if ($(this).is(':checked')) {
+        $("#typeEPR").attr("disabled" , "disabled");
+        $("#fromDateEPR").attr("disabled" , "disabled");
+        $("#toDateEPR").attr("disabled" , "disabled");
+        $("#mobileEPR").attr("disabled" , "disabled");
+        $("#bookIdEPR").attr("disabled" , "disabled");
+    }else{
+        $("#typeEPR").removeAttr("disabled" , "disabled");
+        $("#fromDateEPR").removeAttr("disabled" , "disabled");
+        $("#toDateEPR").removeAttr("disabled" , "disabled");
+        $("#mobileEPR").removeAttr("disabled" , "disabled");
+        $("#bookIdEPR").removeAttr("disabled" , "disabled");
+    }
+  });
+
+   $('#consolidateEBR').click(function () {
+    var id = $(this).attr('id');
+    if ($(this).is(':checked')) {
+        $("#typeEBR").attr("disabled" , "disabled");
+        $("#fromDateEBR").attr("disabled" , "disabled");
+        $("#toDateEBR").attr("disabled" , "disabled");
+        $("#mobileEBR").attr("disabled" , "disabled");
+        $("#bookIdEBR").attr("disabled" , "disabled");
+    }else{
+        $("#typeEBR").removeAttr("disabled" , "disabled");
+        $("#fromDateEBR").removeAttr("disabled" , "disabled");
+        $("#toDateEBR").removeAttr("disabled" , "disabled");
+        $("#mobileEBR").removeAttr("disabled" , "disabled");
+        $("#bookIdEBR").removeAttr("disabled" , "disabled");
+    }
+  });
+
+   $('#consolidateEUR').click(function () {
+    var id = $(this).attr('id');
+    if ($(this).is(':checked')) {
+        $("#typeEUR").attr("disabled" , "disabled");
+        $("#fromDateEUR").attr("disabled" , "disabled");
+        $("#toDateEUR").attr("disabled" , "disabled");
+        $("#mobileEUR").attr("disabled" , "disabled");
+        $("#bookIdEUR").attr("disabled" , "disabled");
+    }else{
+        $("#typeEUR").removeAttr("disabled" , "disabled");
+        $("#fromDateEUR").removeAttr("disabled" , "disabled");
+        $("#toDateEUR").removeAttr("disabled" , "disabled");
+        $("#mobileEUR").removeAttr("disabled" , "disabled");
+        $("#bookIdEUR").removeAttr("disabled" , "disabled");
+    }
+  });
+
 
   $('#consolidateCUR').click(function () {
     var id = $(this).attr('id');
