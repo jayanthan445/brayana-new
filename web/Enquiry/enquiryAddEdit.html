@@ -98,7 +98,7 @@
                             <p>Customer</p>
                         </a>
                     </li>
-                    <li class="active"  >
+                    <li >
                         <a href="../transaction/transactionLandView.html">
                             <i class="pe-7s-look"></i>
                             <p>Transaction</p>
@@ -110,10 +110,28 @@
                             <p>Reports</p>
                         </a>
                     </li>
-                     <li>
-                        <a href="../Notification/notificationView.html">
+                    <li>
+                        <a href="../notification/notificationView.html">
                             <i class="pe-7s-science"></i>
                             <p>Notification</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../myProfile/changePasswordEdit.html">
+                            <i class="pe-7s-user"></i>
+                            <p>Change Pasword</p>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="../comissionEntry/comissionView.html">
+                            <i class="pe-7s-users"></i>
+                            <p>Commission</p>
+                        </a>
+                    </li>
+                     <li class="active">
+                        <a href="../enquiry/enquiryView.html">
+                            <i class="pe-7s-users"></i>
+                            <p>Enquiry</p>
                         </a>
                     </li>
                 </ul>
@@ -156,7 +174,7 @@
                             <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                         <h4 class="title">Add Land Installments</h4>
+                                         <h4 class="title">Add Enquiry</h4>
                                     </div>
                                     
                                   </div>
@@ -165,38 +183,44 @@
                                         <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();" autocomplete="off">
                                         <div>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Booking No</label>
-                                                        <select class="form-control" placeholder="Site Name" value="" id="type_id" onchange="loadBookingById(this.value)" required>
-                                                            <option value=""></option>
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control" placeholder="name"  value="" id="name" >
+                                                    </div>
+                                                </div>
 
-                                                        </select>
-                                                        
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
+                                                  <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Customer Name</label>
-                                                        <input type="text" class="form-control" placeholder="customer_name" readonly="" value="" id="customer_name" required>
-                                                        <input type="hidden" name = "login_id" id="login_id"  value=""/>
+                                                        <label>Mobile</label>
+                                                              <input type="text" class="form-control" placeholder="Installment Date" value="" id="inst_month" >
                                                     </div>
                                                 </div>
+
+                                               
+                                               
                                                 
                                             </div>
                                         
                                             <div class="row">
                                                 
-                                                <div class="col-md-6">
+                                               <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Installment Month</label>
-                                                              <input type="text" class="form-control" placeholder="Installment Date" value="" id="inst_month" readonly>
+                                                        <label>Category</label>
+                                                       <select class="form-control" id="site_name" required>
+                                                            <option value="0"> Select option </option>
+                                                            <option value="1"> Land </option>
+                                                            <option value="2"> Agar Wood </option>
+                                                            <option value="3"> Chit funds </option>
+                                                        </select>
+                                                        
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Installment Amount</label>
-                                                        <input type="number" pattern= "[0-9]"  class="form-control" placeholder="Installment Amount" value="" id="inst_amount" readonly required>
+                                                        <label>Email</label>
+                                                        <input type="text" class="form-control" placeholder="Email" value="" id="email" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -204,41 +228,19 @@
                                                 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Paid Months</label>
-                                                              <input type="text" class="form-control" placeholder="Paid Months" value="" readonly id="paid_months">
+                                                        <label>Address</label>
+                                                              <input type="text" class="form-control" placeholder="Address" value="" id="address">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Paid Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Paid Amount" value="" id="paid_amount" readonly>
+                                                        <label>Description</label>
+                                                        <input type="text" class="form-control" placeholder="Description" value="" id="description">
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Balance Months</label>
-                                                              <input type="text" class="form-control" placeholder="Balance Months" value="" readonly id="balance_months">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Balance Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Balance Amount" value="" id="balance_amount" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Total Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Total Amount" value="" disabled id="totalAmount" required>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
         
                                              
         

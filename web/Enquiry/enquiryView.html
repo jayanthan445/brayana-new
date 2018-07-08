@@ -6,7 +6,6 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="cache-control" content="no-cache">
-
     <title>Brayana Group</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -16,15 +15,8 @@
     <!-- Bootstrap core CSS     -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Animation library for notifications   -->
-    <link href="../assets/css/animate.min.css" rel="stylesheet" />
-
     <!--  Light Bootstrap Table core CSS    -->
     <link href="../assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
-
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="../assets/css/demo.css" rel="stylesheet" />
 
      <!-- Bootstrap core CSS     -->
     <link href="../css/brayana.css" rel="stylesheet" />
@@ -32,8 +24,8 @@
 
 
     <!--     Fonts and icons     -->
-    <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet">
-    <link href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
      <link href="../assets/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!--   Core JS Files   -->
@@ -51,29 +43,28 @@
  <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 <script src="../assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
-<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-<script src="../assets/js/demo.js"></script>
+
 <script src="../js/scripts.js"></script>
- <script src="../js/transaction-agar.js"></script>
+ <script src="../js/enquiry.js"></script>
   <!-- client side validation script -->
   <!-- client side validation script -->
 </head>
 
 <body>
 
-    <div class="wrapper">
-        <div class="sidebar" data-color="blue">
+<div class="wrapper">
+    <div class="sidebar" data-color="blue" >
 
 
 
-            <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="#" class="simple-text">
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
                     Brayana Group
                 </a>
-                </div>
+            </div>
 
-                 <ul class="nav">
+             <ul class="nav">
                      
                     <li class="master">
                         <a href="../land/landView.html">
@@ -87,7 +78,7 @@
                             <p>Chit Funds</p>
                         </a>
                     </li>
-                    <li class="master">
+                    <li >
                         <a href="../agarWood/agarWoodView.html">
                             <i class="pe-7s-news-paper"></i>
                             <p>Agar Wood</p>
@@ -105,56 +96,87 @@
                             <p>Customer</p>
                         </a>
                     </li>
-                    <li class="active">
+
+                    <li>
                         <a href="../transaction/transactionLandView.html">
                             <i class="pe-7s-look"></i>
                             <p>Transaction</p>
                         </a>
                     </li>
+                    
                     <li>
-                        <a href="../reports/reportsView.html">
-                            <i class="pe-7s-bell"></i>
-                            <p>Reports</p>
-                        </a>
-                    </li>
-                     <li>
-                        <a href="../Notification/notificationView.html">
+                            <a href="#demo" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
+                                <i class="pe-7s-ball"></i>
+                                <p class="textAlignLeft">Reports</p>
+                            </a>
+                            <div id="demo" class="collapse">
+                                <a href="../customerReports/reportsView.html" class="sideBarCollapseFirst">
+                                    <i class="pe-7s-download"></i>
+                                    <p>Customer</p>
+                                </a>
+
+                                <a href="../employeeReports/reportsView.html" class="sideBarCollapseLast">
+                                    <i class="pe-7s-download"></i>
+                                    <p>Employee</p>
+                                </a>
+                            </div>
+                        </li>
+                    <li>
+                        <a href="../notification/notificationView.html">
                             <i class="pe-7s-science"></i>
                             <p>Notification</p>
                         </a>
                     </li>
+                    <li>
+                        <a href="../myProfile/changePasswordEdit.html">
+                            <i class="pe-7s-user"></i>
+                            <p>Change Pasword</p>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="../comissionEntry/comissionView.html">
+                            <i class="pe-7s-users"></i>
+                            <p>Commission</p>
+                        </a>
+                    </li>
+                     <li class="active">
+                        <a href="../enquiry/enquiryView.html">
+                            <i class="pe-7s-users"></i>
+                            <p>Enquiry</p>
+                        </a>
+                    </li>
                 </ul>
-            </div>
         </div>
+    </div>
 
-        <div class="main-panel">
-            <nav class="navbar navbar-default navbar-fixed">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                       
-                        <ul class="nav navbar-nav navbar-right">
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>                   
+                </div>
+                <div class="collapse navbar-collapse">
+                   
+                    <ul class="nav navbar-nav navbar-right">
 
-                           <li>
+                    <li>
                             <a href="javascript:;" onclick="logout();">
                                 <p>Log out</p>
                             </a>
                         </li>
-                            <li class="separator hidden-lg hidden-md"></li>
-                        </ul>
-                    </div>
+                        <li class="separator hidden-lg hidden-md"></li>
+                    </ul>
                 </div>
-            </nav>
+            </div>
+        </nav>
 
 
-            <div class="content">
+       <div class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -162,14 +184,14 @@
                                 <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                        <h4 class="title">Agar Fund Transaction</h4>
+                                        <h4 class="title">Enquiry View</h4>
                                     </div>
                                     <div class="col-md-6">
                                         <span class="pull-right">
-                                             <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openTransactionAgarAddEditpage()">Payments</button>
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 "  onclick="openTransactionLandPage()">Land</button>
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 "  onclick="openTransactionChitFundPage()">Chit Funds</button>
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 active"  onclick="openTransactionAgarWoodage()">Agar Wood</button>
+
+                                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openEnquiryAddPage()">Add</button>
+                             
+                                            
                                     </div>
                                   </div>
                                 </div>
@@ -178,18 +200,13 @@
                                     <table class="table table-hover table-striped" id="myTable">
                                         <thead>
                                             <th>S.NO</th>
-                                            <th>Booking No</th>
                                             <th>Name</th>
-                                            <th>No of Trees</th>
-                                            <th>Tree Amount</th>
-                                            <th>Install Amount</th>
-                                            <th>Paid Month</th>
-                                            <th>Paid Amount</th>
-                                            <th></th>
+                                            <th>Mobile</th>
+                                            <th>type</th>
+                                            <th>Email</th>
+                                            <th>Description</th>
                                         </thead>
-                                        
                                         <tbody>
-                                                                                      
                                         </tbody>
                                     </table>
 
@@ -204,7 +221,7 @@
             </div>
 
 
-            <footer class="footer">
+        <footer class="footer">
                 <div class="container-fluid">
                   
                     <p class="copyright pull-right">
@@ -212,44 +229,13 @@
                     </p>
                 </div>
             </footer>
+    
 
-        </div>
     </div>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Delete Confirmation</h4>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="dID" name="dID" value="">
-        <p>Do you want to delete? <span id="modelName"></span>  <span class="loader" style="display: none;"><img src="../img/loader.gif" alt="Processing..." style="width: 35px;height: 35px;"></span></p>
-        <div class="alert success btn-outline-success" id="tagar-success" style="display:none">
-          <strong>Success!!!</strong>
-        </div>
-        <div class="alert fail btn-outline-danger" id="tagar-fail" style="display:none">
-          <strong>Failed!!!</strong> 
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="deleteYes" >Yes</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-      </div>
-    </div>
-
-  </div>
 </div>
-</body>
-<script type="text/javascript">
- $(document).ready(function(){
-    init();
-});    
 
-</script>
+
+</body>
+
 
 </html>
