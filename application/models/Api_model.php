@@ -62,7 +62,8 @@ class Api_model extends CI_Model {
           }
 
           public function update_automaticID($id,$type,$table){
-                $id = str_pad($id,5,0,STR_PAD_LEFT); 
+                //$id = str_pad($id,5,0,STR_PAD_LEFT); 
+                $id = date("Y")."mg".$id;
                 $auto_id = "";
                 if($type == "land"){
                     $auto_id = "BGL".$id;
@@ -568,4 +569,26 @@ class Api_model extends CI_Model {
         $response =$result->result_array();
         return $response[0];
     }
+
+    public function getEnquiry($options = array()){
+            $query = $query = "SELECT * FROM enquiry";
+            $where = array();
+            if(isset($options['where']) && !empty($options['where']))
+            {
+             $where[] = $options['where'];
+            }
+
+             if(!empty($where)){
+               $query .=" where ". implode(" and ", $where);
+             }
+            if(isset($options['offset']))
+            {
+              $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
+              $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
+            } 
+            $result = $this->db->query($query);
+            $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+            return $response;    
+        }
+
 }

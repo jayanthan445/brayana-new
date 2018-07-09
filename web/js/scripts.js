@@ -14,11 +14,14 @@ if(Env == "local"){
 function hideMasters(){
     var auth = getLocal("auth");
     var userType = getLocal("u");
+    console.log($(".enquiry a"));
     if(userType != 1){
         $(".master").css("display","none");
+        $(".enquiry a").attr("href",host_url+"enquiry/enquiryForm.html");
         //$(".nav>.master").hide();
     }else{
        $(".master").css({"display":"inline"});
+       $(".enquiry a").attr("href",host_url+"enquiry/enquiryView.html");
     }
 }
 $( document ).ready(function() {

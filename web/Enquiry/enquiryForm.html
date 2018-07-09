@@ -47,7 +47,7 @@
 
 
 <script src="../js/scripts.js"></script>
- <script src="../js/transaction-agar.js"></script>
+ <script src="../js/enquiry.js"></script>
   <!-- client side validation script -->
   <!-- client side validation script -->
 </head>
@@ -98,7 +98,7 @@
                             <p>Customer</p>
                         </a>
                     </li>
-                    <li class="active"  >
+                    <li class=""  >
                         <a href="../transaction/transactionLandView.html">
                             <i class="pe-7s-look"></i>
                             <p>Transaction</p>
@@ -114,6 +114,13 @@
                         <a href="../Notification/notificationView.html">
                             <i class="pe-7s-science"></i>
                             <p>Notification</p>
+                        </a>
+                    </li>
+                    
+                    <li class="active enquiry">
+                        <a href="../enquiry/enquiryView.html">
+                            <i class="pe-7s-comment"></i>
+                            <p>Enquiry</p>
                         </a>
                     </li>
                 </ul>
@@ -156,20 +163,24 @@
                             <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                         <h4 class="title">Add Agar Installments</h4>
+                                         <h4 class="title">Enquiry Form
+                                         <span class="loader" style="display: none;"><img src="../img/loader.gif" alt="Processing..." style="width: 35px;height: 35px;"></span></h4>
                                     </div>
                                     
                                   </div>
                                 </div>
                                 <div class="content">
-                                        <form name="agarAddForm" id="agarAddForm" onsubmit="return saveAgarDetail();" autocomplete="off">
+                                        <form name="enquiryAddForm" id="enquiryAddForm" onsubmit="return saveenquiryDetail();" autocomplete="off">
                                         <div>
+
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Booking No</label>
-                                                        <select class="form-control" placeholder="Site Name" value="" id="type_id" onchange="loadBookingById(this.value)" required>
-                                                            <option value=""></option>
+                                                        <label>Type</label>
+                                                        <select class="form-control" placeholder="Site Name" value="" id="type" required>
+                                                            <option value="Land">Land</option>
+                                                            <option value="AgarWood">AgarWood</option>
+                                                            <option value="ChitFunds">ChitFunds</option>
 
                                                         </select>
                                                         
@@ -177,9 +188,8 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Customer Name</label>
-                                                        <input type="text" class="form-control" placeholder="customer_name" readonly="" value="" id="customer_name" required>
-                                                        <input type="hidden" name = "login_id" id="login_id"  value=""/>
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control" placeholder="Name" value="" id="name" required>
                                                     </div>
                                                 </div>
                                                 
@@ -189,56 +199,33 @@
                                                 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Installment Month</label>
-                                                              <input type="text" class="form-control" placeholder="Installment Date" value="" id="inst_month" readonly>
+                                                        <label>Mobile</label>
+                                                              <input type="text" class="form-control" placeholder="Mobile(optional)" value="" id="mobile" >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Installment Amount</label>
-                                                        <input type="number" pattern= "[0-9]"  class="form-control" placeholder="Installment Amount" value="" id="inst_amount"  required>
+                                                        <label>Email</label>
+                                                        <input type="text"  class="form-control" placeholder="Email(optional)" value="" id="email" >
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Paid Months</label>
-                                                              <input type="text" class="form-control" placeholder="Paid Months" value="" readonly id="paid_months">
+                                                        <label>Description</label>
+                                                        <textarea id="desc" class="form-control" ></textarea>
+                                                              
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Paid Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Paid Amount" value="" id="paid_amount" readonly>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
 
-                                            <div class="row">
-                                                
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Balance Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Balance Amount" value="" id="balance_amount" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Total Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Total Amount" value="" disabled id="totalAmount" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-        
-                                             
+                                            
         
                                             <button type="submit" class="btn btn-primary btn-fill">Submit</button> 
-                                             <a href="./transactionAgarView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                             <a href="./enquiryView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </form>
@@ -267,10 +254,9 @@
 
 <script type="text/javascript">
  $(document).ready(function(){
-    load_booking();
    // $('.input-group .date').datepicker({
 
-    //});
+   // });
 });    
 
 </script>

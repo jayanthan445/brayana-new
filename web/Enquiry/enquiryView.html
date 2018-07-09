@@ -32,8 +32,8 @@
 
 
     <!--     Fonts and icons     -->
-    <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet">
-    <link href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
      <link href="../assets/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!--   Core JS Files   -->
@@ -54,7 +54,7 @@
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="../assets/js/demo.js"></script>
 <script src="../js/scripts.js"></script>
- <script src="../js/transaction-agar.js"></script>
+ <script src="../js/enquiry.js"></script>
   <!-- client side validation script -->
   <!-- client side validation script -->
 </head>
@@ -75,7 +75,7 @@
 
                  <ul class="nav">
                      
-                    <li class="master">
+                    <li class=" master">
                         <a href="../land/landView.html">
                             <i class="pe-7s-user"></i>
                             <p>Lands</p>
@@ -105,22 +105,44 @@
                             <p>Customer</p>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="../transaction/transactionLandView.html">
                             <i class="pe-7s-look"></i>
                             <p>Transaction</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="../reports/reportsView.html">
-                            <i class="pe-7s-bell"></i>
-                            <p>Reports</p>
-                        </a>
-                    </li>
+
+                   <li>
+                            <a href="#demo" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
+                                <i class="pe-7s-ball"></i>
+                                <p class="textAlignLeft">Reports</p>
+                            </a>
+                            <div id="demo" class="collapse">
+                                <a href="../customerReports/reportsView.html" class="sideBarCollapseFirst">
+                                    <i class="pe-7s-download"></i>
+                                    <p>Customer</p>
+                                </a>
+
+                                <a href="../employeeReports/reportsView.html" class="sideBarCollapseLast">
+                                    <i class="pe-7s-download"></i>
+                                    <p>Employee</p>
+                                </a>
+                            </div>
+                        </li>
+                   
+                     <li>
+                   
                      <li>
                         <a href="../Notification/notificationView.html">
                             <i class="pe-7s-science"></i>
                             <p>Notification</p>
+                        </a>
+                    </li>
+                   
+                    <li class="active">
+                        <a href="../enquiry/enquiryView.html">
+                            <i class="pe-7s-comment"></i>
+                            <p>Enquiry</p>
                         </a>
                     </li>
                 </ul>
@@ -162,14 +184,11 @@
                                 <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                        <h4 class="title">Agar Fund Transaction</h4>
+                                        <h4 class="title">Enquiry List</h4>
                                     </div>
                                     <div class="col-md-6">
                                         <span class="pull-right">
-                                             <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openTransactionAgarAddEditpage()">Payments</button>
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 "  onclick="openTransactionLandPage()">Land</button>
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 "  onclick="openTransactionChitFundPage()">Chit Funds</button>
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 active"  onclick="openTransactionAgarWoodage()">Agar Wood</button>
+                                            <button type="submit" class="btn btn-primary btn-fill <button type="submit" class="btn btn-primary btn-fill "  onclick="openenquiryAddPage()">Add</button></span>
                                     </div>
                                   </div>
                                 </div>
@@ -178,13 +197,11 @@
                                     <table class="table table-hover table-striped" id="myTable">
                                         <thead>
                                             <th>S.NO</th>
-                                            <th>Booking No</th>
+                                            <th>Type</th>
                                             <th>Name</th>
-                                            <th>No of Trees</th>
-                                            <th>Tree Amount</th>
-                                            <th>Install Amount</th>
-                                            <th>Paid Month</th>
-                                            <th>Paid Amount</th>
+                                            <th>Mobile Number</th>
+                                            <th>Email</th>
+                                            <th>Desc</th>
                                             <th></th>
                                         </thead>
                                         
@@ -229,10 +246,10 @@
       <div class="modal-body">
         <input type="hidden" id="dID" name="dID" value="">
         <p>Do you want to delete? <span id="modelName"></span>  <span class="loader" style="display: none;"><img src="../img/loader.gif" alt="Processing..." style="width: 35px;height: 35px;"></span></p>
-        <div class="alert success btn-outline-success" id="tagar-success" style="display:none">
+        <div class="alert success btn-outline-success" id="enquiry-success" style="display:none">
           <strong>Success!!!</strong>
         </div>
-        <div class="alert fail btn-outline-danger" id="tagar-fail" style="display:none">
+        <div class="alert fail btn-outline-danger" id="enquiry-fail" style="display:none">
           <strong>Failed!!!</strong> 
         </div>
       </div>
