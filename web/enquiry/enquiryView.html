@@ -6,7 +6,6 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="cache-control" content="no-cache">
-
     <title>Brayana Group</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -28,8 +27,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <link href="../assets/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="../assets/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+     <link href="../assets/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!--   Core JS Files   -->
 <script src="../assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
@@ -47,7 +45,7 @@
 
 
 <script src="../js/scripts.js"></script>
- <script src="../js/transaction-agar.js"></script>
+ <script src="../js/enquiry.js"></script>
   <!-- client side validation script -->
   <!-- client side validation script -->
 </head>
@@ -80,7 +78,7 @@
                             <p>Chit Funds</p>
                         </a>
                     </li>
-                    <li class="master">
+                    <li >
                         <a href="../agarWood/agarWoodView.html">
                             <i class="pe-7s-news-paper"></i>
                             <p>Agar Wood</p>
@@ -98,12 +96,14 @@
                             <p>Customer</p>
                         </a>
                     </li>
-                    <li class="active"  >
+
+                    <li>
                         <a href="../transaction/transactionLandView.html">
                             <i class="pe-7s-look"></i>
                             <p>Transaction</p>
                         </a>
                     </li>
+                    
                     <li>
                             <a href="#demo" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
                                 <i class="pe-7s-ball"></i>
@@ -139,7 +139,7 @@
                             <p>Commission</p>
                         </a>
                     </li>
-                     <li>
+                     <li class="active">
                         <a href="../enquiry/enquiryView.html">
                             <i class="pe-7s-users"></i>
                             <p>Enquiry</p>
@@ -176,109 +176,49 @@
         </nav>
 
 
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                              
-                        <div class="card  col-md-11">
-                            <div class="content table-responsive table-full-width">
+       <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card col-md-11">
+                                <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                         <h4 class="title">Add Agar Installments</h4>
+                                        <h4 class="title">Enquiry View</h4>
                                     </div>
-                                    
+                                    <div class="col-md-6">
+                                        <span class="pull-right">
+
+                                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openEnquiryAddPage()">Add</button>
+                             
+                                            
+                                    </div>
                                   </div>
                                 </div>
-                                <div class="content">
-                                        <form name="agarAddForm" id="agarAddForm" onsubmit="return saveAgarDetail();" autocomplete="off">
-                                        <div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Booking No</label>
-                                                        <select class="form-control" placeholder="Site Name" value="" id="type_id" onchange="loadBookingById(this.value)" required>
-                                                            <option value=""></option>
+                                  
+                                <div class="content table-responsive table-full-width">
+                                    <table class="table table-hover table-striped" id="myTable">
+                                        <thead>
+                                            <th>S.NO</th>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>type</th>
+                                            <th>Email</th>
+                                            <th>Description</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
 
-                                                        </select>
-                                                        
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Customer Name</label>
-                                                        <input type="text" class="form-control" placeholder="customer_name" readonly="" value="" id="customer_name" required>
-                                                        <input type="hidden" name = "login_id" id="login_id"  value=""/>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Installment Month</label>
-                                                              <input type="text" class="form-control" placeholder="Installment Date" value="" id="inst_month" readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Installment Amount</label>
-                                                        <input type="number" pattern= "[0-9]"  class="form-control" placeholder="Installment Amount" value="" id="inst_amount"  required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Paid Months</label>
-                                                              <input type="text" class="form-control" placeholder="Paid Months" value="" readonly id="paid_months">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Paid Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Paid Amount" value="" id="paid_amount" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Balance Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Balance Amount" value="" id="balance_amount" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Total Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Total Amount" value="" disabled id="totalAmount" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-        
-                                             
-        
-                                            <button type="submit" class="btn btn-primary btn-fill">Submit</button> 
-                                             <a href="./transactionAgarView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </form>
-                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                   
 
+
+
+                    </div>
                 </div>
             </div>
-        </div>
 
 
         <footer class="footer">
@@ -294,15 +234,7 @@
     </div>
 </div>
 
-<script type="text/javascript">
- $(document).ready(function(){
-    load_booking();
-   // $('.input-group .date').datepicker({
 
-    //});
-});    
-
-</script>
 </body>
 
 

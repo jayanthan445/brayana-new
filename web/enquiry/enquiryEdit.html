@@ -47,7 +47,7 @@
 
 
 <script src="../js/scripts.js"></script>
- <script src="../js/transaction-chit.js"></script>
+ <script src="../js/transaction-agar.js"></script>
   <!-- client side validation script -->
   <!-- client side validation script -->
 </head>
@@ -98,30 +98,19 @@
                             <p>Customer</p>
                         </a>
                     </li>
-                    <li class="active"  >
+                    <li   >
                         <a href="../transaction/transactionLandView.html">
                             <i class="pe-7s-look"></i>
                             <p>Transaction</p>
                         </a>
                     </li>
                     <li>
-                            <a href="#demo" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
-                                <i class="pe-7s-ball"></i>
-                                <p class="textAlignLeft">Reports</p>
-                            </a>
-                            <div id="demo" class="collapse">
-                                <a href="../customerReports/reportsView.html" class="sideBarCollapseFirst">
-                                    <i class="pe-7s-download"></i>
-                                    <p>Customer</p>
-                                </a>
-
-                                <a href="../employeeReports/reportsView.html" class="sideBarCollapseLast">
-                                    <i class="pe-7s-download"></i>
-                                    <p>Employee</p>
-                                </a>
-                            </div>
-                        </li>
-                    <li>
+                        <a href="../reports/reportsView.html">
+                            <i class="pe-7s-bell"></i>
+                            <p>Reports</p>
+                        </a>
+                    </li>
+                   <li>
                         <a href="../notification/notificationView.html">
                             <i class="pe-7s-science"></i>
                             <p>Notification</p>
@@ -139,7 +128,7 @@
                             <p>Commission</p>
                         </a>
                     </li>
-                     <li>
+                     <li class="active">
                         <a href="../enquiry/enquiryView.html">
                             <i class="pe-7s-users"></i>
                             <p>Enquiry</p>
@@ -185,86 +174,68 @@
                             <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                         <h4 class="title">Add Chit Installments</h4>
+                                         <h4 class="title">Add Enquiry</h4>
                                     </div>
                                     
                                   </div>
                                 </div>
                                 <div class="content">
-                                        <form name="chitAddForm" id="chitAddForm" onsubmit="return saveChitDetail();" autocomplete="off">
+                                        <form name="agarAddForm" id="agarAddForm" onsubmit="return saveAgarDetail();" autocomplete="off">
                                         <div>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Booking No</label>
-                                                        <select class="form-control" placeholder="Site Name" value="" id="type_id" onchange="loadBookingById(this.value)" required>
-                                                            <option value=""></option>
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control" placeholder="name"  value="" id="name" >
+                                                    </div>
+                                                </div>
 
-                                                        </select>
-                                                        
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
+                                                  <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Customer Name</label>
-                                                        <input type="text" class="form-control" placeholder="customer_name" readonly="" value="" id="customer_name" required>
-                                                        <input type="hidden" name = "login_id" id="login_id"  value=""/>
+                                                        <label>Mobile</label>
+                                                              <input type="text" class="form-control" placeholder="Installment Date" value="" id="inst_month" >
                                                     </div>
                                                 </div>
+
+                                               
+                                               
                                                 
                                             </div>
                                         
                                             <div class="row">
                                                 
-                                                <div class="col-md-6">
+                                               <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Installment Month</label>
-                                                              <input type="text" class="form-control" placeholder="Installment Date" value="" id="inst_month" readonly>
+                                                        <label>Category</label>
+                                                       <select class="form-control" id="site_name" required>
+                                                            <option value="0"> Select option </option>
+                                                            <option value="1"> Land </option>
+                                                            <option value="2"> Agar Wood </option>
+                                                            <option value="3"> Chit funds </option>
+                                                        </select>
+                                                        
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Installment Amount</label>
-                                                        <input type="number" pattern= "[0-9]"  class="form-control" placeholder="Installment Amount" value="" id="inst_amount" readonly required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Paid Months</label>
-                                                              <input type="text" class="form-control" placeholder="Paid Months" value="" readonly id="paid_months">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Paid Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Paid Amount" value="" id="paid_amount" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                            <div class="row">
-                                                
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Balance Months</label>
-                                                              <input type="text" class="form-control" placeholder="Balance Months" value="" readonly id="balance_months">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Balance Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Balance Amount" value="" id="balance_amount" readonly>
+                                                        <label>Email</label>
+                                                        <input type="text" class="form-control" placeholder="Email" value="" id="email" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                
+                                                <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Total Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Total Amount" value="" disabled id="totalAmount" required>
+                                                        <label>Address</label>
+                                                              <input type="text" class="form-control" placeholder="Address" value="" id="address">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                        <input type="text" class="form-control" placeholder="Description" value="" id="description">
                                                     </div>
                                                 </div>
                                             </div>
@@ -272,7 +243,7 @@
                                              
         
                                             <button type="submit" class="btn btn-primary btn-fill">Submit</button> 
-                                             <a href="./transactionChitView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                             <a href="./transactionAgarView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </form>
@@ -302,7 +273,7 @@
 <script type="text/javascript">
  $(document).ready(function(){
     load_booking();
-    //$('.input-group .date').datepicker({
+   // $('.input-group .date').datepicker({
 
     //});
 });    
