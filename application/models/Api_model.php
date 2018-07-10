@@ -481,13 +481,21 @@ class Api_model extends CI_Model {
             if($type != "agar"){
               $count = $list[0]["total_months"];
                 for($i=0;$i<$count;$i++){
-                $booked_ym = date("F-Y",strtotime($list[0]["booked_date"]." +".$i." Month "));
+                $strtime = strtotime($list[0]["booked_date"]." +".$i." Month ");
+                $currentStr = strtotime(date('Y-m-d'));
+                $booked_ym = date("F-Y",$strtime);
+
                 if(isset($list[$i])){
                     $list[$i]["date"] = date("d/m/Y",strtotime($list[$i]["datetime"]));
                     $list[$i]["status"] ="PAID";
                   }else{
                       $list[$i]["inst_amount"] =  $list[0]["amount_per_month"];
-                       $list[$i]["status"] ="UNPAID";
+                      if($currentStr > $strtime){
+                        $list[$i]["status"] ="UNPAID";
+                      }else{
+                        $list[$i]["status"] ="PENDING";
+                      }
+                       
                        $list[$i]["date"] = "";
                        $list[$i]["name"] = $list[0]["name"];
                   }
