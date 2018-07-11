@@ -449,7 +449,7 @@ class Api_model extends CI_Model {
         public function getTransaction($type,$options = array()){
           $cols = "";
            if($type != "agar"){
-              $cols = " b.inst_month as total_months,b.inst_amount as amount_per_month,b.booked_date, ";
+              $cols = " b.inst_month as total_months,b.tot_amount as total_amount,b.balance_amount,b.balance_months,b.paid_months,b.paid_amount,b.inst_amount as amount_per_month,b.booked_date, ";
            }
             $query = "SELECT i.*,b.booking_no,".$cols." c.* FROM ".$type."_installments i ";
             $query .= "JOIN ".$type."_booking b ON (i.".$type."_id = b.id) ";
@@ -477,7 +477,6 @@ class Api_model extends CI_Model {
             $result = $this->db->query($query);
             $list = $result->result_array();
             $count = $result->num_rows();
-            
             if($type != "agar"){
               $count = $list[0]["total_months"];
                 for($i=0;$i<$count;$i++){
@@ -498,6 +497,10 @@ class Api_model extends CI_Model {
                        
                        $list[$i]["date"] = "";
                        $list[$i]["name"] = $list[0]["name"];
+                       $list[$i]["balance_amount"] = $list[0]["balance_amount"];
+                       $list[$i]["total_amount"] = $list[0]["total_amount"];
+                       $list[$i]["balance_months"] = $list[0]["balance_months"];
+                       $list[$i]["total_months"] = $list[0]["total_months"];
                   }
                   $list[$i]["inst_month"] =  $booked_ym;
                    

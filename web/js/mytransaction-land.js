@@ -66,7 +66,9 @@ function buildDetailsTable(list,count){
 
     for(var i=0;i<count;i++){
         $(".booking_no").html(list[i].booking_no);
-        $(".customer_name").html(list[i].name);
+         $(".customer_name").html(list[0].name);
+        $(".customer_months").html(list[0].paid_months+" / "+list[0].total_months);
+        $(".customer_amount").html("₹ "+list[0].paid_amount+" / ₹ "+list[0].total_amount);
         var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].inst_month+"</td><td>"+list[i].inst_amount+"</td><td>"+list[i].date+"</td><td><b>"+(list[i].status == "PAID" ? "<span style='color:green'>"+list[i].status+"</span>" : "<span style='color:#ee7f2e'>"+list[i].status+"</span>")+"</b></td></tr>";
         $("table tbody").append(markup);
     }

@@ -647,27 +647,25 @@ class Api extends REST_Controller {
 
     public function addTransaction_post($type){
         if(!empty($this->isAuth)){
-            $POST = $this->post();          
-            $data = array(
+            $POST = $this->post(); 
+
+            $count_inst = 1;
+            if(isset($POST["count_inst"]) && $POST["count_inst"] > 0 ){
+                $count_inst = $POST["count_inst"] ;
+            }  
+            for($i=0;$i < $count_inst; $i++ ){
+                $data = array(
                             "login_id"=>$POST['login_id'],
                             "inst_month"=>$POST['inst_month'],
                             "inst_amount"=>$POST['inst_amount'],
                             "added_by"=>$this->isAuth->id,
                     );
             
-            $data[$type."_id"] = $POST['type_id'];
-            $table = $type."_installments";
-            /*if($type == "agar"){
-                $data["agar_id"] = $POST['type_id'];
-                $table = "agar_installments";
-            }elseif($type == "chit"){
-                $data["chit_id"] = $POST['type_id'];
-                $table = "chit_installments";
-            }else{
-                $data["land_id"] = $POST['type_id'];
-                $table = "chit_installments";
-            }*/
-            $id = $this->Api_model->insert_data($table,$data);
+                $data[$type."_id"] = $POST['type_id'];
+                $table = $type."_installments";
+                 $id = $this->Api_model->insert_data($table,$data);
+            }       
+            
             if($id){
                 $this->getTransaction_get($type);
                 $where = array("id"=>$POST['type_id']);
