@@ -120,7 +120,7 @@ function saveenquiryDetail(){
       var name = $("#name").val();
       var mobile = $("#mobile").val();
       var email = $("#email").val();
-      var desc = $("desc").text();
+      var desc = $("#desc").val();
 $(".loader").show(); 
                         
       var data = {
@@ -140,9 +140,9 @@ $(".loader").show();
           cache: false,
           success: function(msg, textStatus, xhr) {
             if(msg.STATUS == "OK"){
-               // window.location.href=host_url+'enquiry/enquiryView.html';
-            $(".loader").hide(); 
-            alert("Enquiry Form Submited Successfully");
+               window.location.href=host_url+'enquiry/enquiryView.html';
+            //$(".loader").hide(); 
+            //alert("Enquiry Form Submited Successfully");
             }else{
                 alert(msg.RESPONSE);
             }
