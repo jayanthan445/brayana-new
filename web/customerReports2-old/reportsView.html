@@ -201,7 +201,7 @@
                                   </div>
                                 </div>
                                 <div class="content">
-                                    <!-- <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();"> -->
+                                        <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();">
                                         <div>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -247,33 +247,40 @@
                                            
                                              
         
-                                            <button type="submit" class="btn btn-primary btn-fill" onclick="getCustomerReport()">Search</button> 
-                                             <a href="../customerReports/reportsView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                            <button type="submit" class="btn btn-primary btn-fill">Search</button> 
+                                             <a href="../land/landView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
-                                    <!-- </form> -->
+                                    </form>
                                     </div>
 
                                     <div class="content table-responsive table-full-width">
-                                        <table class="table table-hover table-striped" id="myTable">
-    
-                                            <thead>
-                                                    <th>BOOKING ID</th>
-                                                    <th>CUSTOMER NAME</th>
-                                                    <th>MOBILE NO</th>
-                                                    <th>TYPE</th>
-                                                    <th>INSTALLMENT MONTHS</th>
-                                                    <th>INSTALLMENT AMOUNT</th>
-                                                    <th>TOTAL AMOUNT	</th>
-                                                 
-                                            </thead>
-                                            
-                                            <tbody>
-                                                                                          
-                                            </tbody>
-                                        </table>
-    
-                                    </div>
+                                    <table class="table table-hover table-striped" id="myTable">
+                                        <thead>
+                                            <th>Booking Id</th>
+                                            <th>Customer Name</th>
+                                            <th>Mobile No</th>
+                                            <th>Type</th>
+                                            <th>Installment Months</th>
+                                            <th>Installment Amount</th>
+                                            <th>Total Amount</th>
+                                            <th></th>
+                                        </thead>
+                                        
+                                        <tbody>
+                                              <tr>
+                                                  <td>BGL2018mg01</td>
+                                                   <td>Pandiyan</td>
+                                                   <td>9566103603</td>
+                                                   <td>Land</td>
+                                                   <td>24</td>
+                                                   <td>1000</td>
+                                                   <td>24000</td>
+                                              </tr>                                        
+                                        </tbody>
+                                    </table>
+
+                                </div>
                         </div>
                     </div>
                    
