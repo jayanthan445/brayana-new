@@ -647,27 +647,25 @@ class Api extends REST_Controller {
 
     public function addTransaction_post($type){
         if(!empty($this->isAuth)){
-            $POST = $this->post();          
-            $data = array(
+            $POST = $this->post(); 
+
+            $count_inst = 1;
+            if(isset($POST["count_inst"]) && $POST["count_inst"] > 0 ){
+                $count_inst = $POST["count_inst"] ;
+            }  
+            for($i=0;$i < $count_inst; $i++ ){
+                $data = array(
                             "login_id"=>$POST['login_id'],
                             "inst_month"=>$POST['inst_month'],
                             "inst_amount"=>$POST['inst_amount'],
                             "added_by"=>$this->isAuth->id,
                     );
             
-            $data[$type."_id"] = $POST['type_id'];
-            $table = $type."_installments";
-            /*if($type == "agar"){
-                $data["agar_id"] = $POST['type_id'];
-                $table = "agar_installments";
-            }elseif($type == "chit"){
-                $data["chit_id"] = $POST['type_id'];
-                $table = "chit_installments";
-            }else{
-                $data["land_id"] = $POST['type_id'];
-                $table = "chit_installments";
-            }*/
-            $id = $this->Api_model->insert_data($table,$data);
+                $data[$type."_id"] = $POST['type_id'];
+                $table = $type."_installments";
+                 $id = $this->Api_model->insert_data($table,$data);
+            }       
+            
             if($id){
                 $this->getTransaction_get($type);
                 $where = array("id"=>$POST['type_id']);
@@ -1013,6 +1011,8 @@ class Api extends REST_Controller {
            return $return;
     }
 
+
+
         public function customerReport_post($type,$id=''){
         if(!empty($this->isAuth)){
             $POST = $this->post();
@@ -1074,4 +1074,83 @@ class Api extends REST_Controller {
     //        $this->set_response($response, REST_Controller::HTTP_OK);
     //    }
     // }
+
+
+    public function enquiry_get($id=""){
+       if(!empty($this->isAuth)){
+           $options = array();
+           if($this->userType !=1){
+             $options["where"] = "user_id = ".$id ;
+           }
+
+           $return = $this->Api_model->getEnquiry($options);
+           $response = array("STATUS"=>"OK","RESPONSE"=>$return);
+           $this->set_response($response, REST_Controller::HTTP_OK);
+       } 
+        
+    }
+    public function addenquiry_post(){
+        if(!empty($this->isAuth)){
+            $POST = $this->post();
+        $data = array(
+                        "type" => $POST['type'],
+                        "name"=>$POST['name'],
+                        "mobile"=>$POST['mobile'],
+                        "email"=>$POST['email'],
+                        "desc"=>$POST['desc'],
+                        "user_id"=>$this->isAuth->id,
+
+                );
+        $table = "enquiry";
+        $id = $this->Api_model->insert_data($table,$data);
+        if($id){
+            $this->chits_get($id);
+        }else{
+            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }
+        
+       } 
+    }
+    
+    public function editenquiry_post($id){
+        if(!empty($this->isAuth)){
+        $POST = $this->post();
+        $data = array(
+                        "type" => $POST['type'],
+                        "name"=>$POST['name'],
+                        "mobile"=>$POST['mobile'],
+                        "email"=>$POST['email'],
+                        "desc"=>$POST['desc'],
+                        "user_id"=>$this->isAuth->id,
+
+                );
+        $table = "enquiry";
+        $id = $this->Api_model->update_data($table,$data, array('chit_id'=>$id));
+        if($id){
+            $this->chits_get($id);
+        }else{
+            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }
+        
+       } 
+    }
+    
+   
+    public function deleteenquiry_post($id){
+        if(!empty($this->isAuth)){
+        
+        $table = "enquiry"; 
+        $id = $this->Api_model->delete_data($table, array('id'=>$id));
+        if($id){
+            $response = array("STATUS"=>"OK","RESPONSE"=>"Data Deleted");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }else{
+            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to Deleta");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }
+        
+       } 
+    }
 }

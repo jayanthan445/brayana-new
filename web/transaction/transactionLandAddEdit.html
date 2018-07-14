@@ -69,23 +69,27 @@
              <ul class="nav">
                      
                     <li class="master">
-                        <a href="../land/landView.html">
-                            <i class="pe-7s-user"></i>
-                            <p>Lands</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../chitFund/chitFundView.html">
-                            <i class="pe-7s-note2"></i>
-                            <p>Chit Funds</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../agarWood/agarWoodView.html">
-                            <i class="pe-7s-news-paper"></i>
-                            <p>Agar Wood</p>
-                        </a>
-                    </li>
+                            <a href="#Category" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
+                                <i class="pe-7s-plus"></i>
+                                <p class="textAlignLeft">BG Category</p>
+                            </a>
+                            <div id="Category" class="collapse">
+                                <a href="../land/landView.html" class="sideBarCollapseFirst ">
+                                    <i class="pe-7s-user"></i>
+                                    <p>Lands</p>
+                                </a>
+
+                                <a href="../chitFund/chitFundView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-note2"></i>
+                                    <p>Chit Funds</p>
+                                </a>
+
+                                 <a href="../agarWood/agarWoodView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-news-paper"></i>
+                                    <p>Agar Wood</p>
+                                </a>
+                            </div>
+                        </li>
                     <li class="master">
                         <a href="../employee/employeeView.html">
                             <i class="pe-7s-science"></i>
@@ -206,6 +210,14 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <label>No of Installment to pay</label>
+                                                        <input type="number" class="form-control" placeholder="" value="1" id="count_inst" required="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
                                                         <label>Customer Name</label>
                                                         <input type="text" class="form-control" placeholder="customer_name" readonly="" value="" id="customer_name" required>
                                                         <input type="hidden" name = "login_id" id="login_id"  value=""/>
@@ -261,7 +273,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Total Amount</label>
                                                         <input type="text" class="form-control" placeholder="Total Amount" value="" disabled id="totalAmount" required>

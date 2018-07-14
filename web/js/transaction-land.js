@@ -84,8 +84,10 @@ function buildDetailsTable(list,count){
 
     for(var i=0;i<count;i++){
         $(".booking_no").html(list[i].booking_no);
-        $(".customer_name").html(list[i].name);
-        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].inst_month+"</td><td>"+list[i].inst_amount+"</td><td>"+list[i].date+"</td><td><b>"+(list[i].status == "PAID" ? "<span style='color:green'>"+list[i].status+"</span>" : "<span style='color:#ee7f2e'>"+list[i].status+"</span>")+"</b></td><td> <a href='./button' class='btn btn-outline-danger deleteTransactionLand'  data-toggle='modal' data-target='#myModal'  data-id='"+list[i].inst_id+"' ><i class='fa fa-trash-o' aria-hidden='true'></i></a></td></tr>";
+        $(".customer_name").html(list[0].name);
+        $(".customer_months").html(list[0].paid_months+" / "+list[0].total_months);
+        $(".customer_amount").html("₹ "+list[0].paid_amount+" / ₹ "+list[0].total_amount);
+        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].inst_month+"</td><td> ₹ "+list[i].inst_amount+"</td><td>"+list[i].date+"</td><td><b>"+(list[i].status == "PAID" ? "<span style='color:green'>"+list[i].status+"</span>" : "<span style='color:#ee7f2e'>"+list[i].status+"</span>")+"</b></td><td>"+(list[i].status == "PAID" ? "<a href='./button' class='btn btn-outline-danger deleteTransactionLand'  data-toggle='modal' data-target='#myModal'  data-id='"+list[i].inst_id+"' ><i class='fa fa-trash-o' aria-hidden='true'></i></a>":"")+"</td></tr>";
         $("table tbody").append(markup);
     }
     
@@ -197,6 +199,7 @@ function fillEditLandDetail(data){
       
 }
 function saveLandDetail(){
+
       var login_id = $("#login_id").val();
       var type_id = $("#type_id").val();
       var installmentMonths = $("#inst_month").val();
@@ -210,8 +213,14 @@ function saveLandDetail(){
 
       var paid_amount = $("#paid_amount").val();
       var paid_months = $("#paid_months").val();
-      if(balance_amount == 0){ 
+      var count_inst = $("#count_inst").val();
+      if(parseInt(balance_months)  == 0){ 
           alert("Balance amount is 0 to pay");
+          return false;
+      }
+
+      if(parseInt(balance_months) <  parseInt(count_inst)){ 
+          alert("Only "+balance_months+" balance months to pay");
           return false;
       }
       var data = {  
@@ -219,6 +228,7 @@ function saveLandDetail(){
                     "login_id":login_id,
                     "inst_month":installmentMonths,
                     "inst_amount":installmentAmount,
+                    "count_inst": count_inst
                   }
       var auth = getLocal("auth");
      $.ajax({

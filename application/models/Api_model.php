@@ -62,7 +62,8 @@ class Api_model extends CI_Model {
           }
 
           public function update_automaticID($id,$type,$table){
-                $id = str_pad($id,5,0,STR_PAD_LEFT); 
+                //$id = str_pad($id,5,0,STR_PAD_LEFT); 
+                $id = date("Y")."mg".$id;
                 $auto_id = "";
                 if($type == "land"){
                     $auto_id = "BGL".$id;
@@ -555,7 +556,7 @@ class Api_model extends CI_Model {
         public function getTransaction($type,$options = array()){
           $cols = "";
            if($type != "agar"){
-              $cols = " b.inst_month as total_months,b.inst_amount as amount_per_month,b.booked_date, ";
+              $cols = " b.inst_month as total_months,b.tot_amount as total_amount,b.balance_amount,b.balance_months,b.paid_months,b.paid_amount,b.inst_amount as amount_per_month,b.booked_date, ";
            }
             $query = "SELECT i.*,b.booking_no,".$cols." c.* FROM ".$type."_installments i ";
             $query .= "JOIN ".$type."_booking b ON (i.".$type."_id = b.id) ";
@@ -583,19 +584,30 @@ class Api_model extends CI_Model {
             $result = $this->db->query($query);
             $list = $result->result_array();
             $count = $result->num_rows();
-            
             if($type != "agar"){
               $count = $list[0]["total_months"];
                 for($i=0;$i<$count;$i++){
-                $booked_ym = date("F-Y",strtotime($list[0]["booked_date"]." +".$i." Month "));
+                $strtime = strtotime($list[0]["booked_date"]." +".$i." Month ");
+                $currentStr = strtotime(date('Y-m-d'));
+                $booked_ym = date("F-Y",$strtime);
+
                 if(isset($list[$i])){
                     $list[$i]["date"] = date("d/m/Y",strtotime($list[$i]["datetime"]));
                     $list[$i]["status"] ="PAID";
                   }else{
                       $list[$i]["inst_amount"] =  $list[0]["amount_per_month"];
-                       $list[$i]["status"] ="UNPAID";
+                      if($currentStr > $strtime){
+                        $list[$i]["status"] ="UNPAID";
+                      }else{
+                        $list[$i]["status"] ="PENDING";
+                      }
+                       
                        $list[$i]["date"] = "";
                        $list[$i]["name"] = $list[0]["name"];
+                       $list[$i]["balance_amount"] = $list[0]["balance_amount"];
+                       $list[$i]["total_amount"] = $list[0]["total_amount"];
+                       $list[$i]["balance_months"] = $list[0]["balance_months"];
+                       $list[$i]["total_months"] = $list[0]["total_months"];
                   }
                   $list[$i]["inst_month"] =  $booked_ym;
                    
@@ -675,4 +687,26 @@ class Api_model extends CI_Model {
         $response =$result->result_array();
         return $response[0];
     }
+
+    public function getEnquiry($options = array()){
+            $query = $query = "SELECT * FROM enquiry";
+            $where = array();
+            if(isset($options['where']) && !empty($options['where']))
+            {
+             $where[] = $options['where'];
+            }
+
+             if(!empty($where)){
+               $query .=" where ". implode(" and ", $where);
+             }
+            if(isset($options['offset']))
+            {
+              $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
+              $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
+            } 
+            $result = $this->db->query($query);
+            $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+            return $response;    
+        }
+
 }

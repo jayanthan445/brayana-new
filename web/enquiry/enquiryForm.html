@@ -47,7 +47,7 @@
 
 
 <script src="../js/scripts.js"></script>
- <script src="../js/transaction-agar.js"></script>
+ <script src="../js/enquiry.js"></script>
   <!-- client side validation script -->
   <!-- client side validation script -->
 </head>
@@ -69,23 +69,27 @@
              <ul class="nav">
                      
                     <li class="master">
-                        <a href="../land/landView.html">
-                            <i class="pe-7s-user"></i>
-                            <p>Lands</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../chitFund/chitFundView.html">
-                            <i class="pe-7s-note2"></i>
-                            <p>Chit Funds</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../agarWood/agarWoodView.html">
-                            <i class="pe-7s-news-paper"></i>
-                            <p>Agar Wood</p>
-                        </a>
-                    </li>
+                            <a href="#Category" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
+                                <i class="pe-7s-plus"></i>
+                                <p class="textAlignLeft">BG Category</p>
+                            </a>
+                            <div id="Category" class="collapse">
+                                <a href="../land/landView.html" class="sideBarCollapseFirst ">
+                                    <i class="pe-7s-user"></i>
+                                    <p>Lands</p>
+                                </a>
+
+                                <a href="../chitFund/chitFundView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-note2"></i>
+                                    <p>Chit Funds</p>
+                                </a>
+
+                                 <a href="../agarWood/agarWoodView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-news-paper"></i>
+                                    <p>Agar Wood</p>
+                                </a>
+                            </div>
+                        </li>
                     <li class="master">
                         <a href="../employee/employeeView.html">
                             <i class="pe-7s-science"></i>
@@ -98,7 +102,7 @@
                             <p>Customer</p>
                         </a>
                     </li>
-                    <li   >
+                    <li class=""  >
                         <a href="../transaction/transactionLandView.html">
                             <i class="pe-7s-look"></i>
                             <p>Transaction</p>
@@ -110,27 +114,16 @@
                             <p>Reports</p>
                         </a>
                     </li>
-                   <li>
-                        <a href="../notification/notificationView.html">
+                     <li>
+                        <a href="../Notification/notificationView.html">
                             <i class="pe-7s-science"></i>
                             <p>Notification</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="../myProfile/changePasswordEdit.html">
-                            <i class="pe-7s-user"></i>
-                            <p>Change Pasword</p>
-                        </a>
-                    </li>
-                     <li>
-                        <a href="../comissionEntry/comissionView.html">
-                            <i class="pe-7s-users"></i>
-                            <p>Commission</p>
-                        </a>
-                    </li>
-                     <li class="active">
+                    
+                    <li class="active enquiry">
                         <a href="../enquiry/enquiryView.html">
-                            <i class="pe-7s-users"></i>
+                            <i class="pe-7s-comment"></i>
                             <p>Enquiry</p>
                         </a>
                     </li>
@@ -174,76 +167,69 @@
                             <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                         <h4 class="title">Add Enquiry</h4>
+                                         <h4 class="title">Enquiry Form
+                                         <span class="loader" style="display: none;"><img src="../img/loader.gif" alt="Processing..." style="width: 35px;height: 35px;"></span></h4>
                                     </div>
                                     
                                   </div>
                                 </div>
                                 <div class="content">
-                                        <form name="agarAddForm" id="agarAddForm" onsubmit="return saveAgarDetail();" autocomplete="off">
+                                        <form name="enquiryAddForm" id="enquiryAddForm" onsubmit="return saveenquiryDetail();" autocomplete="off">
                                         <div>
+
                                             <div class="row">
-                                                 <div class="col-md-6">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Type</label>
+                                                        <select class="form-control" placeholder="Site Name" value="" id="type" required>
+                                                            <option value="Land">Land</option>
+                                                            <option value="AgarWood">AgarWood</option>
+                                                            <option value="ChitFunds">ChitFunds</option>
+
+                                                        </select>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Name</label>
-                                                        <input type="text" class="form-control" placeholder="name"  value="" id="name" >
+                                                        <input type="text" class="form-control" placeholder="Name" value="" id="name" required>
                                                     </div>
                                                 </div>
-
-                                                  <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Mobile</label>
-                                                              <input type="text" class="form-control" placeholder="Installment Date" value="" id="inst_month" >
-                                                    </div>
-                                                </div>
-
-                                               
-                                               
                                                 
                                             </div>
                                         
                                             <div class="row">
                                                 
-                                               <div class="col-md-6">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Category</label>
-                                                       <select class="form-control" id="site_name" required>
-                                                            <option value="0"> Select option </option>
-                                                            <option value="1"> Land </option>
-                                                            <option value="2"> Agar Wood </option>
-                                                            <option value="3"> Chit funds </option>
-                                                        </select>
-                                                        
+                                                        <label>Mobile</label>
+                                                              <input type="text" class="form-control" placeholder="Mobile(optional)" value="" id="mobile" >
                                                     </div>
                                                 </div>
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Email</label>
-                                                        <input type="text" class="form-control" placeholder="Email" value="" id="email" required>
+                                                        <input type="text"  class="form-control" placeholder="Email(optional)" value="" id="email" >
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Address</label>
-                                                              <input type="text" class="form-control" placeholder="Address" value="" id="address">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Description</label>
-                                                        <input type="text" class="form-control" placeholder="Description" value="" id="description">
+                                                        <textarea id="desc" class="form-control" ></textarea>
+                                                              
                                                     </div>
                                                 </div>
+                                                
                                             </div>
-        
-                                             
+
+                                            
         
                                             <button type="submit" class="btn btn-primary btn-fill">Submit</button> 
-                                             <a href="./transactionAgarView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                             <a href="./enquiryView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </form>
@@ -272,10 +258,9 @@
 
 <script type="text/javascript">
  $(document).ready(function(){
-    load_booking();
    // $('.input-group .date').datepicker({
 
-    //});
+   // });
 });    
 
 </script>

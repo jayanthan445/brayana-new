@@ -67,23 +67,27 @@
              <ul class="nav">
                      
                     <li class="master">
-                        <a href="../land/landView.html">
-                            <i class="pe-7s-user"></i>
-                            <p>Lands</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../chitFund/chitFundView.html">
-                            <i class="pe-7s-note2"></i>
-                            <p>Chit Funds</p>
-                        </a>
-                    </li>
-                    <li >
-                        <a href="../agarWood/agarWoodView.html">
-                            <i class="pe-7s-news-paper"></i>
-                            <p>Agar Wood</p>
-                        </a>
-                    </li>
+                            <a href="#Category" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
+                                <i class="pe-7s-plus"></i>
+                                <p class="textAlignLeft">BG Category</p>
+                            </a>
+                            <div id="Category" class="collapse">
+                                <a href="../land/landView.html" class="sideBarCollapseFirst ">
+                                    <i class="pe-7s-user"></i>
+                                    <p>Lands</p>
+                                </a>
+
+                                <a href="../chitFund/chitFundView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-note2"></i>
+                                    <p>Chit Funds</p>
+                                </a>
+
+                                 <a href="../agarWood/agarWoodView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-news-paper"></i>
+                                    <p>Agar Wood</p>
+                                </a>
+                            </div>
+                        </li>
                     <li class="master">
                         <a href="../employee/employeeView.html">
                             <i class="pe-7s-science"></i>
@@ -189,7 +193,7 @@
                                     <div class="col-md-6">
                                         <span class="pull-right">
 
-                                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openEnquiryAddPage()">Add</button>
+                                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openenquiryAddPage()">Add</button>
                              
                                             
                                     </div>
@@ -200,11 +204,13 @@
                                     <table class="table table-hover table-striped" id="myTable">
                                         <thead>
                                             <th>S.NO</th>
+                                            <th>Type</th>
                                             <th>Name</th>
                                             <th>Mobile</th>
-                                            <th>type</th>
+                                            
                                             <th>Email</th>
                                             <th>Description</th>
+                                            <th></th>   
                                         </thead>
                                         <tbody>
                                         </tbody>
@@ -233,8 +239,40 @@
 
     </div>
 </div>
+<script type="text/javascript">
+ $(document).ready(function(){
+    init();
+});    
 
+</script>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete Confirmation</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="dID" name="dID" value="">
+        <p>Do you want to delete? <span id="modelName"></span>  <span class="loader" style="display: none;"><img src="../img/loader.gif" alt="Processing..." style="width: 35px;height: 35px;"></span></p>
+        <div class="alert success btn-outline-success" id="chitFund-success" style="display:none">
+          <strong>Success!!!</strong>
+        </div>
+        <div class="alert fail btn-outline-danger" id="chitFund-fail" style="display:none">
+          <strong>Failed!!!</strong> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="deleteYes" >Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 </body>
 
 
