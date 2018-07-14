@@ -111,7 +111,7 @@ if(currentPath == "customer/customerAgar/customerAgarAddEdit.html"){
 }
 function loadAfter(id){
   getAgars(id);
-        getCustomerAgarsByID(id);
+ // getCustomerAgarsByID(id);
 }
 function loadDataTable(){
 var table = $('#myTable').DataTable({
@@ -216,9 +216,11 @@ function fillEditLandDetail(data){
   $("#no_tree").val(data.no_tree);
   $("#tree_amount").val(data.tree_amount);
   $("#tot_amount").val(data.tot_amount);
-
+  
   $("#id").val(data.id);
   $("#login_id").val(data.login_id);
+  $(".booking_no").html(data.booking_no);
+  $("#reference").val(data.reference);
 
   
 }

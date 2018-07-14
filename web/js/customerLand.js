@@ -164,6 +164,9 @@ function fillEditLandDetail(data){
   $("#id").val(data.id);
   $("#login_id").val(data.login_id);
 
+  $(".booking_no").html(data.booking_no);
+  $("#reference").val(data.reference);
+
   
 }
 
@@ -202,6 +205,7 @@ function saveLandDetail(){
   var site_name = $("#site_name").val();
   var address = $("#address").val();
   var email_id = $("#email_id").val();
+  var reference = $("#reference").val();
   
   var data = {
                 //"booking_no":booking_no,
@@ -213,7 +217,8 @@ function saveLandDetail(){
                 "site_id":site_name,                
                 "inst_month":installmentMonths,
                 "inst_amount":installmentAmount,
-                "tot_amount":installmentMonths*installmentAmount
+                "tot_amount":installmentMonths*installmentAmount,
+                "reference":reference
               };
 
 
@@ -254,6 +259,7 @@ function editLandDetail(){
 
     var id = $("#id").val();
     var login_id = $("#login_id").val();
+    var reference = $("#reference").val();
     
     
     var data = {
@@ -264,7 +270,8 @@ function editLandDetail(){
                   "inst_month":installmentMonths,
                   "inst_amount":installmentAmount,
                   "tot_amount":installmentMonths*installmentAmount,
-                  "login_id":login_id
+                  "login_id":login_id,
+                  "reference":reference
                 };
 
                 console.log(data);
