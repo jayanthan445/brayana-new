@@ -68,23 +68,27 @@
              <ul class="nav">
                      
                     <li class="master">
-                        <a href="../land/landView.html">
-                            <i class="pe-7s-user"></i>
-                            <p>Lands</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../chitFund/chitFundView.html">
-                            <i class="pe-7s-note2"></i>
-                            <p>Chit Funds</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../agarWood/agarWoodView.html">
-                            <i class="pe-7s-news-paper"></i>
-                            <p>Agar Wood</p>
-                        </a>
-                    </li>
+                            <a href="#Category" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
+                                <i class="pe-7s-plus"></i>
+                                <p class="textAlignLeft">BG Category</p>
+                            </a>
+                            <div id="Category" class="collapse">
+                                <a href="../land/landView.html" class="sideBarCollapseFirst ">
+                                    <i class="pe-7s-user"></i>
+                                    <p>Lands</p>
+                                </a>
+
+                                <a href="../chitFund/chitFundView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-note2"></i>
+                                    <p>Chit Funds</p>
+                                </a>
+
+                                 <a href="../agarWood/agarWoodView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-news-paper"></i>
+                                    <p>Agar Wood</p>
+                                </a>
+                            </div>
+                        </li>
                     <li class="master">
                         <a href="../employee/employeeView.html">
                             <i class="pe-7s-science"></i>
@@ -200,7 +204,7 @@
                                   </div>
                                 </div>
                                 <div class="content">
-                                        <!-- <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();"> -->
+                                        <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();">
                                         <div>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -246,11 +250,11 @@
                                            
                                              
         
-                                            <button type="submit" class="btn btn-primary btn-fill" onclick="getEmployerReport()">Search</button> 
-                                             <a href="../employeeReports/reportsView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                            <button type="submit" class="btn btn-primary btn-fill">Search</button> 
+                                             <a href="../land/landView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
-                                    <!-- </form> -->
+                                    </form>
                                     </div>
 
                                     <div class="content table-responsive table-full-width">
@@ -266,7 +270,15 @@
                                         </thead>
                                         
                                         <tbody>
-                                                                                     
+                                               <tr>
+                                                <td>BGE2018mg01</td>
+                                                   <td>Jai</td>
+                                                  <td>BGL2018mg01</td>
+                                                   <td>Pandiyan</td>
+                                                   <td>9566103603</td>
+                                                   <td>Land</td>
+                                                   <td>24000</td>
+                                              </tr>                                           
                                         </tbody>
                                     </table>
 
