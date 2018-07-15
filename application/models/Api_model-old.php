@@ -19,10 +19,8 @@ class Api_model extends CI_Model {
         
         public function update_data($table,$data,$where)
         {
-        //print_r($data);exit;
-          //$this->db->where($where);
+
           $this->db->update($table,$data,$where);
-          //debug_last_query();exit;
           $afftectedRows = $this->db->affected_rows();
           return $afftectedRows;
         }
@@ -63,6 +61,38 @@ class Api_model extends CI_Model {
               return $this->db->count_all($table);
           }
 
+          public function update_automaticID($id,$type,$table){
+                //$id = str_pad($id,5,0,STR_PAD_LEFT); 
+                $id = date("Y")."mg".$id;
+                $auto_id = "";
+                if($type == "land"){
+                    $auto_id = "BGL".$id;
+                    $data = array("booking_no "=>$auto_id );
+                    $where = array('id'=>$id);
+                }else if($type == "agar"){
+                    $auto_id = "BGW".$id;
+                    $data = array("booking_no "=>$auto_id );
+                    $where = array('id'=>$id);
+                }else if($type == "chit"){
+                    $auto_id = "BGF".$id;
+                    $data = array("booking_no "=>$auto_id );
+                    $where = array('id'=>$id);
+                }else if($type == "employee"){
+                    $auto_id = "BGE".$id;
+                    $data = array("emp_pin "=>$auto_id );
+                    $where = array('emp_id'=>$id);
+                }
+                if($auto_id != ""){
+
+                    $this->db->update($table,$data,$where);
+                    $afftectedRows = $this->db->affected_rows();
+                    return $afftectedRows;  
+                }
+                return false;
+                
+
+          }
+
 		// Read data using username and password
 	public function login($data) {
 
@@ -100,13 +130,8 @@ class Api_model extends CI_Model {
         public function validateToken(){
             
             $headers = $this->input->request_headers();
-            $auth = "";
-            if(isset($headers['auth'])){
-                $auth = $headers['auth'];
-            }else if(isset($headers['Auth'])){
-                 $auth = $headers['Auth'];
-            }
-            if((array_key_exists('auth', $headers) || array_key_exists('Auth', $headers)) && !empty($auth)) {
+            $auth = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJlbWFpbCI6bnVsbCwibW9iaWxlIjoiOTAwMzUwMjcxOSIsInR5cGUiOiIxIn0.NcrGhOr9Bvu99q5eEGcKkJqnjs81YodTbYpTyHrasx0";
+            if(!empty($auth)) {
                 $decodedToken = AUTHORIZATION::validateToken($auth);
                 
                 if ($decodedToken != false) {
@@ -114,8 +139,33 @@ class Api_model extends CI_Model {
                     return $decodedToken;
                 }
             }
+            /*if(isset($headers['authorization'])){
+                $auth = $headers['authorization'];
+            }else if(isset($headers['Authorization'])){
+                 $auth = $headers['Authorization'];
+            }
+            if((array_key_exists('authorization', $headers) || array_key_exists('Authorization', $headers)) && !empty($auth)) {
+                $decodedToken = AUTHORIZATION::validateToken($auth);
+                
+                if ($decodedToken != false) {
+                    
+                    return $decodedToken;
+                }
+            }*/
             return false;
         }
+        /* public function validateToken($post){
+            print_r($post);
+            if(!empty( $post["auth"])) {
+                $decodedToken = AUTHORIZATION::validateToken($post["auth"]);
+                
+                if ($decodedToken != false) {
+                    
+                    return $decodedToken;
+                }
+            }
+            return false;
+        }*/
         /*** Land**/
         public function getLands($options = array()){
             $query = $query = "SELECT * FROM land_master";
@@ -162,6 +212,29 @@ class Api_model extends CI_Model {
             return $response;    
         }
 
+
+
+        public function getEmployees($options = array()){
+          $query = $query = "SELECT * FROM employees";
+          $where = array();
+          if(isset($options['where']) && !empty($options['where']))
+          {
+           $where[] = $options['where'];
+          }
+
+           if(!empty($where)){
+             $query .=" where ". implode(" and ", $where);
+           }
+          $query .= " order by emp_id ASC"; 
+          if(isset($options['offset']))
+          {
+            $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
+            $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
+          } 
+          $result = $this->db->query($query);
+          $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+          return $response;    
+      }
         /*** Agar**/
         public function getAgars($options = array()){
             $query = $query = "SELECT * FROM tree_master";
@@ -245,8 +318,8 @@ class Api_model extends CI_Model {
             if($customer_count > 0){
                 foreach ($customer_list as $key=>$customer) {
 
-                        $customerId = $customer["customer_id"];
-                        $options["where"] = "customer_id = ".$customerId ;
+                        $customerId = $customer["login_id"];
+                        $options["where"] = "login_id = ".$customerId ;
                         $customer_detail = $this->getLandBookings($options);
                         $customer_list[$key]["detail"]["land"] = $customer_detail;
 
@@ -265,7 +338,12 @@ class Api_model extends CI_Model {
         }
 
         public function getLandBookings($options = array()){
-            $query = $query = "SELECT * FROM land_booking";
+              if(empty($options)){
+                  $query = "SELECT lb.*,lm.site_name,lm.survey_no,lm.area,lm.city,c.* FROM land_booking as lb JOIN land_master as lm ON (lb.site_id = lm.site_id) JOIN customers as c ON (lb.login_id = c.login_id)";
+              }else{
+                $query = "SELECT * FROM land_booking";
+              }
+              
             $where = array();
             if(isset($options['where']) && !empty($options['where']))
             {
@@ -275,7 +353,7 @@ class Api_model extends CI_Model {
              if(!empty($where)){
                $query .=" where ". implode(" and ", $where);
              }
-            $query .= " order by booking_no ASC"; 
+             $query .= " order by booking_no ASC"; 
             if(isset($options['offset']))
             {
               $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
@@ -285,9 +363,130 @@ class Api_model extends CI_Model {
             $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
             return $response;    
         }
+        public function getcustomerReport($options = array(),$table){
+
+        
+          $detail = array();
+          if(empty($table)){
+          $tab = array("chit_booking","agar_booking","land_booking");
+          $i = 1;
+          for ($i=0; $i <=2 ; $i++) { 
+           
+            $query = "SELECT * FROM"." ".$tab[$i]." as cb JOIN customers as cm ON (cb.login_id = cm.login_id)";
+             $where = array();
+          if(isset($options['where']) && !empty($options['where']))
+          {
+           $where[] = $options['where'];
+          }
+           if(!empty($where)){
+             $query .=" where ". implode(" and ", $where);
+           }
+            $result = $this->db->query($query);
+            $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+    
+                for ($k=0; $k <=$result->num_rows() - 1 ; $k++) { 
+                
+                  array_push($detail,$response['data'][$k]);
+                }
+
+          }
+        }else{
+          $query = "SELECT * FROM"." ".$table." as cb JOIN customers as cm ON (cb.login_id = cm.login_id)";
+          //$result = $this->db->query($query);
+           // $response = array('data'=>$result->result_array(),'count'=>count($result->result_array()));
+          //  print_r($result->result_array()); exit;
+          $result = $this->db->query($query);
+          $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+          return $response; 
+
+        }
+        
+          // $query = $query = "SELECT * FROM chit_booking";
+          // $where = array();
+          // if(isset($options['where']) && !empty($options['where']))
+          // {
+          //  $where[] = $options['where'];
+          // }
+
+          //  if(!empty($where)){
+          //    $query .=" where ". implode(" and ", $where);
+          //  }
+          // $query .= " order by name ASC"; 
+
+          // $result = $this->db->query($query);
+          //   $customer_list = $result->result_array();
+          //   $customer_count = $result->num_rows();
+            // if($customer_count > 0){
+            //     foreach ($customer_list as $key=>$customer) {
+
+            //             $customerId = $customer["login_id"];
+            //             $options["where"] = "login_id = ".$customerId ;
+            //             $customer_detail = $this->getLandBookings($options);
+            //             $customer_list[$key]["land"]["detail"] = $customer_detail;
+
+            //             $customer_detail = $this->getChitBookings($options);
+            //             $customer_list[$key]["chit"]["detail"] = $customer_detail;
+                       
+
+            //             $customer_detail = $this->getAgarBookings($options);
+            //             $customer_list[$key]["agar"]["detail"] = $customer_detail;
+                   
+
+            //           // $key = array_combine($customer_list[$key]["chit"]["detail"]["data"]["data"],$customer_list[$key]["land"]["detail"]["data"]["data"]);
+            //           // print_r($a); exit;  //   $a = array_push($a,$customer_list[$key]["chit"]["detail"]);
+
+
+            //     }  
+            // }
+
+          //  print_r($a); exit;
+       $response = array('data'=>$detail,'count'=>count($detail));
+            return $response;    
+    }
+
+    public function getChitBookingReport($options = array()){
+      if(empty($options)){
+           $query = "SELECT cb.*,cm.fund_type,c.* FROM chit_booking as cb JOIN chit_master as cm ON (cb.chit_id = cm.chit_id) JOIN customers as c ON (cb.login_id = c.login_id)";
+        }else{
+          $query = "SELECT * FROM chit_booking";
+        }
+      
+      $where = array();
+      if(isset($options['where']) && !empty($options['where']))
+      {
+       $where[] = $options['where'];
+      }
+
+       if(!empty($where)){
+         $query .=" where ". implode(" and ", $where);
+       }
+      $query .= " order by booking_no ASC"; 
+      if(isset($options['offset']))
+      {
+        $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
+        $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
+      } 
+      $result = $this->db->query($query);
+      $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+      return $response;    
+  }
+
+        public function getLandBookingById($id = ''){
+         $query = "SELECT lb.*,lm.site_name,lm.survey_no,lm.area,lm.city,c.* FROM land_booking as lb JOIN land_master as lm ON (lb.site_id = lm.site_id) JOIN customers as c ON (lb.login_id = c.login_id) WHERE lb.id=$id";          
+       //  print($query);
+
+        $result = $this->db->query($query);
+        $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+        return $response;    
+    }
 
         public function getChitBookings($options = array()){
-            $query = $query = "SELECT * FROM chit_booking";
+            if(empty($options)){
+                 $query = "SELECT cb.*,cm.fund_type,c.* FROM chit_booking as cb JOIN chit_master as cm ON (cb.chit_id = cm.chit_id) JOIN customers as c ON (cb.login_id = c.login_id)";
+              }else{
+                $query = "SELECT * FROM chit_booking";
+              }
+            
             $where = array();
             if(isset($options['where']) && !empty($options['where']))
             {
@@ -308,8 +507,22 @@ class Api_model extends CI_Model {
             return $response;    
         }
 
+        public function getChitBookingById($id = ''){
+          $query = "SELECT lb.*,lm.fund_type,c.*,c.email_id ,c.mobile as user_mobile FROM chit_booking as lb JOIN chit_master as lm ON (lb.chit_id = lm.chit_id) JOIN customers as c ON (lb.login_id = c.login_id) WHERE lb.id=$id";          
+        //  print($query);
+ 
+         $result = $this->db->query($query);
+         $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+         return $response;    
+     }
+
         public function getAgarBookings($options = array()){
-            $query = $query = "SELECT * FROM agar_booking";
+          if(empty($options)){
+                 $query = $query = "SELECT * FROM agar_booking as ab JOIN tree_master as tm ON (ab.agar_id = tm.site_id) JOIN customers as c ON (ab.login_id = c.login_id)";
+              }else{
+                $query = "SELECT * FROM agar_booking";
+              }
+            
             $where = array();
             if(isset($options['where']) && !empty($options['where']))
             {
@@ -320,6 +533,172 @@ class Api_model extends CI_Model {
                $query .=" where ". implode(" and ", $where);
              }
             $query .= " order by booking_no ASC"; 
+            if(isset($options['offset']))
+            {
+              $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
+              $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
+            } 
+            $result = $this->db->query($query);
+            $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+            return $response;    
+        }
+
+        public function getAgarBookingById($id = ''){
+          $query = "SELECT ab.*,tm.site_name,c.* FROM agar_booking as ab JOIN tree_master as tm ON (ab.agar_id = tm.site_id) JOIN customers as c ON (ab.login_id = c.login_id) WHERE ab.id=$id";          
+        //  print($query);
+ 
+         $result = $this->db->query($query);
+         $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+         return $response;    
+     }
+
+        /*Transaction */
+        public function getTransaction($type,$options = array()){
+          $cols = "";
+           if($type != "agar"){
+              $cols = " b.inst_month as total_months,b.tot_amount as total_amount,b.balance_amount,b.balance_months,b.paid_months,b.paid_amount,b.inst_amount as amount_per_month,b.booked_date, ";
+           }
+            $query = "SELECT i.*,b.booking_no,".$cols." c.* FROM ".$type."_installments i ";
+            $query .= "JOIN ".$type."_booking b ON (i.".$type."_id = b.id) ";
+            if($type == "agar"){
+              $query .= "JOIN tree_master m ON (b.agar_id = m.site_id) ";
+            }else if($type == "land"){
+              $query .= "JOIN land_master m ON (b.site_id = m.site_id) ";
+            }else if($type == "chit"){
+              $query .= "JOIN chit_master m ON (b.chit_id = m.chit_id) ";
+            }
+            $query .= " JOIN customers c ON (b.login_id = c.login_id) ";
+            $where = array();
+            if(isset($options['where']) && !empty($options['where']))
+            {
+             $where[] = $options['where'];
+            }
+             if(!empty($where)){
+               $query .=" where ". implode(" and ", $where);
+             }
+            if(isset($options['offset']))
+            {
+              $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
+              $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
+            } 
+            $result = $this->db->query($query);
+            $list = $result->result_array();
+            $count = $result->num_rows();
+            if($type != "agar"){
+              $count = $list[0]["total_months"];
+                for($i=0;$i<$count;$i++){
+                $strtime = strtotime($list[0]["booked_date"]." +".$i." Month ");
+                $currentStr = strtotime(date('Y-m-d'));
+                $booked_ym = date("F-Y",$strtime);
+
+                if(isset($list[$i])){
+                    $list[$i]["date"] = date("d/m/Y",strtotime($list[$i]["datetime"]));
+                    $list[$i]["status"] ="PAID";
+                  }else{
+                      $list[$i]["inst_amount"] =  $list[0]["amount_per_month"];
+                      if($currentStr > $strtime){
+                        $list[$i]["status"] ="UNPAID";
+                      }else{
+                        $list[$i]["status"] ="PENDING";
+                      }
+                       
+                       $list[$i]["date"] = "";
+                       $list[$i]["name"] = $list[0]["name"];
+                       $list[$i]["balance_amount"] = $list[0]["balance_amount"];
+                       $list[$i]["total_amount"] = $list[0]["total_amount"];
+                       $list[$i]["balance_months"] = $list[0]["balance_months"];
+                       $list[$i]["total_months"] = $list[0]["total_months"];
+                  }
+                  $list[$i]["inst_month"] =  $booked_ym;
+                   
+              }
+            }else{
+                for($i=0;$i<$count;$i++){
+                if(isset($list[$i])){
+                    $list[$i]["date"] = date("d/m/Y",strtotime($list[$i]["datetime"]));
+                    $list[$i]["inst_month"] = date("F-Y",strtotime($list[$i]["datetime"]));
+                    $list[$i]["status"] ="PAID";
+                  }
+                   
+              }
+            }
+            
+            $response = array('data'=>$list,'count'=>$count);
+            return $response;    
+                
+        }
+
+        public function getBooking($type,$options = array()){
+          $column = "b.*,c.* ";
+          if($type == "agar"){
+              $column  .= ",m.site_name ";
+            }else if($type == "chit"){
+              $column  .= ",m.fund_type ";
+            }else if($type == "land"){
+              $column  .= ",m.site_name ";
+            }
+          $query = "SELECT ".$column." FROM ".$type."_booking b JOIN customers c ON (b.login_id = c.login_id) ";
+          if($type == "agar"){
+              $query .= "JOIN tree_master m ON (b.agar_id = m.site_id) ";
+            }else if($type == "land"){
+              $query .= "JOIN land_master m ON (b.site_id = m.site_id) ";
+            }else if($type == "chit"){
+              $query .= "JOIN chit_master m ON (b.chit_id = m.chit_id) ";
+            }
+          $where = array();
+          if(isset($options['where']) && !empty($options['where']))
+          {
+           $where[] = $options['where'];
+          }
+
+           if(!empty($where)){
+             $query .=" where ". implode(" and ", $where);
+           }
+          if(isset($options['offset']))
+          {
+            $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
+            $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
+          } 
+          $result = $this->db->query($query);
+          $count = $result->num_rows();
+          $lists = $result->result_array();
+          if($count > 0){
+              foreach($lists as $key=>$value){
+                $calc = $this->calculateBookingDetails($type,$value["id"]);
+                $lists[$key]["calc"] = $calc;
+                $paid_amount = ($calc["paid_amount"] == null ? 0 : $calc["paid_amount"]);
+                $paid_months = ($calc["paid_months"] == null ? 0 : $calc["paid_months"]);
+                $lists[$key]["paid_amount"] =  $paid_amount;
+                $lists[$key]["paid_months"] = $calc["paid_months"];
+                $lists[$key]["balance_amount"] = $value["tot_amount"] - $paid_amount;
+                if(isset($value["inst_month"])){
+                      $lists[$key]["balance_months"] = $value["inst_month"] - $paid_months;
+                }
+                
+              }
+          }
+          $response = array('data'=>$lists,'count'=>$result->num_rows());
+          return $response;    
+      }
+
+      public function calculateBookingDetails($type,$id){
+        $query = "SELECT SUM(inst_amount) paid_amount,count(inst_id) paid_months FROM ".$type."_installments i WHERE ".$type."_id=".$id." and is_delete =0";
+        $result = $this->db->query($query);
+        $response =$result->result_array();
+        return $response[0];
+    }
+
+    public function getEnquiry($options = array()){
+            $query = $query = "SELECT * FROM enquiry";
+            $where = array();
+            if(isset($options['where']) && !empty($options['where']))
+            {
+             $where[] = $options['where'];
+            }
+
+             if(!empty($where)){
+               $query .=" where ". implode(" and ", $where);
+             }
             if(isset($options['offset']))
             {
               $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;

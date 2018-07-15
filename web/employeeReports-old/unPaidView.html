@@ -61,36 +61,34 @@
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
-                   <img src="../img/logo.png" class="logoStyle"> Brayana Group
+                    Brayana Group
                 </a>
             </div>
 
              <ul class="nav">
                      
                     <li class="master">
-                        <a href="../land/landView.html">
-                            <i class="pe-7s-user"></i>
-                            <p>Lands</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../chitFund/chitFundView.html">
-                            <i class="pe-7s-note2"></i>
-                            <p>Chit Funds</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../agarWood/agarWoodView.html">
-                            <i class="pe-7s-news-paper"></i>
-                            <p>Agar Wood</p>
-                        </a>
-                    </li>
-                    <li class="master">
-                        <a href="../employee/employeeView.html">
-                            <i class="pe-7s-science"></i>
-                            <p>Employees</p>
-                        </a>
-                    </li>
+                            <a href="#Category" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
+                                <i class="pe-7s-plus"></i>
+                                <p class="textAlignLeft">BG Category</p>
+                            </a>
+                            <div id="Category" class="collapse">
+                                <a href="../land/landView.html" class="sideBarCollapseFirst ">
+                                    <i class="pe-7s-user"></i>
+                                    <p>Lands</p>
+                                </a>
+
+                                <a href="../chitFund/chitFundView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-note2"></i>
+                                    <p>Chit Funds</p>
+                                </a>
+
+                                 <a href="../agarWood/agarWoodView.html" class="sideBarCollapseLast ">
+                                    <i class="pe-7s-news-paper"></i>
+                                    <p>Agar Wood</p>
+                                </a>
+                            </div>
+                        </li>
                     <li>
                         <a href="../customer/customerLand/customerLandView.html">
                             <i class="pe-7s-map-marker"></i>
@@ -105,7 +103,7 @@
                         </a>
                     </li>
                     
-                   <li>
+                    <li>
                             <a href="#demo" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
                                 <i class="pe-7s-ball"></i>
                                 <p class="textAlignLeft">Reports</p>
@@ -122,7 +120,8 @@
                                 </a>
                             </div>
                         </li>
-                    <li>
+                   
+                   <li>
                         <a href="../notification/notificationView.html">
                             <i class="pe-7s-science"></i>
                             <p>Notification</p>
@@ -140,7 +139,7 @@
                             <p>Commission</p>
                         </a>
                     </li>
-                     <li class="employee">
+                     <li>
                         <a href="../enquiry/enquiryView.html">
                             <i class="pe-7s-users"></i>
                             <p>Enquiry</p>
@@ -164,11 +163,6 @@
                 <div class="collapse navbar-collapse">
                    
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="userName">
-                            <a href="#">
-                                <p></p>
-                            </a>
-                        </li>
 
                     <li>
                             <a href="javascript:;" onclick="logout();">
@@ -197,21 +191,21 @@
                                         <span class="pull-right">
 
                         
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 active"  onclick="openBookingEmployeeReportsPage()">Booking</button>
+                          <button type="submit" class="btn btn-primary btn-fill marginBottom10 "  onclick="openBookingEmployeeReportsPage()">Booking</button>
                             <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openEmployeePaymentReportsPage()">Payments</button>
-                            <button type="submit" class="btn btn-primary btn-fill marginBottom10"  onclick="openEmployeeunPaidReportsPage()">un paid</button>
+                            <button type="submit" class="btn btn-primary btn-fill marginBottom10 active"  onclick="openEmployeeunPaidReportsPage()">un paid</button>
                                     </div>
                                     
                                   </div>
                                 </div>
                                 <div class="content">
-                                        <!-- <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();"> -->
+                                        <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();">
                                         <div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Category</label>
-                                                       <select class="form-control" id="typeEBR" required>
+                                                       <select class="form-control" id="typeEUR" required>
                                                             <option value="0"> Select option </option>
                                                             <option value="1"> Land </option>
                                                             <option value="2"> Agar Wood </option>
@@ -222,13 +216,13 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>From Date</label>
-                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDateEBR" >
+                                                        <input type="date" class="form-control" placeholder="From Date" value="" id="fromDateEUR" >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                        <label>To Date</label>
-                                                        <input type="date" class="form-control" placeholder="To Date" value="" id="toDateEBR" required>
+                                                        <input type="date" class="form-control" placeholder="To Date" value="" id="toDateEUR" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -237,13 +231,13 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                        <label>Mobile Number or Booking Id</label>
-                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="mobileEBR" >
+                                                        <input type="text" class="form-control" placeholder="mobile number" value="" id="mobileEUR" >
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="form-group" style="margin-top: 26px">
                                                         <label>Consolidate List </label>
-                                                        <input type="checkbox" id="consolidateEBR">
+                                                        <input type="checkbox" id="consolidateEUR">
                                                          
                                                     </div>
                                             </div>
@@ -251,18 +245,19 @@
                                            
                                              
         
-                                            <button type="submit" class="btn btn-primary btn-fill" onclick="getEmployerReport()">Search</button> 
-                                             <a href="../employeeReports/reportsView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                            <button type="submit" class="btn btn-primary btn-fill">Search</button> 
+                                             <a href="../land/landView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
-                                    <!-- </form> -->
+                                    </form>
                                     </div>
 
                                     <div class="content table-responsive table-full-width">
                                     <table class="table table-hover table-striped" id="myTable">
                                         <thead>
-                                            <th>Employee Id</th>
+                                           <th>Employee Id</th>
                                             <th>Employee Name</th>
+                                            <th>Booking Id</th>
                                             <th>Booking Id</th>
                                             <th>Customer Name</th>
                                             <th>Mobile No</th>
@@ -271,7 +266,7 @@
                                         </thead>
                                         
                                         <tbody>
-                                                                                     
+                                                                                      
                                         </tbody>
                                     </table>
 
