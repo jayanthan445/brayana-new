@@ -41,5 +41,28 @@ table.dataTable thead th, table.dataTable tbody td{
 	border:none;
 }
 
+.title{
+  display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
 
+ .userName a{
+    cursor: default;
+    
+ }
+
+ .userName p {
+  /*color: #333333;*/
+ }
+
+ .logoStyle {
+    width: 65px;
+    height: 38px;
+ }
 

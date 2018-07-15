@@ -76,9 +76,9 @@
 
 <div class="sidebar-wrapper">
 <div class="logo">
-    <a href="#" class="simple-text">
-        BRAYANA
-    </a>
+     <a href="#" class="simple-text">
+                   <img src="../../img/logo.png" class="logoStyle"> Brayana Group
+                </a>
 </div>
 
 <ul class="nav">
@@ -158,7 +158,7 @@
                             <p>Commission</p>
                         </a>
                     </li>
-                     <li>
+                     <li class="employee">
                         <a href="../enquiry/enquiryView.html">
                             <i class="pe-7s-users"></i>
                             <p>Enquiry</p>
@@ -184,7 +184,11 @@
 
 
         <ul class="nav navbar-nav navbar-right">
-
+<li class="userName">
+                            <a href="#">
+                                <p></p>
+                            </a>
+                        </li>
             <li>
                 <a href="../index.html">
                     <p>Log out</p>
@@ -217,7 +221,7 @@
             <form id="customerChitFundForm" action="#" method="POST" autocomplete="off">
 
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         
                         <div class="form-group">
                             <label for="exampleInputEmail1">Fund Type</label>
@@ -227,28 +231,31 @@
                            
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" class="form-control" placeholder="Name" value="" id="name"   name="name" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mobile No</label>
-                            <input type="text" class="form-control" placeholder="Mobile No" id="user_mobile" name="user_mobile" required>
+                            <input type="mobile" class="form-control" placeholder="Mobile No" id="user_mobile" name="user_mobile" required>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Email Id</label>
                             <input type="text" class="form-control" placeholder="Email Id" value="" id="email_id" name="email_id" required pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
                         </div>
                     </div>
-                    <div class="col-md-7">
+                </div>
+
+                <div class="row">
+                    
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label>Address</label>
                             <input type="text" class="form-control" placeholder="Address" value="" id="address" name="address" required>
@@ -274,7 +281,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Total Amount</label>
                             <input type="text" class="form-control" placeholder="Total Amount" value="" readonly id="tot_amount" name="tot_amount" >
@@ -282,6 +289,20 @@
                     </div>
                 </div>
 
+                <div class="row">
+                <div class="col-md-6">
+                     <h4 class="title">Reference-(Optional) </h4>
+                </div>
+                
+              </div>
+              <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+                            <input type="number" class="form-control" placeholder="mobile number" name="reference" value="" id="reference">
+                        </div>
+                    </div>
+                </div>
 
 
                 <button type="button" class="btn btn-primary btn-fill " onclick="saveChitDetail()">Submit</button>

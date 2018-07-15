@@ -62,27 +62,28 @@ class Api_model extends CI_Model {
           }
 
           public function update_automaticID($id,$type,$table){
-                $id = str_pad($id,5,0,STR_PAD_LEFT); 
+
+                //$id = str_pad($id,5,0,STR_PAD_LEFT); 
+                $B_id = date("Y")."MG".$id;
                 $auto_id = "";
                 if($type == "land"){
-                    $auto_id = "BGL".$id;
+                    $auto_id = "BGL".$B_id;
                     $data = array("booking_no "=>$auto_id );
                     $where = array('id'=>$id);
                 }else if($type == "agar"){
-                    $auto_id = "BGW".$id;
+                    $auto_id = "BGW".$B_id;
                     $data = array("booking_no "=>$auto_id );
                     $where = array('id'=>$id);
                 }else if($type == "chit"){
-                    $auto_id = "BGF".$id;
+                    $auto_id = "BGF".$B_id;
                     $data = array("booking_no "=>$auto_id );
                     $where = array('id'=>$id);
                 }else if($type == "employee"){
-                    $auto_id = "BGE".$id;
+                    $auto_id = "BGE".$B_id;
                     $data = array("emp_pin "=>$auto_id );
                     $where = array('emp_id'=>$id);
                 }
                 if($auto_id != ""){
-
                     $this->db->update($table,$data,$where);
                     $afftectedRows = $this->db->affected_rows();
                     return $afftectedRows;  
@@ -720,4 +721,48 @@ class Api_model extends CI_Model {
         $response =$result->result_array();
         return $response[0];
     }
+
+
+    public function getEnquiry($options = array()){
+            $query = $query = "SELECT * FROM enquiry";
+            $where = array();
+            if(isset($options['where']) && !empty($options['where']))
+            {
+             $where[] = $options['where'];
+            }
+
+             if(!empty($where)){
+               $query .=" where ". implode(" and ", $where);
+             }
+            if(isset($options['offset']))
+            {
+              $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
+              $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
+            } 
+            $result = $this->db->query($query);
+            $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+            return $response;    
+        }
+  public function validateMobile($options = array()){
+
+              $query = $query = "SELECT * FROM customers";
+              $where = array();
+              if(isset($options['where']) && !empty($options['where']))
+              {
+               $where[] = $options['where'];
+              }
+
+             if(!empty($where)){
+               $query .=" where ". implode(" and ", $where);
+             }
+            if(isset($options['offset']))
+            {
+              $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
+              $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
+            } 
+            $result = $this->db->query($query);
+            $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
+            return $result->num_rows();
+
+  }
 }

@@ -195,6 +195,8 @@ function fillEditLandDetail(data){
 
   $("#id").val(data.id);
   $("#login_id").val(data.login_id);
+  $(".booking_no").html(data.booking_no);
+  $("#reference").val(data.reference);
 
   
 }
