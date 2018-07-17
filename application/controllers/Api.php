@@ -334,149 +334,137 @@ class Api extends REST_Controller {
 
     public function registerCustomer_post($type){
         if(!empty($this->isAuth)){
-            
+            if($this->userType !=3){
                 $POST = $this->post();
-                $isReference = $this->isReference($POST);
-                if($isReference!=0){
-                    if($this->userType !=3){
-                    if(isset($POST['user_mobile']) && !empty($POST['user_mobile'])){
-                                $options = array();
+                if(isset($POST['user_mobile']) && !empty($POST['user_mobile'])){
+                    $options = array();
+                    $userId =  $POST['user_mobile'];
+                    $options["where"] = "user_name = '".$userId."'" ;
+                    $userDetail = $this->Api_model->getUsers($options);
+                     
+                    if(!$userDetail["count"]){
+                        $data = array(
+                                    "user_name" => $POST['user_mobile'],
+                                    "user_password" => md5($POST['user_mobile']),
+                                    "user_mobile" => $POST['user_mobile'],
+                                    "user_email"=>(isset($POST['email_id']) && !empty($POST['email_id']) ? $POST['email_id']: ""),
+                                    "user_type"=>3,
+                                );      
+                        $table = "user_login";
+                        $id = $this->Api_model->insert_data($table,$data);
+                        if($id){
                                 $userId =  $POST['user_mobile'];
-                                $options["where"] = "user_name = '".$userId."'" ;
+                                $options["where"] = "id = ".$id;
                                 $userDetail = $this->Api_model->getUsers($options);
-                                 
-                                if(!$userDetail["count"]){
-                                    $data = array(
-                                                "user_name" => $POST['user_mobile'],
-                                                "user_password" => md5($POST['user_mobile']),
-                                                "user_mobile" => $POST['user_mobile'],
-                                                "user_email"=>(isset($POST['email_id']) && !empty($POST['email_id']) ? $POST['email_id']: ""),
-                                                "user_type"=>3,
-                                            );      
-                                    $table = "user_login";
-                                    $id = $this->Api_model->insert_data($table,$data);
-                                    if($id){
-                                            $userId =  $POST['user_mobile'];
-                                            $options["where"] = "id = ".$id;
-                                            $userDetail = $this->Api_model->getUsers($options);
-                                            
-                                    }else{
-                                        $response = array("STATUS"=>"NOK","RESPONSE"=>"Registration Failed");
-                                        $this->set_response($response, REST_Controller::HTTP_OK);
-                                    }
-                                }
-                                $options = array();
-                                $userId =  $POST['user_mobile'];
-                                $options["where"] = "mobile = '".$userId."'" ;
-                                $customerDetail = $this->Api_model->getCustomers($options);
-                                if($type == "land"){
-                                    $t_id= 1;
-                                }else if($type == "chit"){
-                                    $t_id= 2;
-                                }else{
-                                    $t_id= 3;
-                                }
-                                if(!$customerDetail["count"]){
-                                    $data = array(
-                                                "login_id" => $userDetail["data"][0]["id"],
-                                                "name" => $POST['name'],
-                                                "mobile" => $POST['user_mobile'],
-                                                "email_id"=>(isset($POST['email_id']) && !empty($POST['email_id']) ? $POST['email_id']: ""),
-                                                "address"=>$POST['address'],
-                                                "added_by"=>$this->isAuth->id,
-                                                "type"=>$t_id,
-                                            );      
-                                    $table = "customers";
-                                    $id = $this->Api_model->insert_data($table,$data);
-                                }
-                                $options = array();
-                                $userId =  $POST['user_mobile'];
-                                $options["where"] = "mobile = '".$userId."'" ;
-                                $customerDetail = $this->Api_model->getCustomers($options);
-
-                                $options = array();
-                               // $booking_no =  $POST['booking_no'];
-                                //$options["where"] = "booking_no = '".$booking_no."'" ;
-                                if($type=="land"){
-                                            $data = array(
-                                                "site_id" => $POST['site_id'],
-                                                //"booking_no" => $POST['booking_no'],
-                                                "login_id"=> $customerDetail["data"][0]["login_id"],
-                                                "inst_month"=> $POST['inst_month'],
-                                                "inst_amount"=> $POST['inst_amount'],
-                                                "tot_amount"=> $POST['tot_amount'],                                   
-                                                "added_by"=>$this->isAuth->id,
-                                                "booked_date"=>date("Y-m-d"),
-                                                "reference"=>$POST["reference"]
-                                            );      
-                                            $table = "land_booking";
-                                            $id = $this->Api_model->insert_data($table,$data);   
-                                }
-
-                                if($type=="chit"){
-                                            $data = array(
-                                                "chit_id" => $POST['chit_id'],
-                                               // "booking_no" => $POST['booking_no'],
-                                                "login_id"=> $customerDetail["data"][0]["login_id"],
-                                                "inst_month"=> $POST['inst_month'],
-                                                "inst_amount"=> $POST['inst_amount'],
-                                                "tot_amount"=> $POST['tot_amount'],                                    
-                                                "added_by"=>$this->isAuth->id,
-                                                "booked_date"=>date("Y-m-d"),
-                                                "reference"=>$POST["reference"]
-                                            );      
-                                            $table = "chit_booking";
-                                            $id = $this->Api_model->insert_data($table,$data);   
-                                }
-
-                                if($type=="agar"){
-                                            $data = array(
-                                                "agar_id" => $POST['agar_id'],
-                                               // "booking_no" => $POST['booking_no'],
-                                                "login_id"=> $customerDetail["data"][0]["login_id"],
-                                                "no_tree"=> $POST['no_tree'],
-                                                "tree_amount"=> $POST['tree_amount'],                                  
-                                                "tot_amount"=> $POST['tot_amount'],
-                                                "added_by"=>$this->isAuth->id,
-                                                "booked_date"=>date("Y-m-d"),
-                                                "reference"=>$POST["reference"]
-                                            );      
-                                            $table = "agar_booking";
-                                            $id = $this->Api_model->insert_data($table,$data);   
-                                }
-                                if($id){
-                                    $bookin_no = $this->Api_model->update_automaticID($id,$type,$table);
-                                }
-                                if($id){
-                                        $options = array();
-                                        $userId =  $POST['user_mobile'];
-                                        $options["where"] = "user_name = '".$userId."'" ;
-                                        $userDetail = $this->Api_model->getUsers($options);
-
-                                        sleep(1);
-
-                                        $response = array("STATUS"=>"OK","RESPONSE"=>$userDetail);
-                                        //print_r($response);
-                                        $this->set_response($response, REST_Controller::HTTP_OK);
-                                }else{
-                                        $response = array("STATUS"=>"NOK","RESPONSE"=>"No Mobile number found");
-                                        $this->set_response($response, REST_Controller::HTTP_OK);
-                                }
                                 
-                            }else{
-                                $response = array("STATUS"=>"NOK","RESPONSE"=>"No Mobile number found");
-                                $this->set_response($response, REST_Controller::HTTP_OK);
-                            }
-                        }else {
-                            $response = array("STATUS"=>"NOK","RESPONSE"=>"Not Authorised get this information");
+                        }else{
+                            $response = array("STATUS"=>"NOK","RESPONSE"=>"Registration Failed");
                             $this->set_response($response, REST_Controller::HTTP_OK);
                         }
+                    }
+                    $options = array();
+                    $userId =  $POST['user_mobile'];
+                    $options["where"] = "mobile = '".$userId."'" ;
+                    $customerDetail = $this->Api_model->getCustomers($options);
+                    if($type == "land"){
+                        $t_id= 1;
+                    }else if($type == "chit"){
+                        $t_id= 2;
+                    }else{
+                        $t_id= 3;
+                    }
+                    if(!$customerDetail["count"]){
+                        $data = array(
+                                    "login_id" => $userDetail["data"][0]["id"],
+                                    "name" => $POST['name'],
+                                    "mobile" => $POST['user_mobile'],
+                                    "email_id"=>(isset($POST['email_id']) && !empty($POST['email_id']) ? $POST['email_id']: ""),
+                                    "address"=>$POST['address'],
+                                    "added_by"=>$this->isAuth->id,
+                                    "type"=>$t_id,
+                                );      
+                        $table = "customers";
+                        $id = $this->Api_model->insert_data($table,$data);
+                    }
+                    $options = array();
+                    $userId =  $POST['user_mobile'];
+                    $options["where"] = "mobile = '".$userId."'" ;
+                    $customerDetail = $this->Api_model->getCustomers($options);
+
+                    $options = array();
+                   // $booking_no =  $POST['booking_no'];
+                    //$options["where"] = "booking_no = '".$booking_no."'" ;
+                    if($type=="land"){
+                                $data = array(
+                                    "site_id" => $POST['site_id'],
+                                    //"booking_no" => $POST['booking_no'],
+                                    "login_id"=> $customerDetail["data"][0]["login_id"],
+                                    "inst_month"=> $POST['inst_month'],
+                                    "inst_amount"=> $POST['inst_amount'],
+                                    "tot_amount"=> $POST['tot_amount'],                                   
+                                    "added_by"=>$this->isAuth->id,
+                                    "booked_date"=>date("Y-m-d")
+                                );      
+                                $table = "land_booking";
+                                $id = $this->Api_model->insert_data($table,$data);   
+                    }
+
+                    if($type=="chit"){
+                                $data = array(
+                                    "chit_id" => $POST['chit_id'],
+                                   // "booking_no" => $POST['booking_no'],
+                                    "login_id"=> $customerDetail["data"][0]["login_id"],
+                                    "inst_month"=> $POST['inst_month'],
+                                    "inst_amount"=> $POST['inst_amount'],
+                                    "tot_amount"=> $POST['tot_amount'],                                    
+                                    "added_by"=>$this->isAuth->id,
+                                    "booked_date"=>date("Y-m-d")
+                                );      
+                                $table = "chit_booking";
+                                $id = $this->Api_model->insert_data($table,$data);   
+                    }
+
+                    if($type=="agar"){
+                                $data = array(
+                                    "agar_id" => $POST['agar_id'],
+                                   // "booking_no" => $POST['booking_no'],
+                                    "login_id"=> $customerDetail["data"][0]["login_id"],
+                                    "no_tree"=> $POST['no_tree'],
+                                    "tree_amount"=> $POST['tree_amount'],                                  
+                                    "tot_amount"=> $POST['tot_amount'],
+                                    "added_by"=>$this->isAuth->id,
+                                    "booked_date"=>date("Y-m-d")
+                                );      
+                                $table = "agar_booking";
+                                $id = $this->Api_model->insert_data($table,$data);   
+                    }
+                    if($id){
+                        $bookin_no = $this->Api_model->update_automaticID($id,$type,$table);
+                    }
+                    if($id && $bookin_no){
+                            $options = array();
+                            $userId =  $POST['user_mobile'];
+                            $options["where"] = "user_name = '".$userId."'" ;
+                            $userDetail = $this->Api_model->getUsers($options);
+
+                            sleep(1);
+
+                            $response = array("STATUS"=>"OK","RESPONSE"=>$userDetail);
+                            //print_r($response);
+                            $this->set_response($response, REST_Controller::HTTP_OK);
+                    }else{
+                            $response = array("STATUS"=>"NOK","RESPONSE"=>"No Mobile number found");
+                            $this->set_response($response, REST_Controller::HTTP_OK);
+                    }
+                    
                 }else{
-                    $response = array("STATUS"=>"NOK","RESPONSE"=>"Invalid Reference Mobile");
+                    $response = array("STATUS"=>"NOK","RESPONSE"=>"No Mobile number found");
                     $this->set_response($response, REST_Controller::HTTP_OK);
                 }
-                
-            
+            }else {
+                $response = array("STATUS"=>"NOK","RESPONSE"=>"Not Authorised get this information");
+                $this->set_response($response, REST_Controller::HTTP_OK);
+            }
     
        }
     }
@@ -498,42 +486,36 @@ class Api extends REST_Controller {
      public function editCustomerLand_post($id){
         if(!empty($this->isAuth)){
         $POST = $this->post();
-        $isReference = $this->isReference($POST);
-            if($isReference!=0){
-                $data = array(
-                    "name" =>  $POST['name'],
-                    "address" =>  $POST['address']
-                );
 
-                $login_id = $POST['login_id'];
-
-                $table = "customers";   
-                $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
-
-                unset($POST['login_id']);
-                unset($POST['name']);
-                unset($POST['address']);
-               
-              //  print_r($POST);
-
-                $table = "land_booking";    
-                $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
-               // print($id);
-               sleep(1);
-                if($id || $cus_id){
-                    $this->customerLands_get($id);
-                }elseif(!$id && !$cus_id){
-                    $this->customerLands_get($id);    
-                }else{
-                    $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
-                    $this->set_response($response, REST_Controller::HTTP_OK);
-                }
-            }else{
-                $response = array("STATUS"=>"NOK","RESPONSE"=>"Invalid Reference Mobile");
-                $this->set_response($response, REST_Controller::HTTP_OK);
-            }
               
-        
+        $data = array(
+            "name" =>  $POST['name'],
+            "address" =>  $POST['address']
+        );
+
+        $login_id = $POST['login_id'];
+
+        $table = "customers";   
+        $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
+
+        unset($POST['login_id']);
+        unset($POST['name']);
+        unset($POST['address']);
+       
+      //  print_r($POST);
+
+        $table = "land_booking";	
+        $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
+       // print($id);
+       sleep(1);
+        if($id || $cus_id){
+            $this->customerLands_get($id);
+        }elseif(!$id && !$cus_id){
+            $this->customerLands_get($id);    
+        }else{
+            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }
         
        } 
     }
@@ -555,49 +537,41 @@ class Api extends REST_Controller {
      public function editCustomerChit_post($id){
         if(!empty($this->isAuth)){
         $POST = $this->post();
-        $isReference = $this->isReference($POST);
-            if($isReference!=0){
-                $data = array(
-                    "name" =>  $POST['name'],
-                    "address" =>  $POST['address']
-                );
-
-                $login_id = $POST['login_id'];
-
-                $table = "customers";   
-                $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
-
-                unset($POST['login_id']);
-                unset($POST['name']);
-                unset($POST['address']);
-                unset($POST['user_mobile']);
-                unset($POST['email_id']);
-                
-               
-               // print_r($POST);
-
-                $table = "chit_booking";    
-                $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
-               // print($id);
-
-               sleep(1);
-                if($id || $cus_id){
-                    $this->customerChits_get($id);
-                }elseif(!$id && !$cus_id){
-                    $this->customerChits_get($id);    
-                }else{
-                    $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
-                    $this->set_response($response, REST_Controller::HTTP_OK);
-                }
-            }else{
-                $response = array("STATUS"=>"NOK","RESPONSE"=>"Invalid Reference Mobile");
-                $this->set_response($response, REST_Controller::HTTP_OK);
-            }
               
+        $data = array(
+            "name" =>  $POST['name'],
+            "address" =>  $POST['address']
+        );
+
+        $login_id = $POST['login_id'];
+
+        $table = "customers";   
+        $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
+
+        unset($POST['login_id']);
+        unset($POST['name']);
+        unset($POST['address']);
+        unset($POST['user_mobile']);
+        unset($POST['email_id']);
         
+       
+       // print_r($POST);
+
+        $table = "chit_booking";	
+        $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
+       // print($id);
+
+       sleep(1);
+        if($id || $cus_id){
+            $this->customerChits_get($id);
+        }elseif(!$id && !$cus_id){
+            $this->customerChits_get($id);    
+        }else{
+            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }
         
        } 
-
     }
 
     public function customerAgars_get($id=''){
@@ -616,45 +590,39 @@ class Api extends REST_Controller {
 
      public function editCustomerAgar_post($id){
         if(!empty($this->isAuth)){
-            $POST = $this->post();
-            $isReference = $this->isReference($POST);
-            if($isReference!=0){
-               $data = array(
-                    "name" =>  $POST['name'],
-                    "address" =>  $POST['address']
-                );
+        $POST = $this->post();
+              
+        $data = array(
+            "name" =>  $POST['name'],
+            "address" =>  $POST['address']
+        );
 
-                $login_id = $POST['login_id'];
+        $login_id = $POST['login_id'];
 
-                $table = "customers";   
-                $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
+        $table = "customers";   
+        $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
 
-                unset($POST['login_id']);
-                unset($POST['name']);
-                unset($POST['address']);
-                unset($POST['user_mobile']);
-                unset($POST['email_id']);
-                
-               
-               // print_r($POST);
-
-                $table = "agar_booking";    
-                $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
-               // print($id);
-               sleep(1);
-                if($id || $cus_id){
-                    $this->customerAgars_get($id);
-                }elseif(!$id && !$cus_id){
-                    $this->customerAgars_get($id);    
-                }else{
-                    $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
-                    $this->set_response($response, REST_Controller::HTTP_OK);
-                }
-            }else{
-                $response = array("STATUS"=>"NOK","RESPONSE"=>"Invalid Reference Mobile");
-                $this->set_response($response, REST_Controller::HTTP_OK);
-            }    
+        unset($POST['login_id']);
+        unset($POST['name']);
+        unset($POST['address']);
+        unset($POST['user_mobile']);
+        unset($POST['email_id']);
         
+       
+       // print_r($POST);
+
+        $table = "agar_booking";	
+        $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
+       // print($id);
+       sleep(1);
+        if($id || $cus_id){
+            $this->customerAgars_get($id);
+        }elseif(!$id && !$cus_id){
+            $this->customerAgars_get($id);    
+        }else{
+            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }
         
        } 
     }
@@ -1057,11 +1025,16 @@ class Api extends REST_Controller {
                 $table = "";
             }
 
-           if(isset($POST["fromDateCBR"]) && $POST["fromDateCBR"] != ""){
-               
-                 $options["where"] = "cb.booked_date >= ".$POST["fromDateCBR"];
+            if(!empty($POST["fromDateCBR"])  && empty($POST["toDateCBR"])){
+                $options["where"] = "cb.booked_date >= "."'".$POST['fromDateCBR']."'";
+                $table = "";
+            }else if (!empty($POST["toDateCBR"]) && empty($POST["fromDateCBR"])) {
+                $options["where"] = "cb.booked_date <= "."'".$POST['toDateCBR']."'";
                  $table = "";
-           }
+            }else if(!empty($POST["toDateCBR"]) && !empty($POST["fromDateCBR"])){
+               $options["where"] = "cb.booked_date >= "."'".$POST['fromDateCBR']."'"." and "."cb.booked_date <= "."'".$POST['toDateCBR']."'";
+                 $table = "";
+            }
            if(isset($POST["typeCBR"]) && $POST["typeCBR"] != ""){
             if ($POST["typeCBR"] == 1) {
                 $table = "land_booking";
@@ -1071,10 +1044,6 @@ class Api extends REST_Controller {
                 $table = "chit_booking";
             }
       }
-           if(isset($POST["toDateCBR"]) && $POST["toDateCBR"] != ""){
-                $options["where"] = "cb.booked_date <= ".$POST["toDateCBR"];
-                $table = "";
-            }
                 $return = $this->Api_model->getcustomerReport($options,$table);
             
             
@@ -1086,20 +1055,27 @@ class Api extends REST_Controller {
      public function emploeeReport_post($type,$id=''){
         if(!empty($this->isAuth)){
             $POST = $this->post();
-         //  print_r($POST); exit;
+         //  print_r($POST); 
             $options = array();
             if($type == "all"){
                 $table = "";
+                $from = "";
+                $to = "";
             }else if($type == "paid"){
                 $options["where"] = "cb.balance_amount = 0";
                 $table = "";
+                
             }
-
-           if(isset($POST["fromDateCBR"]) && $POST["fromDateCBR"] != ""){
-               
-                 $options["where"] = "cb.booked_date >= ".$POST["fromDateCBR"];
+           if(!empty($POST["fromDateCBR"])  && empty($POST["toDateCBR"])){
+                 $options["where"] = "cb.booked_date >= "."'".$POST['fromDateCBR']."'";
                  $table = "";
-           }
+             }else if (!empty($POST["toDateCBR"]) && empty($POST["fromDateCBR"])) {
+                 $options["where"] = "cb.booked_date <= "."'".$POST['toDateCBR']."'";
+                  $table = "";
+             }else if(!empty($POST["toDateCBR"]) && !empty($POST["fromDateCBR"])){
+                $options["where"] = "cb.booked_date >= "."'".$POST['fromDateCBR']."'"." and "."cb.booked_date <= "."'".$POST['toDateCBR']."'";
+                  $table = "";
+             }
            if(isset($POST["typeCBR"]) && $POST["typeCBR"] != ""){
             if ($POST["typeCBR"] == 1) {
                 $table = "land_booking";
@@ -1109,11 +1085,8 @@ class Api extends REST_Controller {
                 $table = "chit_booking";
             }
       }
-           if(isset($POST["toDateCBR"]) && $POST["toDateCBR"] != ""){
-                $options["where"] = "cb.booked_date <= ".$POST["toDateCBR"];
-                $table = "";
-            }
-         //   print_r($options); print_r($table); exit;
+          
+        //   print_r($options); exit;
             $return = $this->Api_model->getemployerReport($options,$table);
             
             
@@ -1122,36 +1095,5 @@ class Api extends REST_Controller {
         }          
      }
 
-    
-   
-    public function deleteenquiry_post($id){
-        if(!empty($this->isAuth)){
-        
-        $table = "enquiry"; 
-        $id = $this->Api_model->delete_data($table, array('id'=>$id));
-        if($id){
-            $response = array("STATUS"=>"OK","RESPONSE"=>"Data Deleted");
-            $this->set_response($response, REST_Controller::HTTP_OK);
-        }else{
-            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to Deleta");
-            $this->set_response($response, REST_Controller::HTTP_OK);
-        }
-        
-       } 
-    }
-
-    public function isReference($post){
-        $return = true;
-        if(!empty($this->isAuth)){
-            $options = array();
-            if(isset($post["reference"]) && !empty($post["reference"])){
-                $options["where"] = "mobile = '".$post["reference"]."'";
-                $return = $this->Api_model->validateMobile($options);
-                return $return;
-            }
-           
-           
-       }
-       return $return;
-    }
+     
 }

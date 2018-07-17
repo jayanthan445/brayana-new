@@ -28,16 +28,28 @@ function openEmployeePaymentReportsPage() {
 function openEmployeeunPaidReportsPage() {
     window.location = '../employeeReports/unPaidView.html';
 }
-// $(document).ready(function(){
-//     loadDataTable();
-//     init();
+$(document).ready(function () {
 
-// });
+    // $('#myTable').DataTable( {
+    //     dom: 'Bfrtip',
+    //     buttons: [
+    //         'copy', 'csv', 'excel', 'pdf', 'print'
+    //     ]
+    // } );
 
-$(document).ready(function(){
+ 
+    //loadDataTable();
     init();
 
-    loadDataTable();
+    // $('#empReport').DataTable({
+    //     "processing": true,
+    //     dom: 'Bfrtip',
+    //     buttons: [
+    //         'copy', 'csv', 'excel', 'pdf', 'print'
+    //     ]
+    // });
+
+
 
 });
 
@@ -55,7 +67,7 @@ function init() {
         getEmployerReport();
     } else if (currentPath == "employeeReports/paymentView.html") {
         getEmployerReportPaid();
-    } 
+    }
     else {
         var params = getParams(window.location.href);
         if (typeof params.id != "undefined" && params.id != "" && params.id != null) {
@@ -77,31 +89,40 @@ function loadDataTable() {
 
 
 
-    var table = $('#myTable').DataTable({
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "bDestroy": true
-    });
+    // var table = $('#myTable').DataTable({
+    //     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    //     "bDestroy": true
+    // });
 
 
 
     // #myInput is a <input type="text"> element
-    $('#myInput').on('keyup', function () {
-        table.search(this.value).draw();
-    });
+    // $('#myInput').on('keyup', function () {
+    //     table.search(this.value).draw();
+    // });
 }
 
 function buildTable(list, count) {
     var auth = getLocal("auth");
     var userType = getLocal("u");
 
-    $("#myTable tbody tr").remove();
+    for (var i = 0; i < count; i++) {
 
-        for (var i = 0; i < count; i++) {
+        var markup = "<tr><td>" + list[i].booking_no + "</td><td>" + list[i].name + "</td><td>" + list[i].mobile + "</td><td>" + list[i].type + "</td><td>" + list[i].inst_month + "</td><td>" + list[i].inst_amount + "</td><td>" + list[i].tot_amount + "</td></tr>";
+        $("table tbody").append(markup);
+
        
-            var markup = "<tr><td>" + list[i].booking_no + "</td><td>" + list[i].name + "</td><td>" + list[i].mobile + "</td><td>" + list[i].type + "</td><td>" + list[i].inst_month + "</td><td>" + list[i].inst_amount + "</td><td>" + list[i].tot_amount + "</td></tr>";
-            $("#myTable tbody").append(markup);
-        }
-   
+    }
+
+    $('#cusReport').DataTable({
+        "processing": true,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+    
+
 
 }
 
@@ -109,15 +130,24 @@ function buildTableEmp(list, count) {
     var auth = getLocal("auth");
     var userType = getLocal("u");
 
-    $("#myTable tbody tr").remove();
 
-    
-        for (var i = 0; i < count; i++) {
-       
-            var markup = "<tr><td>" + list[i].emp_pin + "</td><td>" + list[i].emp_name + "</td><td>" + list[i].booking_no + "</td><td>" + list[i].cust_name + "</td><td>" + list[i].emp_mobile + "</td><td>" + list[i].type + "</td><td>" + list[i].tot_amount + "</td></tr>";
-            $("#myTable tbody").append(markup);
-        }
-    
+    for (var i = 0; i < count; i++) {
+
+        var markup = "<tr><td>" + list[i].emp_pin + "</td><td>" + list[i].emp_name + "</td><td>" + list[i].booking_no + "</td><td>" + list[i].cust_name + "</td><td>" + list[i].emp_mobile + "</td><td>" + list[i].type + "</td><td>" + list[i].tot_amount + "</td></tr>";
+        
+        $("table tbody").append(markup);
+        //  $("table tbody").append(markup);
+
+    }
+
+    $('#empReport').DataTable({
+        "processing": true,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+
 
 }
 
@@ -158,8 +188,8 @@ function getEmployerReport() {
 
     var auth = getLocal("auth");
     var typeCBR = $("#typeEBR").val();
-    var fromDateCBR = $("#fromDateCBR").val();
-    var toDateCBR = $("#toDateCBR").val();
+    var fromDateCBR = $("#fromDateEBR").val();
+    var toDateCBR = $("#toDateEBR").val();
 
 
     var data = {

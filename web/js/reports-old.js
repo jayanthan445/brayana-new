@@ -28,8 +28,11 @@ function openEmployeePaymentReportsPage() {
 function openEmployeeunPaidReportsPage() {
     window.location = '../employeeReports/unPaidView.html';
 }
+// $(document).ready(function(){
+//     loadDataTable();
+//     init();
 
-
+// });
 
 $(document).ready(function(){
     init();
@@ -48,7 +51,12 @@ function init() {
         getCustomerReport();
     } else if (currentPath == "customerReports/paymentView.html") {
         getCustomerReportPaid();
-    } else {
+    } else if (currentPath == "employeeReports/reportsView.html") {
+        getEmployerReport();
+    } else if (currentPath == "employeeReports/paymentView.html") {
+        getEmployerReportPaid();
+    } 
+    else {
         var params = getParams(window.location.href);
         if (typeof params.id != "undefined" && params.id != "" && params.id != null) {
             getLands();
@@ -67,10 +75,14 @@ $('input[id^="customerBbookingConsolidate"]').click(function () {
 
 function loadDataTable() {
 
+
+
     var table = $('#myTable').DataTable({
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "bDestroy": true
     });
+
+
 
     // #myInput is a <input type="text"> element
     $('#myInput').on('keyup', function () {
@@ -82,15 +94,31 @@ function buildTable(list, count) {
     var auth = getLocal("auth");
     var userType = getLocal("u");
 
-    $("#myTable tbody").html('<tr><td> </td><td> </td><td> </td><td> </td><td></td><td></td><td></td></tr>');
+    $("#myTable tbody tr").remove();
 
-    var markup=[];
-    for (var i = 0; i < count; i++) {
-        var tbody = "<tr><td>" + list[i].booking_no + "</td><td>" + list[i].name + "</td><td>" + list[i].mobile + "</td><td>" + list[i].type + "</td><td>" + list[i].inst_month + "</td><td>" + list[i].inst_amount + "</td><td>" + list[i].tot_amount + "</td></tr>";
-        markup.push(tbody);
-        
-    }
-    $("#myTable tbody").html(markup);
+        for (var i = 0; i < count; i++) {
+       
+            var markup = "<tr><td>" + list[i].booking_no + "</td><td>" + list[i].name + "</td><td>" + list[i].mobile + "</td><td>" + list[i].type + "</td><td>" + list[i].inst_month + "</td><td>" + list[i].inst_amount + "</td><td>" + list[i].tot_amount + "</td></tr>";
+            $("#myTable tbody").append(markup);
+        }
+   
+
+}
+
+function buildTableEmp(list, count) {
+    var auth = getLocal("auth");
+    var userType = getLocal("u");
+
+    $("#myTable tbody tr").remove();
+
+    
+        for (var i = 0; i < count; i++) {
+       
+            var markup = "<tr><td>" + list[i].emp_pin + "</td><td>" + list[i].emp_name + "</td><td>" + list[i].booking_no + "</td><td>" + list[i].cust_name + "</td><td>" + list[i].emp_mobile + "</td><td>" + list[i].type + "</td><td>" + list[i].tot_amount + "</td></tr>";
+            $("#myTable tbody").append(markup);
+        }
+    
+
 }
 
 function getCustomerReport() {
@@ -120,7 +148,71 @@ function getCustomerReport() {
                 if (data.count > 0) {
                     var list = data.data;
                     buildTable(list, data.count);
-                   // loadDataTable();
+                }
+            }
+        }
+    });
+}
+
+function getEmployerReport() {
+
+    var auth = getLocal("auth");
+    var typeCBR = $("#typeEBR").val();
+    var fromDateCBR = $("#fromDateCBR").val();
+    var toDateCBR = $("#toDateCBR").val();
+
+
+    var data = {
+        "toDateCBR": toDateCBR,
+        "fromDateCBR": fromDateCBR,
+        "typeCBR": typeCBR
+    }
+    $.ajax({
+        type: "POST",
+        url: api_url + "/api/emploeeReport/all",
+        //headers: { "auth":auth},
+        dataType: "JSON",
+        cache: false,
+        data: data,
+        success: function (msg, textStatus, xhr) {
+            var status = msg.STATUS;
+            var data = msg.RESPONSE;
+            if (status == "OK") {
+                if (data.count > 0) {
+                    var list = data.data;
+                    buildTableEmp(list, data.count);
+                }
+            }
+        }
+    });
+}
+function getEmployerReportPaid() {
+
+    var auth = getLocal("auth");
+    var typeCBR = $("#typeEBR").val();
+    var fromDateCBR = $("#fromDateCBR").val();
+    var toDateCBR = $("#toDateCBR").val();
+
+
+    var data = {
+        "toDateCBR": toDateCBR,
+        "fromDateCBR": fromDateCBR,
+        "typeCBR": typeCBR
+    }
+    $.ajax({
+        type: "POST",
+        url: api_url + "/api/emploeeReport/paid",
+        //headers: { "auth":auth},
+        dataType: "JSON",
+        cache: false,
+        data: data,
+        success: function (msg, textStatus, xhr) {
+            var status = msg.STATUS;
+            var data = msg.RESPONSE;
+            if (status == "OK") {
+                if (data.count > 0) {
+                    var list = data.data;
+                    buildTableEmp(list, data.count);
                 }
             }
         }
@@ -142,7 +234,7 @@ function getCustomerReportPaid() {
                 if (data.count > 0) {
                     var list = data.data;
                     buildTable(list, data.count);
-              //      loadDataTable();
+                    //loadDataTable();
                 }
             }
         }
@@ -319,6 +411,9 @@ function saveLandDetail() {
     }
 
 }
+
+
+
 
 
 

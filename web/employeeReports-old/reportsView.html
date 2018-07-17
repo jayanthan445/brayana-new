@@ -61,34 +61,30 @@
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
-                    Brayana Group
+                   <img src="../img/logo.png" class="logoStyle"> Brayana Group
                 </a>
             </div>
 
              <ul class="nav">
                      
                     <li class="master">
-                            <a href="#Category" class="btn btn-info sideNavADefaultColor" data-toggle="collapse">
-                                <i class="pe-7s-plus"></i>
-                                <p class="textAlignLeft">BG Category</p>
-                            </a>
-                            <div id="Category" class="collapse">
-                                <a href="../land/landView.html" class="sideBarCollapseFirst ">
-                                    <i class="pe-7s-user"></i>
-                                    <p>Lands</p>
-                                </a>
-
-                                <a href="../chitFund/chitFundView.html" class="sideBarCollapseLast ">
-                                    <i class="pe-7s-note2"></i>
-                                    <p>Chit Funds</p>
-                                </a>
-
-                                 <a href="../agarWood/agarWoodView.html" class="sideBarCollapseLast ">
-                                    <i class="pe-7s-news-paper"></i>
-                                    <p>Agar Wood</p>
-                                </a>
-                            </div>
-                        </li>
+                        <a href="../land/landView.html">
+                            <i class="pe-7s-user"></i>
+                            <p>Lands</p>
+                        </a>
+                    </li>
+                    <li class="master">
+                        <a href="../chitFund/chitFundView.html">
+                            <i class="pe-7s-note2"></i>
+                            <p>Chit Funds</p>
+                        </a>
+                    </li>
+                    <li class="master">
+                        <a href="../agarWood/agarWoodView.html">
+                            <i class="pe-7s-news-paper"></i>
+                            <p>Agar Wood</p>
+                        </a>
+                    </li>
                     <li class="master">
                         <a href="../employee/employeeView.html">
                             <i class="pe-7s-science"></i>
@@ -144,7 +140,7 @@
                             <p>Commission</p>
                         </a>
                     </li>
-                     <li>
+                     <li class="employee">
                         <a href="../enquiry/enquiryView.html">
                             <i class="pe-7s-users"></i>
                             <p>Enquiry</p>
@@ -168,6 +164,11 @@
                 <div class="collapse navbar-collapse">
                    
                     <ul class="nav navbar-nav navbar-right">
+                        <li class="userName">
+                            <a href="#">
+                                <p></p>
+                            </a>
+                        </li>
 
                     <li>
                             <a href="javascript:;" onclick="logout();">
@@ -190,7 +191,7 @@
                             <div class="content table-responsive table-full-width">
                                   <div class="row">
                                     <div class="col-md-6">
-                                         <h4 class="title">Employee Reports <img src="../img/reports.png"> </h4>
+                                         <h4 class="title">Employee Reports<img src="../img/reports.png">  </h4>
                                     </div>
                                     <div class="col-md-6">
                                         <span class="pull-right">
@@ -204,7 +205,7 @@
                                   </div>
                                 </div>
                                 <div class="content">
-                                        <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();">
+                                        <!-- <form name="landAddForm" id="landAddForm" onsubmit="return saveLandDetail();"> -->
                                         <div>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -250,11 +251,11 @@
                                            
                                              
         
-                                            <button type="submit" class="btn btn-primary btn-fill">Search</button> 
-                                             <a href="../land/landView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
+                                            <button type="submit" class="btn btn-primary btn-fill" onclick="getEmployerReport()">Search</button> 
+                                             <a href="../employeeReports/reportsView.html" class="btn btn-info btn-fill" role="button">Cancel</a>
                                             <div class="clearfix"></div>
                                         </div>
-                                    </form>
+                                    <!-- </form> -->
                                     </div>
 
                                     <div class="content table-responsive table-full-width">
@@ -270,15 +271,7 @@
                                         </thead>
                                         
                                         <tbody>
-                                               <tr>
-                                                <td>BGE2018mg01</td>
-                                                   <td>Jai</td>
-                                                  <td>BGL2018mg01</td>
-                                                   <td>Pandiyan</td>
-                                                   <td>9566103603</td>
-                                                   <td>Land</td>
-                                                   <td>24000</td>
-                                              </tr>                                           
+                                                                                     
                                         </tbody>
                                     </table>
 

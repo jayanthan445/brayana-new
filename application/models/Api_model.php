@@ -62,28 +62,27 @@ class Api_model extends CI_Model {
           }
 
           public function update_automaticID($id,$type,$table){
-
-                //$id = str_pad($id,5,0,STR_PAD_LEFT); 
-                $B_id = date("Y")."MG".$id;
+                $id = str_pad($id,5,0,STR_PAD_LEFT); 
                 $auto_id = "";
                 if($type == "land"){
-                    $auto_id = "BGL".$B_id;
+                    $auto_id = "BGL".$id;
                     $data = array("booking_no "=>$auto_id );
                     $where = array('id'=>$id);
                 }else if($type == "agar"){
-                    $auto_id = "BGW".$B_id;
+                    $auto_id = "BGW".$id;
                     $data = array("booking_no "=>$auto_id );
                     $where = array('id'=>$id);
                 }else if($type == "chit"){
-                    $auto_id = "BGF".$B_id;
+                    $auto_id = "BGF".$id;
                     $data = array("booking_no "=>$auto_id );
                     $where = array('id'=>$id);
                 }else if($type == "employee"){
-                    $auto_id = "BGE".$B_id;
+                    $auto_id = "BGE".$id;
                     $data = array("emp_pin "=>$auto_id );
                     $where = array('emp_id'=>$id);
                 }
                 if($auto_id != ""){
+
                     $this->db->update($table,$data,$where);
                     $afftectedRows = $this->db->affected_rows();
                     return $afftectedRows;  
@@ -451,7 +450,7 @@ class Api_model extends CI_Model {
       if(empty($table)){
       $tab = array("chit_booking","agar_booking","land_booking");
       $i = 1;
-      for ($i=0; $i <=2 ; $i++) {  
+      for ($i=0; $i <=2 ; $i++) { 
        
         $query = "SELECT cm.emp_pin,cm.name as emp_name,cb.booking_no,c.name as cust_name,cm.mobile as emp_mobile,c.type,cb.tot_amount FROM"." ".$tab[$i]." as cb JOIN employees as cm ON (cb.added_by = cm.login_id) JOIN customers as c ON (cb.login_id = c.login_id)";
          $where = array();
@@ -462,9 +461,16 @@ class Api_model extends CI_Model {
        if(!empty($where)){
          $query .=" where ". implode(" and ", $where);
        }
-
-      // print_r($query);
-
+      //  if(!empty($from)){
+      //   $query .=" where ". implode(" and ", $from);
+      // }
+      // if(!empty($to)){
+      //   // if (condition) {
+      //   //   # code...
+      //   // }
+      //   $query .=" where ". implode(" and ", $to);
+      // }
+     //print_r($query); 
         $result = $this->db->query($query);
         $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
 
@@ -477,16 +483,15 @@ class Api_model extends CI_Model {
     }else{
       $query = "SELECT cm.emp_pin,cm.name as emp_name,cb.booking_no,c.name as cust_name,cm.mobile as emp_mobile,c.type,cb.tot_amount FROM"." ".$table." as cb JOIN employees as cm ON (cb.added_by = cm.login_id) JOIN customers as c ON (cb.login_id = c.login_id)";
 
-      //  print_r($query);
+    // print_r($query); exit; 
       $result = $this->db->query($query);
-      //print_r($result);
       $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
       return $response; 
 
     }
     
    $response = array('data'=>$detail,'count'=>count($detail));
-   return $response;    
+        return $response;    
 }
 
     public function getChitBookingReport($options = array()){
@@ -721,48 +726,4 @@ class Api_model extends CI_Model {
         $response =$result->result_array();
         return $response[0];
     }
-
-
-    public function getEnquiry($options = array()){
-            $query = $query = "SELECT * FROM enquiry";
-            $where = array();
-            if(isset($options['where']) && !empty($options['where']))
-            {
-             $where[] = $options['where'];
-            }
-
-             if(!empty($where)){
-               $query .=" where ". implode(" and ", $where);
-             }
-            if(isset($options['offset']))
-            {
-              $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
-              $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
-            } 
-            $result = $this->db->query($query);
-            $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
-            return $response;    
-        }
-  public function validateMobile($options = array()){
-
-              $query = $query = "SELECT * FROM customers";
-              $where = array();
-              if(isset($options['where']) && !empty($options['where']))
-              {
-               $where[] = $options['where'];
-              }
-
-             if(!empty($where)){
-               $query .=" where ". implode(" and ", $where);
-             }
-            if(isset($options['offset']))
-            {
-              $options['offset'] = !empty($options['offset']) ? $options['offset'] : 0;
-              $query .=" LIMIT ".$options['offset'].",".$options['limit']."";
-            } 
-            $result = $this->db->query($query);
-            $response = array('data'=>$result->result_array(),'count'=>$result->num_rows());
-            return $result->num_rows();
-
-  }
 }
