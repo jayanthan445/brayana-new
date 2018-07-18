@@ -98,7 +98,7 @@ function getBookingLands(){
     $.ajax({
       type: "GET",
       url: api_url+"/api/getBookings/land",
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -119,7 +119,7 @@ function getTransactionLands(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getTransaction/land",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -141,7 +141,7 @@ function getBookingDetails(id){
      $.ajax({
         type: "GET",
         url: api_url+"/api/getBookingDetails/land/"+id,
-        //headers: { "auth":auth},
+        headers: { "auth":auth},
         dataType:"JSON",
         cache: false,
         success: function(msg, textStatus, xhr) {
@@ -167,7 +167,7 @@ function getTransactionLandsByID(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getTransaction/land/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -234,7 +234,7 @@ function saveLandDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/addTransaction/land",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -268,7 +268,7 @@ function editLandDetail(){
       $.ajax({
           type: "POST",
           url: api_url+"/api/editTransaction/land/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -295,7 +295,7 @@ function deleteTransactionLand(id){
         $.ajax({
           type: "POST",
           url: api_url+"/api/deleteTransaction/land/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -341,7 +341,7 @@ function load_booking(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getBookings/land",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -365,7 +365,7 @@ function loadBookingById(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getBookings/land/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {

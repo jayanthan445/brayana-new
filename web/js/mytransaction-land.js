@@ -80,7 +80,7 @@ function getBookingLands(){
     $.ajax({
       type: "GET",
       url: api_url+"/api/getBookings/land",
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -101,7 +101,7 @@ function getTransactionLands(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getTransaction/land",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -123,7 +123,7 @@ function getBookingDetails(id){
      $.ajax({
         type: "GET",
         url: api_url+"/api/getBookingDetails/land/"+id,
-        //headers: { "auth":auth},
+        headers: { "auth":auth},
         dataType:"JSON",
         cache: false,
         success: function(msg, textStatus, xhr) {
@@ -149,7 +149,7 @@ function getTransactionLandsByID(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getTransaction/land/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -207,7 +207,7 @@ function load_booking(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getBookings/land",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -231,7 +231,7 @@ function loadBookingById(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getBookings/land/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {

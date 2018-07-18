@@ -167,7 +167,7 @@ function getCustomerReport() {
     $.ajax({
         type: "POST",
         url: api_url + "/api/customerReport/all",
-        //headers: { "auth":auth},
+        headers: { "auth":auth},
         dataType: "JSON",
         cache: false,
         data: data,
@@ -200,7 +200,7 @@ function getEmployerReport() {
     $.ajax({
         type: "POST",
         url: api_url + "/api/emploeeReport/all",
-        //headers: { "auth":auth},
+        headers: { "auth":auth},
         dataType: "JSON",
         cache: false,
         data: data,
@@ -232,7 +232,7 @@ function getEmployerReportPaid() {
     $.ajax({
         type: "POST",
         url: api_url + "/api/emploeeReport/paid",
-        //headers: { "auth":auth},
+        headers: { "auth":auth},
         dataType: "JSON",
         cache: false,
         data: data,
@@ -254,7 +254,7 @@ function getCustomerReportPaid() {
     $.ajax({
         type: "POST",
         url: api_url + "/api/customerReport/paid",
-        //headers: { "auth":auth},
+        headers: { "auth":auth},
         dataType: "JSON",
         cache: false,
         success: function (msg, textStatus, xhr) {

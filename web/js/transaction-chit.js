@@ -101,7 +101,7 @@ function getBookingChits(){
     $.ajax({
       type: "GET",
       url: api_url+"/api/getBookings/chit",
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -122,7 +122,7 @@ function getTransactionChits(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getTransaction/chit",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -144,7 +144,7 @@ function getBookingDetails(id){
      $.ajax({
         type: "GET",
         url: api_url+"/api/getBookingDetails/chit/"+id,
-        //headers: { "auth":auth},
+        headers: { "auth":auth},
         dataType:"JSON",
         cache: false,
         success: function(msg, textStatus, xhr) {
@@ -170,7 +170,7 @@ function getTransactionChitsByID(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getTransaction/chit/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -236,7 +236,7 @@ function saveChitDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/addTransaction/chit",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -270,7 +270,7 @@ function editChitDetail(){
       $.ajax({
           type: "POST",
           url: api_url+"/api/editTransaction/chit/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -296,7 +296,7 @@ function deleteTransactionChit(id){
         $.ajax({
           type: "POST",
           url: api_url+"/api/deleteTransaction/chit/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -342,7 +342,7 @@ function load_booking(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getBookings/chit",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -366,7 +366,7 @@ function loadBookingById(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getBookings/chit/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {

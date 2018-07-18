@@ -105,7 +105,7 @@ function getEmployeeEdit(){
     $.ajax({
          type: "GET",
          url: api_url+"/api/employees",
-         //headers: { "auth":auth},
+         headers: { "auth":auth},
          dataType:"JSON",
          cache: false,
          success: function(msg, textStatus, xhr) {
@@ -170,7 +170,7 @@ function getEmployees(){
  $.ajax({
       type: "GET",
       url: api_url+"/api/employees",
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -191,7 +191,7 @@ function getEmployeeByID(id){
  $.ajax({
       type: "GET",
       url: api_url+"/api/employees/"+id,
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -274,7 +274,7 @@ function saveEmployeeDetail(){
  $.ajax({
       type: "POST",
       url: api_url+"/api/addemployee",
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       data:data,
       cache: false,
@@ -330,7 +330,7 @@ function editEmployeeDetail(){
      
       type: "POST",
       url: api_url+"/api/editEmployee/"+emp_id,
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       data:data,
       cache: false,
@@ -357,7 +357,7 @@ function deleteEmployee(id){
 $.ajax({
       type: "POST",
       url: api_url+"/api/deleteEmployee/"+id,
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       data:data,
       cache: false,

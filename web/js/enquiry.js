@@ -63,7 +63,7 @@ function getenquiry(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/enquiry",
-          ////headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -84,7 +84,7 @@ function getenquiryByID(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/enquiry/"+id,
-          ////headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -177,7 +177,7 @@ function editenquiryDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/editenquiry/"+site_id,
-          ////headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -203,7 +203,7 @@ function deleteenquiry(id){
     $.ajax({
           type: "POST",
           url: api_url+"/api/deleteenquiry/"+id,
-          ////headers: { "auth":auth},
+          //headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,

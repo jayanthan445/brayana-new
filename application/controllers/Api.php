@@ -486,36 +486,42 @@ class Api extends REST_Controller {
      public function editCustomerLand_post($id){
         if(!empty($this->isAuth)){
         $POST = $this->post();
+        $isReference = $this->isReference($POST);
+            if($isReference!=0){
+                $data = array(
+                    "name" =>  $POST['name'],
+                    "address" =>  $POST['address']
+                );
 
+                $login_id = $POST['login_id'];
+
+                $table = "customers";   
+                $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
+
+                unset($POST['login_id']);
+                unset($POST['name']);
+                unset($POST['address']);
+               
+              //  print_r($POST);
+
+                $table = "land_booking";    
+                $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
+               // print($id);
+               sleep(1);
+                if($id || $cus_id){
+                    $this->customerLands_get($id);
+                }elseif(!$id && !$cus_id){
+                    $this->customerLands_get($id);    
+                }else{
+                    $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
+                    $this->set_response($response, REST_Controller::HTTP_OK);
+                }
+            }else{
+                $response = array("STATUS"=>"NOK","RESPONSE"=>"Invalid Reference Mobile");
+                $this->set_response($response, REST_Controller::HTTP_OK);
+            }
               
-        $data = array(
-            "name" =>  $POST['name'],
-            "address" =>  $POST['address']
-        );
-
-        $login_id = $POST['login_id'];
-
-        $table = "customers";   
-        $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
-
-        unset($POST['login_id']);
-        unset($POST['name']);
-        unset($POST['address']);
-       
-      //  print_r($POST);
-
-        $table = "land_booking";	
-        $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
-       // print($id);
-       sleep(1);
-        if($id || $cus_id){
-            $this->customerLands_get($id);
-        }elseif(!$id && !$cus_id){
-            $this->customerLands_get($id);    
-        }else{
-            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
-            $this->set_response($response, REST_Controller::HTTP_OK);
-        }
+        
         
        } 
     }
@@ -537,41 +543,49 @@ class Api extends REST_Controller {
      public function editCustomerChit_post($id){
         if(!empty($this->isAuth)){
         $POST = $this->post();
+        $isReference = $this->isReference($POST);
+            if($isReference!=0){
+                $data = array(
+                    "name" =>  $POST['name'],
+                    "address" =>  $POST['address']
+                );
+
+                $login_id = $POST['login_id'];
+
+                $table = "customers";   
+                $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
+
+                unset($POST['login_id']);
+                unset($POST['name']);
+                unset($POST['address']);
+                unset($POST['user_mobile']);
+                unset($POST['email_id']);
+                
+               
+               // print_r($POST);
+
+                $table = "chit_booking";    
+                $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
+               // print($id);
+
+               sleep(1);
+                if($id || $cus_id){
+                    $this->customerChits_get($id);
+                }elseif(!$id && !$cus_id){
+                    $this->customerChits_get($id);    
+                }else{
+                    $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
+                    $this->set_response($response, REST_Controller::HTTP_OK);
+                }
+            }else{
+                $response = array("STATUS"=>"NOK","RESPONSE"=>"Invalid Reference Mobile");
+                $this->set_response($response, REST_Controller::HTTP_OK);
+            }
               
-        $data = array(
-            "name" =>  $POST['name'],
-            "address" =>  $POST['address']
-        );
-
-        $login_id = $POST['login_id'];
-
-        $table = "customers";   
-        $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
-
-        unset($POST['login_id']);
-        unset($POST['name']);
-        unset($POST['address']);
-        unset($POST['user_mobile']);
-        unset($POST['email_id']);
         
-       
-       // print_r($POST);
-
-        $table = "chit_booking";	
-        $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
-       // print($id);
-
-       sleep(1);
-        if($id || $cus_id){
-            $this->customerChits_get($id);
-        }elseif(!$id && !$cus_id){
-            $this->customerChits_get($id);    
-        }else{
-            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
-            $this->set_response($response, REST_Controller::HTTP_OK);
-        }
         
        } 
+
     }
 
     public function customerAgars_get($id=''){
@@ -590,39 +604,45 @@ class Api extends REST_Controller {
 
      public function editCustomerAgar_post($id){
         if(!empty($this->isAuth)){
-        $POST = $this->post();
-              
-        $data = array(
-            "name" =>  $POST['name'],
-            "address" =>  $POST['address']
-        );
+            $POST = $this->post();
+            $isReference = $this->isReference($POST);
+            if($isReference!=0){
+               $data = array(
+                    "name" =>  $POST['name'],
+                    "address" =>  $POST['address']
+                );
 
-        $login_id = $POST['login_id'];
+                $login_id = $POST['login_id'];
 
-        $table = "customers";   
-        $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
+                $table = "customers";   
+                $cus_id = $this->Api_model->update_data($table,$data, array('login_id'=>$login_id));    
 
-        unset($POST['login_id']);
-        unset($POST['name']);
-        unset($POST['address']);
-        unset($POST['user_mobile']);
-        unset($POST['email_id']);
+                unset($POST['login_id']);
+                unset($POST['name']);
+                unset($POST['address']);
+                unset($POST['user_mobile']);
+                unset($POST['email_id']);
+                
+               
+               // print_r($POST);
+
+                $table = "agar_booking";    
+                $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
+               // print($id);
+               sleep(1);
+                if($id || $cus_id){
+                    $this->customerAgars_get($id);
+                }elseif(!$id && !$cus_id){
+                    $this->customerAgars_get($id);    
+                }else{
+                    $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
+                    $this->set_response($response, REST_Controller::HTTP_OK);
+                }
+            }else{
+                $response = array("STATUS"=>"NOK","RESPONSE"=>"Invalid Reference Mobile");
+                $this->set_response($response, REST_Controller::HTTP_OK);
+            }    
         
-       
-       // print_r($POST);
-
-        $table = "agar_booking";	
-        $idd = $this->Api_model->update_data($table,$POST, array('id'=>$id));
-       // print($id);
-       sleep(1);
-        if($id || $cus_id){
-            $this->customerAgars_get($id);
-        }elseif(!$id && !$cus_id){
-            $this->customerAgars_get($id);    
-        }else{
-            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to update");
-            $this->set_response($response, REST_Controller::HTTP_OK);
-        }
         
        } 
     }
@@ -1095,5 +1115,36 @@ class Api extends REST_Controller {
         }          
      }
 
-     
+    
+   
+    public function deleteenquiry_post($id){
+        if(!empty($this->isAuth)){
+        
+        $table = "enquiry"; 
+        $id = $this->Api_model->delete_data($table, array('id'=>$id));
+        if($id){
+            $response = array("STATUS"=>"OK","RESPONSE"=>"Data Deleted");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }else{
+            $response = array("STATUS"=>"NOK","RESPONSE"=>"Data Failed to Deleta");
+            $this->set_response($response, REST_Controller::HTTP_OK);
+        }
+        
+       } 
+    }
+
+    public function isReference($post){
+        $return = true;
+        if(!empty($this->isAuth)){
+            $options = array();
+            if(isset($post["reference"]) && !empty($post["reference"])){
+                $options["where"] = "mobile = '".$post["reference"]."'";
+                $return = $this->Api_model->validateMobile($options);
+                return $return;
+            }
+           
+           
+       }
+       return $return;
+    }
 }

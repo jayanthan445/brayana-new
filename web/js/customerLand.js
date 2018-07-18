@@ -98,7 +98,7 @@ function getLands(){
  $.ajax({
       type: "GET",
       url: api_url+"/api/lands",
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -124,7 +124,7 @@ function getCustomerLandsByID(id){
  $.ajax({
       type: "GET",
       url: api_url+"/api/customerLands/"+id,
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -175,7 +175,7 @@ function getCustomerLands(){
     $.ajax({
          type: "GET",
          url: api_url+"/api/customerLands",
-         //headers: { "auth":auth},
+         headers: { "auth":auth},
          dataType:"JSON",
          cache: false,
          success: function(msg, textStatus, xhr) {
@@ -227,7 +227,7 @@ function saveLandDetail(){
     $.ajax({
         type: "POST",
         url: api_url+"/api/registerCustomer/land",
-        //headers: { "auth":auth},
+        headers: { "auth":auth},
         dataType:"JSON",
         data:data,
         cache: false,
@@ -280,7 +280,7 @@ function editLandDetail(){
  $.ajax({
       type: "POST",
       url: api_url+"/api/editCustomerLand/"+id,
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       data:data,
       cache: false,
@@ -304,7 +304,7 @@ function getLandsByID(id){
     $.ajax({
          type: "GET",
          url: api_url+"/api/lands/"+id,
-         //headers: { "auth":auth},
+         headers: { "auth":auth},
          dataType:"JSON",
          cache: false,
          success: function(msg, textStatus, xhr) {
@@ -340,7 +340,7 @@ function deleteCustomerLand(id){
 $.ajax({
       type: "POST",
       url: api_url+"/api/deleteCustomerLand/"+id,
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       data:data,
       cache: false,

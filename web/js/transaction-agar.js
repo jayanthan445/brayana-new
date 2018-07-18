@@ -99,7 +99,7 @@ function getBookingAgars(){
     $.ajax({
       type: "GET",
       url: api_url+"/api/getBookings/agar",
-      //headers: { "auth":auth},
+      headers: { "auth":auth},
       dataType:"JSON",
       cache: false,
       success: function(msg, textStatus, xhr) {
@@ -120,7 +120,7 @@ function getTransactionAgars(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getTransaction/agar",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -142,7 +142,7 @@ function getBookingDetails(id){
      $.ajax({
         type: "GET",
         url: api_url+"/api/getBookingDetails/agar/"+id,
-        //headers: { "auth":auth},
+        headers: { "auth":auth},
         dataType:"JSON",
         cache: false,
         success: function(msg, textStatus, xhr) {
@@ -168,7 +168,7 @@ function getTransactionAgarsByID(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getTransaction/agar/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -228,7 +228,7 @@ function saveAgarDetail(){
      $.ajax({
           type: "POST",
           url: api_url+"/api/addTransaction/agar",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -262,7 +262,7 @@ function editAgarDetail(){
       $.ajax({
           type: "POST",
           url: api_url+"/api/editTransaction/agar/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -288,7 +288,7 @@ function deleteTransactionAgar(id){
         $.ajax({
           type: "POST",
           url: api_url+"/api/deleteTransaction/agar/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           data:data,
           cache: false,
@@ -332,7 +332,7 @@ function load_booking(){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getBookings/agar",
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {
@@ -356,7 +356,7 @@ function loadBookingById(id){
      $.ajax({
           type: "GET",
           url: api_url+"/api/getBookings/agar/"+id,
-          //headers: { "auth":auth},
+          headers: { "auth":auth},
           dataType:"JSON",
           cache: false,
           success: function(msg, textStatus, xhr) {

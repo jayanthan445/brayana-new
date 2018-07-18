@@ -1,5 +1,5 @@
 // global.js
-var Env = "local";
+var Env = "remote";
 
 if(Env == "local"){
   var host_url = "http://localhost/brayana/web/";
