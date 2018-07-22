@@ -278,9 +278,13 @@ class Api extends REST_Controller {
         if(!empty($this->isAuth)){
             $POST = $this->post();
             $data = array(
-                            "site_name" => $POST['site_name'],
-                            "no_tree"=>$POST['no_tree'],
-                            "tree_amount"=>$POST['tree_amount'],
+                        "site_name" => $POST['site_name'],
+                        "survey_no"=> $POST['survey_no'],
+                        "city"=> $POST['city'],
+                        "area"=>$POST['area'],
+                        "inst_month"=>$POST['inst_month'],
+                        "inst_amount"=>$POST['inst_amount'],
+                        "Total_amount"=>$POST['Total_amount'],
                     );
             $table = "tree_master";
             $id = $this->Api_model->insert_data($table,$data);
@@ -299,8 +303,12 @@ class Api extends REST_Controller {
         $POST = $this->post();
         $data = array(
                         "site_name" => $POST['site_name'],
-                        "no_tree"=>$POST['no_tree'],
-                        "tree_amount"=>$POST['tree_amount'],
+                        "survey_no"=> $POST['survey_no'],
+                        "city"=> $POST['city'],
+                        "area"=>$POST['area'],
+                        "inst_month"=>$POST['inst_month'],
+                        "inst_amount"=>$POST['inst_amount'],
+                        "Total_amount"=>$POST['Total_amount'],
                 );
         $table = "tree_master";
         $id = $this->Api_model->update_data($table,$data, array('site_id'=>$id));
@@ -426,12 +434,12 @@ class Api extends REST_Controller {
 
                     if($type=="agar"){
                                 $data = array(
-                                    "agar_id" => $POST['agar_id'],
-                                   // "booking_no" => $POST['booking_no'],
+                                   "site_id" => $POST['site_id'],
+                                    //"booking_no" => $POST['booking_no'],
                                     "login_id"=> $customerDetail["data"][0]["login_id"],
-                                    "no_tree"=> $POST['no_tree'],
-                                    "tree_amount"=> $POST['tree_amount'],                                  
-                                    "tot_amount"=> $POST['tot_amount'],
+                                    "inst_month"=> $POST['inst_month'],
+                                    "inst_amount"=> $POST['inst_amount'],
+                                    "tot_amount"=> $POST['tot_amount'],                                   
                                     "added_by"=>$this->isAuth->id,
                                     "booked_date"=>date("Y-m-d")
                                 );      

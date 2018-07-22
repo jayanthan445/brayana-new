@@ -25,9 +25,11 @@ function loginSubmit(){
                     var data = data.RESPONSE;
 
                     if(status == "OK"){
-
+console.log(data);
                       setLocal("auth",data.token);
                       setLocal("u",data.user_type);
+                      setLocal("un",data.user_name);
+                      
 
                       getLocal("auth");
 

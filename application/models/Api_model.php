@@ -577,7 +577,7 @@ class Api_model extends CI_Model {
 
         public function getAgarBookings($options = array()){
           if(empty($options)){
-                 $query = $query = "SELECT * FROM agar_booking as ab JOIN tree_master as tm ON (ab.agar_id = tm.site_id) JOIN customers as c ON (ab.login_id = c.login_id)";
+                 $query = $query = "SELECT * FROM agar_booking as ab JOIN tree_master as tm ON (ab.site_id = tm.site_id) JOIN customers as c ON (ab.login_id = c.login_id)";
               }else{
                 $query = "SELECT * FROM agar_booking";
               }
@@ -603,7 +603,7 @@ class Api_model extends CI_Model {
         }
 
         public function getAgarBookingById($id = ''){
-          $query = "SELECT ab.*,tm.site_name,c.* FROM agar_booking as ab JOIN tree_master as tm ON (ab.agar_id = tm.site_id) JOIN customers as c ON (ab.login_id = c.login_id) WHERE ab.id=$id";          
+          $query = "SELECT ab.*,tm.site_name,c.* FROM agar_booking as ab JOIN tree_master as tm ON (ab.site_id = tm.site_id) JOIN customers as c ON (ab.login_id = c.login_id) WHERE ab.id=$id";          
         //  print($query);
  
          $result = $this->db->query($query);
@@ -620,7 +620,7 @@ class Api_model extends CI_Model {
             $query = "SELECT i.*,b.booking_no,".$cols." c.* FROM ".$type."_installments i ";
             $query .= "JOIN ".$type."_booking b ON (i.".$type."_id = b.id) ";
             if($type == "agar"){
-              $query .= "JOIN tree_master m ON (b.agar_id = m.site_id) ";
+              $query .= "JOIN tree_master m ON (b.site_id = m.site_id) ";
             }else if($type == "land"){
               $query .= "JOIN land_master m ON (b.site_id = m.site_id) ";
             }else if($type == "chit"){
@@ -687,7 +687,7 @@ class Api_model extends CI_Model {
             }
           $query = "SELECT ".$column." FROM ".$type."_booking b JOIN customers c ON (b.login_id = c.login_id) ";
           if($type == "agar"){
-              $query .= "JOIN tree_master m ON (b.agar_id = m.site_id) ";
+              $query .= "JOIN tree_master m ON (b.site_id = m.site_id) ";
             }else if($type == "land"){
               $query .= "JOIN land_master m ON (b.site_id = m.site_id) ";
             }else if($type == "chit"){

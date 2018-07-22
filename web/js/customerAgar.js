@@ -13,7 +13,7 @@ $(document).ready(function(){
     });
 
     
-$('#agar_id').on('change', function() {
+$('#site_name').on('change', function() {
     var idd = $(this).val();
     getAgarsByID(idd);
 });
@@ -133,7 +133,7 @@ function buildTable(list,count){
         if(userType == 1){
             var delete_btn = "<a href='./button' class='btn btn-outline-danger master deleteland'  data-toggle='modal' data-target='#myModal' data-name='"+list[i].name+"' data-id='"+list[i].id+"' ><i class='fa fa-trash-o' aria-hidden='true'></i></a>";  
         }
-        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].name+"</td><td>"+list[i].mobile+"</td><td>"+list[i].email_id+"</td><td>"+list[i].booking_no+"</td><td>"+list[i].site_name+"</td><td>"+list[i].no_tree+"</td><td>"+list[i].tree_amount+"</td><td>"+list[i].tot_amount+"</td><td> <a href=../customerAgar/customerAgarEdit.html?id="+list[i].id+"  class='btn btn-outline-success'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>"+delete_btn+"</td></tr>";
+        var markup = "<tr><td>"+(i+1)+"</td><td>"+list[i].name+"</td><td>"+list[i].mobile+"</td><td>"+list[i].email_id+"</td><td>"+list[i].booking_no+"</td><td>"+list[i].site_name+"</td><td>"+list[i].inst_month+"</td><td>"+list[i].tot_amount+"</td><td> <a href=../customerAgar/customerAgarEdit.html?id="+list[i].id+"  class='btn btn-outline-success'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>"+delete_btn+"</td></tr>";
         $("table tbody").append(markup);
     }
 
@@ -157,7 +157,7 @@ function getAgars(id){
                     var list = data.data;     
                     
                     $.each(list, function (i, item) {
-                        $('#agar_id,#no_tree').append($('<option>', { 
+                        $('#site_name').append($('<option>', { 
                             value: item.site_id,
                             text : item.site_name 
                         }));
@@ -202,25 +202,28 @@ function getCustomerAgarsByID(id){
     });
 }
 function fillEditLandDetail(data){
+  
   $("#booking_no").val(data.booking_no);
   $("#name").val(data.name);
-  $("#user_mobile").val(data.mobile);
+  $("#mobile").val(data.mobile);
   $("#email_id").val(data.email_id);
   $("#address").val(data.address);
   
  // $('select[name="site_name"] option[value="'+data.site_id+'"]').attr('selected', 'selected');
-  $("#agar_id").val(data.agar_id);
+  $("#site_name").val(data.site_id);
   $("#survey_no").val(data.survey_no);
   $("#area").val(data.area);
   $("#city").val(data.city);
-  $("#no_tree").val(data.no_tree);
-  $("#tree_amount").val(data.tree_amount);
-  $("#tot_amount").val(data.tot_amount);
-  
+  $("#installment_month").val(data.inst_month);
+  $("#installment_amount").val(data.inst_amount);
+  $("#total_amount").val(data.tot_amount);
+
   $("#id").val(data.id);
   $("#login_id").val(data.login_id);
+
   $(".booking_no").html(data.booking_no);
   $("#reference").val(data.reference);
+
 
   
 }
@@ -252,9 +255,32 @@ function saveAgarDetail(){
   
     var auth = getLocal("auth");
 
-    //  if($("#customerAgarForm").valid()){
-    
-      var data = $('#customerAgarForm').serializeFormJSON();
+    var surveyNo = $("#survey_no").val();
+  var area = $("#area").val();
+  var city = $("#city").val();
+  var installmentMonths = $("#installment_month").val();
+  var installmentAmount = $("#installment_amount").val();
+  var mobile = $("#mobile").val();
+  var name = $("#name").val();
+  //var booking_no = $("#booking_no").val();
+  var site_name = $("#site_name").val();
+  var address = $("#address").val();
+  var email_id = $("#email_id").val();
+  var reference = $("#reference").val();
+  
+  var data = {
+                //"booking_no":booking_no,
+                "user_mobile":mobile,
+                "email_id":email_id,
+                "name":name,
+                "mobile":mobile,
+                "address":address,
+                "site_id":site_name,                
+                "inst_month":installmentMonths,
+                "inst_amount":installmentAmount,
+                "tot_amount":installmentMonths*installmentAmount,
+                "reference":reference
+              };
       
    
     $.ajax({
@@ -286,8 +312,31 @@ function editAgarDetail(){
     
 //  if($("#customerAgarForm").valid()){
    
-    var data = $('#customerAgarForm').serializeFormJSON();
-    var id = $('#id').val();
+      var installmentMonths = $("#installment_month").val();
+    var installmentAmount = $("#installment_amount").val();
+    var mobile = $("#mobile").val();
+    var name = $("#name").val();
+    var booking_no = $("#booking_no").val();
+    var site_name = $("#site_name").val();
+    var address = $("#address").val();
+
+    var id = $("#id").val();
+    var login_id = $("#login_id").val();
+    var reference = $("#reference").val();
+    
+    
+    var data = {
+                  "booking_no":booking_no,                 
+                  "name":name,
+                  "address":address,
+                  "site_id":site_name,                 
+                  "inst_month":installmentMonths,
+                  "inst_amount":installmentAmount,
+                  "tot_amount":installmentMonths*installmentAmount,
+                  "login_id":login_id,
+                  "reference":reference
+                };
+
   var auth = getLocal("auth");
  $.ajax({
       type: "POST",
@@ -325,10 +374,14 @@ function getAgarsByID(id){
               var data = msg.RESPONSE;
               if(status == "OK"){
                    if(data.count > 0){
-                       var agarData = data.data[0];
-                        $('#no_tree').val(agarData.no_tree);
-                        $('#tree_amount').val(agarData.tree_amount);
-                        $('#tot_amount').val(agarData.no_tree*agarData.tree_amount); 
+                       // fillEditLandDetail(data.data[0]);
+                       var landData = data.data[0];
+                       $('#survey_no').val(landData.survey_no);
+                       $('#area').val(landData.area);
+                       $('#city').val(landData.city); 
+                       $('#installment_month').val(landData.inst_month); 
+                       $('#installment_amount').val(landData.inst_amount); 
+                       $('#total_amount').val(landData.total_amount);        
                    }else{
                        alert("No data Found");
                        //window.location.href=host_url+'land/landView.html';

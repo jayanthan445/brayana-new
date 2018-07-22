@@ -206,30 +206,51 @@
                                         <form name="agarWoodAddForm" id="agarWoodAddForm" onsubmit="return saveagarWoodDetail();">
                                         <div>
                                             <div class="row">
-                                                <div class="col-md-5">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Site Name</label>
-                                                        <input type="text" class="form-control" placeholder="Site Name" value="" id="siteName">
+                                                        <input type="text" class="form-control" placeholder="Site Name" value="" id="siteName" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Number of trees</label>
-                                                        <input type="number" pattern= "[0-9]" class="form-control" placeholder="Number of trees" value="" id="noTree">
+                                                        <label>Survey No</label>
+                                                        <input type="text" class="form-control" placeholder="survey No" value="" id="surveyNo" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Tree Amount</label>
-                                                        <input type="number" pattern= "[0-9]" class="form-control" placeholder="Tree Amount" id="treeAmount">
+                                                        <label for="exampleInputEmail1">Area</label>
+                                                        <input type="text" class="form-control" placeholder="Area" id="area" required>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        <input type="text" class="form-control" placeholder="City" value="" id="city" required>
+                                                    </div>
+                                                </div>
+                                        
                                             </div>
+                                             
                                             <div class="row">
-                                                <div class="col-md-5">
+                                               
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Installment in Months</label>
+                                                        <input type="number" class="form-control" placeholder="Installment in Months" pattern= "[0-9]"  value="" id="installmentMonths" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Installment Amount</label>
+                                                        <input type="number" pattern= "[0-9]"  class="form-control" placeholder="Installment Amount" value="" id="installmentAmount" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Total Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Site Name" value="" id="totalAmount" readonly="">
+                                                        <input type="text" class="form-control" placeholder="Total Amount" value="" disabled id="totalAmount" required>
                                                     </div>
                                                 </div>
                                             </div>

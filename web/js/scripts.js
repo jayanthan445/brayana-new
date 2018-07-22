@@ -1,5 +1,5 @@
 // global.js
-var Env = "remote";
+var Env = "local";
 
 if(Env == "local"){
   var host_url = "http://localhost/brayana/web/";
@@ -15,7 +15,7 @@ function hideMasters(){
     var auth = getLocal("auth");
     var userType = getLocal("u");
     console.log($(".enquiry a"));
-    if(userType != 1){
+    if(userType == 3){
         $(".master").css("display","none");
         $(".enquiry a").attr("href",host_url+"enquiry/enquiryForm.html");
         //$(".nav>.master").hide();
@@ -26,6 +26,7 @@ function hideMasters(){
 }
 $( document ).ready(function() {
   hideMasters();
+
 });
 function islogged(){
   var pathname = window.location.pathname; // Returns path only
@@ -33,6 +34,8 @@ function islogged(){
   var currentPath = pathname.replace(replace_ct,"");
   var auth = getLocal("auth");
   var userType = getLocal("u");
+  var uname = getLocal("un");
+  $(".userName").html(uname);
   var isLogged = (typeof auth != "undefined" && auth != "" && auth != null);
   if(isLogged && (currentPath == "login.html" || currentPath == "index.html")){
     if(userType == 1){
